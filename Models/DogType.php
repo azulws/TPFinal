@@ -1,7 +1,10 @@
 <?php
 namespace Models;
 
-class DogType
+class DogType{
+
+    $testeandoGit
+}
 
 
 ?>
