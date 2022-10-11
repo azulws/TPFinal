@@ -22,7 +22,6 @@
                 <th>UserName</th>
                 <th>Password</th>                
                 <th>Remuneration</th>
-                <th>Reputacion</th>
               </tr>
             </thead>
             <tbody align="center">
@@ -44,10 +43,7 @@
                 </td>                
                 <td>
                   <input type="double" name="remuneration" required>
-                </td>
-                <td>
-                  <input type="double" name="reputacion" required>
-                </td>                  
+                </td>                
               </tr>
               </tbody>
           </table>
