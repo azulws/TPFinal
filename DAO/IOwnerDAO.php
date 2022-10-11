@@ -7,7 +7,7 @@
     {
         function Add(Owner $owner);
         function GetAll();
-        function GetById($id);
+        function GetByUserName($userName);
         function Remove($id);
     }
 ?>

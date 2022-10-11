@@ -20,11 +20,22 @@
             require_once(VIEWS_PATH."add-owner.php"); //MODIFICAR
         }
 
+        public function ShowMenuView()
+        {
+            require_once(VIEWS_PATH . "validate-session.php");
+            echo "te logueaste bien,imaginate un menu xd";
+        }
+
         /*public function ShowListView()
         {
             $keeperList = $this->keeperDAO->GetAll();
             require_once(VIEWS_PATH."beertype-list.php"); //para mostrar una lista de los keepers?
         }*/
+
+        public function ShowLoguinView()
+        {
+            include_once(VIEWS_PATH. "loguin-owner.php");
+        }
 
         public function Add($firstName,$lastName,$userName,$password)  
         
@@ -45,6 +56,26 @@
             $this->keeperDAO->Remove($id);
 
             $this->ShowListView();
+        }
+
+        public function Login($userName, $password) {
+            $owner = $this->OwnerDAO->GetByUserName($userName);
+    
+            if(($owner != null) && ($owner->getPassword() === $password)) {
+                $_SESSION["loggedUser"] = $owner;
+                $this->ShowMenuView();
+            } else {
+                echo "Usuario Incorrecto";
+                require_once(VIEWS_PATH."loguin-owner.php");
+                
+            }
+    
+        }
+    
+        public function Logout() {
+            session_destroy();
+    
+            require_once(VIEWS_PATH."home.php");
         }
     }
 ?>

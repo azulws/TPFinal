@@ -29,16 +29,16 @@
         }
 
 
-        public function GetById($id) {
+        public function GetByUserName($userName) {
             $this->RetrieveData();
 
-            $aux = array_filter($this->ownerList, function($owner) use($id) {
-                return $owner->getIdOwner() == $id;
+            $user = null;
+
+            $aux = array_filter($this->ownerList, function($owner) use ($userName) {
+                return $owner->getUserName() === $userName;
             });
 
-            $aux = array_values($aux);
-
-            return (count($aux) > 0) ? $aux[0] : array();
+            return (count($aux) > 0) ? $aux[0] : null;
         }
 
         public function GetAll() {
@@ -73,13 +73,13 @@
 
                 foreach($arrayDecode as $value) {
                     $owner = new Owner();
-                    $owner->setIdOwner($value["idOwner"]);
-                    $owner->setFirstName($value["fisrtName"]);
+                    $owner->setIdOwner($value["id"]);
+                    $owner->setFirstName($value["firstName"]);
                     $owner->setLastName($value["lastName"]);
                     $owner->setUserName($value["userName"]);
                     $owner->setPassword($value["password"]);
 
-                    array_push($this->beerList, $beer);
+                    array_push($this->ownerList, $owner);
                 }
             }
         }
@@ -92,4 +92,6 @@
             return $id + 1;
         }
     }
+
+    
 ?>

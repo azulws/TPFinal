@@ -22,14 +22,14 @@
             <li class="active"><a href="<?php echo FRONT_ROOT ?>">Menu Principal</a></li>
             <li><a class="drop" href="#">Owner</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT."Owner/ShowAddView" ?>">Agregar</a></li>
-                <li><a href="<?php echo FRONT_ROOT."Beer/ShowListView" ?>">Ver Listado</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Owner/ShowAddView" ?>">Registrarse</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Owner/ShowLoguinView" ?>">Loguearse</a></li>
               </ul>
             </li>
-            <li><a class="drop" href="#">Tipos de Cervezas</a>
+            <li><a class="drop" href="#">Keeper</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT."BeerType/ShowAddView" ?>">Agregar</a></li>
-                <li><a href=<?php echo FRONT_ROOT."BeerType/ShowListView" ?>>Ver Listado</a></li>
+                <li><a href="<?php echo FRONT_ROOT."BeerType/ShowAddView" ?>">Registrarse</a></li>
+                <li><a href=<?php echo FRONT_ROOT."BeerType/ShowListView" ?>>Loguearse</a></li>
               </ul>
             </li>
         </ul>
