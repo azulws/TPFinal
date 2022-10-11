@@ -28,7 +28,7 @@
             return $this->userName;
         }
         public function setUserName($userName){
-            $this->userName=$userName
+            $this->userName=$userName;
         }
 
         public function getPassword(){

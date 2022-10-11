@@ -20,9 +20,9 @@
       <nav id="mainav" class="fl_right">
         <ul class="clear">
             <li class="active"><a href="<?php echo FRONT_ROOT ?>">Menu Principal</a></li>
-            <li><a class="drop" href="#">Cervezas</a>
+            <li><a class="drop" href="#">Owner</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT."Beer/ShowAddView" ?>">Agregar</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Owner/ShowAddView" ?>">Agregar</a></li>
                 <li><a href="<?php echo FRONT_ROOT."Beer/ShowListView" ?>">Ver Listado</a></li>
               </ul>
             </li>
