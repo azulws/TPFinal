@@ -1,12 +1,10 @@
 <footer id="footer" class="hoc clear"> 
     <div class="center">
-      <h6 class="heading">Flamming Moe´s</h6> 
+      <h6 class="heading">Pet Hero</h6> 
       <nav>
         <ul class="nospace inline pushright uppercase">
           <li><a href="home.php"><i class="fas fa-lg fa-home"></i></a></li>
           <li><a href="">Home</a></li>
-          <li><a href="">Cervezas</a></li>
-          <li><a href="">Tipos de Cerveza</a></li>
         </ul>
       </nav>
     </div>
