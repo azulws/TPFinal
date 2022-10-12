@@ -3,7 +3,7 @@
 
     use Models\Keeper as Keeper;
 
-    interface class IKeeper{
+    interface IKeeper{
         function Add(Keeper $keeper);
         function GetAll();
         function Remove($id);

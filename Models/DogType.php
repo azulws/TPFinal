@@ -3,7 +3,7 @@ namespace Models;
 
 class DogType{
 
-    $testeandoGit
+    private $testeandoGit;
 }
 
 

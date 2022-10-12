@@ -21,6 +21,18 @@
             return $this->keeperList;
         }
 
+        public function GetByUserName($userName) {
+            $this->RetrieveData();
+
+            $user = null;
+
+            $aux = array_filter($this->keeperList, function($keeper) use ($userName) {
+                return $keeper->getUserName() === $userName;
+            });
+
+            return (count($aux) > 0) ? $aux[0] : null;
+        }
+
         public function Remove($id){
             $this->retriveData();
             

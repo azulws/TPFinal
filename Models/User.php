@@ -1,11 +1,12 @@
 <?php
     namespace Models;
 
-    abstract class Person{
+    abstract class User{
         private $firstName;
         private $lastName;
         private $userName;
         private $password;
+        private $userKeeper;
 
         function __construct(){
         }
@@ -36,6 +37,13 @@
         }
         public function setPassword($password){
             $this->password=$password;
+        }
+
+        public function getUserKeeper(){
+            return $this->userKeeper;
+        }
+        public function setUserKeeper($userKeeper){
+            $this->userKeeper=$userKeeper;
         }
     }
 ?>

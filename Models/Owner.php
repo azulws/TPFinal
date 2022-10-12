@@ -4,7 +4,7 @@ namespace Models;
 use Models\Person as Person;
 use Models\Dog as Dog;
 
-class Owner extends Person {
+class Owner extends User {
 
     private $idOwner;
 

@@ -52,6 +52,10 @@
     <div class="clear"></div>
   </main>
 </div>
+<?php
+  echo "<script> alert('agregado con exito')";
+  echo "window.location: '../home.php';</script>";
+?>
 
 
 <?php 
