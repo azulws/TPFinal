@@ -5,15 +5,10 @@
 
 <main>
     <div>
-        <h1>WELCOME</h1>
+        <h1 align="center">WELCOME</h1>
     </div>
-    <div id="pageintro" class="hoc clear"> 
-    <article class="center">
-      <h3 class="heading underline">Los mejores en cuidado de mascotas</h3>
-      <footer><a class="btn" href="#">Conocer Mas</a></footer>
-    </article>
-  </div>
-    <div>
+  
+    <div align="center">
         <form action="<?php echo FRONT_ROOT . "Owner/Login"?>" method="post">
             <div>
                 <label for="user_name">
@@ -32,8 +27,15 @@
             </div>
         </form>
     </div>
+    <div id="pageintro" class="hoc clear"> 
+    <article class="center">
+      <h3 class="heading underline">Los mejores en cuidado de mascotas</h3>
+      <footer><a class="btn" href="#">Conocer Mas</a></footer>
+    </article>
+  </div>
 </main>
 
 <?php 
   include_once('footer.php');
 ?> 
+</div>
