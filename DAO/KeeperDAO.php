@@ -30,7 +30,7 @@
                 return $keeper->getUserName() == $userName;
             });
 
-            $keeper= array_values($keepers);
+            $keepers= array_values($keepers);
             return (count($keepers) > 0) ? $keepers[0] : null;
         }
 

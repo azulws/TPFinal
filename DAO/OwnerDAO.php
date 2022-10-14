@@ -37,7 +37,7 @@
                 return $owner->getUserName() == $userName;
             });
 
-            $owner= array_values($owners);
+            $owners= array_values($owners);
             return (count($owners) > 0) ? $owners[0] : null;
         }
         
