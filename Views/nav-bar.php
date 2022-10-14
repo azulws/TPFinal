@@ -19,7 +19,7 @@
             <li><a class="drop" href="#">Keeper</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT."Keeper/ShowAddView" ?>">Registrarse</a></li>
-                <li><a href=<?php echo FRONT_ROOT."Keeper/ShowListView" ?>>Loguearse</a></li>
+                <li><a href=<?php echo FRONT_ROOT."Keeper/ShowLoginView" ?>>Loguearse</a></li>
               </ul>
             </li>
         </ul>

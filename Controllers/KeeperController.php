@@ -2,7 +2,7 @@
     namespace Controllers;
 
     use DAO\KeeperDAO as KeeperDAO;
-
+    use Models\Keeper as Keeper;
 
     class KeeperController
     {
@@ -15,7 +15,7 @@
 
         public function ShowAddView()
         {
-            require_once(VIEWS_PATH."add-beertype.php"); //MODIFICAR
+            require_once(VIEWS_PATH."add-keeper.php"); //MODIFICAR
         }
 
         /*public function ShowListView()
@@ -24,7 +24,7 @@
             require_once(VIEWS_PATH."beertype-list.php"); //para mostrar una lista de los keepers?
         }*/
 
-        public function Add($firstName,$lastName,$userName,$password,$idKeeper,$remuneration,$reputation)  
+        public function Add($firstName,$lastName,$userName,$password,$remuneration)  
         
         {
             $keeper = new Keeper();
@@ -32,9 +32,7 @@
             $keeper->setLastName($lastName);
             $keeper->setUserName($userName);
             $keeper->setPassword($password);
-            $keeper->setIdKeeper($idKeeper);
             $keeper->setRemuneration($remuneration);
-            $keeper->setReputation($reputation);
 
             $this->keeperDAO->Add($keeper);
 

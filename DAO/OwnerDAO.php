@@ -28,19 +28,19 @@
             $this->SaveData();
         }
 
-
         public function GetByUserName($userName) {
             $this->RetrieveData();
 
-            $user = null;
+            $owner = null;
 
-            $aux = array_filter($this->ownerList, function($owner) use ($userName) {
-                return $owner->getUserName() === $userName;
+            $owners = array_filter($this->ownerList, function($owner) use ($userName) {
+                return $owner->getUserName() == $userName;
             });
 
-            return (count($aux) > 0) ? $aux[0] : null;
+            $owner= array_values($owners);
+            return (count($owners) > 0) ? $owners[0] : null;
         }
-
+        
         public function GetAll() {
             $this->RetrieveData();
 

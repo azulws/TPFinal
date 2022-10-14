@@ -9,7 +9,7 @@
     </div>
   
     <div align="center">
-        <form action="<?php echo FRONT_ROOT . "Owner/Login"?>" method="post">
+        <form action="<?php echo FRONT_ROOT . "Home/Login"?>" method="post">
             <div>
                 <label for="user_name">
                     <span>UserName</span>
@@ -20,6 +20,15 @@
                 <label for="user_password">
                     <span>Password</span>
                     <input type="password" id="password" name="password" required>
+                </label>
+            </div>
+            <div>
+                <label for="user_type">
+                    <span>UserType</span>
+                    <select name="userType" id="userType" require>
+                        <option value="owner">Owner</option>
+                        <option value="keeper">Keeper</option>
+                    </select>
                 </label>
             </div>
             <div>

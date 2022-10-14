@@ -11,7 +11,7 @@
             $this->retrieveData();
 
             $keeper->setIdKeeper($this->GetNextId());
-            array_push($this->keeperList,$Keeper);
+            array_push($this->keeperList,$keeper);
 
             $this->saveData();
         }
@@ -24,13 +24,14 @@
         public function GetByUserName($userName) {
             $this->RetrieveData();
 
-            $user = null;
+            $keeper = null;
 
-            $aux = array_filter($this->keeperList, function($keeper) use ($userName) {
-                return $keeper->getUserName() === $userName;
+            $keepers = array_filter($this->keeperList, function($keeper) use ($userName) {
+                return $keeper->getUserName() == $userName;
             });
 
-            return (count($aux) > 0) ? $aux[0] : null;
+            $keeper= array_values($keepers);
+            return (count($keepers) > 0) ? $keepers[0] : null;
         }
 
         public function Remove($id){
@@ -51,9 +52,10 @@
                 $value["firstName"] = $keeper->getFirstName();
                 $value["lastName"] = $keeper->getLastName();
                 $value["userName"] = $keeper->getUserName();
+                $value["password"] = $keeper->getPassword();
                 $value["remuneration"]= $keeper->getRemuneration();
 
-                array_push($keeperList, $value);
+                array_push($arrayToEncode, $value);
             }
             $jsonContent= json_encode($arrayToEncode, JSON_PRETTY_PRINT);
             file_put_contents($this->fileName,$jsonContent);
@@ -64,7 +66,7 @@
 
             if(file_exists($this->fileName)){
                 $jsonToDecode = file_get_contents($this->fileName);
-                $arrayDecode = ($jsonDecode) ? json_decode($jsonToDecode, true) : array();
+                $arrayDecode = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
 
                 foreach($arrayDecode as $value){
                     $keeper = new Keeper();
@@ -72,6 +74,7 @@
                     $keeper->setFirstName($value["firstName"]);
                     $keeper->setLastName($value["lastName"]);
                     $keeper->setUserName($value["userName"]);
+                    $keeper->setPassword($value["password"]);
                     $keeper->setRemuneration($value["remuneration"]);
 
                     array_push($this->keeperList,$keeper);
@@ -81,8 +84,8 @@
 
         private function GetNextId(){
             $id = 0;
-            foreach($this->ownerList as $keeper) {
-                $id = ($keeper->getIdKeeper() > $id) ? $keeper->getIdOwner() : $id;
+            foreach($this->keeperList as $keeper) {
+                $id = ($keeper->getIdKeeper() > $id) ? $keeper->getIdKeeper() : $id;
             }
             return $id + 1;
         }

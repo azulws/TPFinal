@@ -3,7 +3,7 @@
 ?>
 
 <div id="breadcrumb" class="hoc clear"> 
-    <h6 class="heading">Ingreso de Cervezas</h6>
+    <h6 class="heading">Ingreso de Keeper</h6>
   </div>
 </div>
 <div class="wrapper row3" >
@@ -16,7 +16,6 @@
           <table> 
             <thead>              
               <tr>
-                <th>idKeeper</th>
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>UserName</th>
@@ -26,20 +25,17 @@
             </thead>
             <tbody align="center">
               <tr>
-                <td style="max-width: 120px;">    
-                  <input type="text" name="idKeeper" required>
-                </td>
                 <td>
                   <input type="text" name="firstName" required>
                 </td>
                 <td>
-                  <select type "text" name="lastName" required>
+                  <input type="text" name="lastName" required>
                 </td>
                 <td>
-                  <textarea type="text" name="userName"></textarea>
+                  <input type="text" name="userName" required>
                 </td>
                 <td>
-                  <input type="text" name="password" required>
+                  <input type="password" name="password" required>
                 </td>                
                 <td>
                   <input type="double" name="remuneration" required>
