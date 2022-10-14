@@ -6,7 +6,7 @@
         private $lastName;
         private $userName;
         private $password;
-        private $userKeeper;
+        private $userType;
 
         function __construct(){
         }
@@ -39,11 +39,16 @@
             $this->password=$password;
         }
 
-        public function getUserKeeper(){
-            return $this->userKeeper;
+        public function getUserType()
+        {
+                return $this->userType;
         }
-        public function setUserKeeper($userKeeper){
-            $this->userKeeper=$userKeeper;
+
+        public function setUserType($userType)
+        {
+                $this->userType = $userType;
+
+                return $this;
         }
     }
 ?>
