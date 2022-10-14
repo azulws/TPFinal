@@ -15,8 +15,6 @@ class Owner extends User {
     public function setIdOwner($idOwner)
     {
         $this->idOwner = $idOwner;
-
-        return $this;
     }
 }
 ?>   

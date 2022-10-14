@@ -29,9 +29,8 @@
         }
 
         public function GetByUserName($userName) {
-            $this->RetrieveData();
-
             $owner = null;
+            $this->RetrieveData();
 
             $owners = array_filter($this->ownerList, function($owner) use ($userName) {
                 return $owner->getUserName() == $userName;
