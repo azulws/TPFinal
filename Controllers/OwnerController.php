@@ -23,7 +23,7 @@
         public function ShowMenuView()
         {
             require_once(VIEWS_PATH . "validate-session.php");
-            echo "te logueaste bien,imaginate un menu xd";
+            require_once(VIEWS_PATH . "home-owner.php");
         }
 
         /*public function ShowListView()
