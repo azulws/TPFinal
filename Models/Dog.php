@@ -1,5 +1,7 @@
 <?php
 namespace Models;
+
+use Models\DogType as DogType;
     
     class Dog {
 
@@ -83,7 +85,7 @@ namespace Models;
          *
          * @return  self
          */ 
-        public function setDogType($dogType)
+        public function setDogType(DogType $dogType)
         {
                 $this->dogType = $dogType;
 
