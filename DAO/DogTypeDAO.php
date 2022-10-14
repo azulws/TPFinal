@@ -3,6 +3,7 @@
     namespace DAO;
 
     use Models\DogType;
+    use DAO\IDogTypeDAO as IDogTypeDAO;
 
     class DogTypeDAO implements IDogTypeDAO {
         private $fileName = ROOT . "/Data/dogTypes.json";

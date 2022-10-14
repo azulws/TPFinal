@@ -7,6 +7,7 @@
         function Add(Keeper $keeper);
         function GetAll();
         function Remove($id);
+        function GetByUserName($userName);
     }
 
 ?>

@@ -2,6 +2,7 @@
     namespace DAO;
 
     use Models\Keeper as Keeper;
+    use DAO\IkeeperDAO as IKeeperDAO;
 
     class KeeperDAO implements IKeeper{
         private $keeperList= Array();
@@ -22,9 +23,8 @@
         }
 
         public function GetByUserName($userName) {
-            $this->RetrieveData();
-
             $keeper = null;
+            $this->RetrieveData();
 
             $keepers = array_filter($this->keeperList, function($keeper) use ($userName) {
                 return $keeper->getUserName() == $userName;

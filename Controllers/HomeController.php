@@ -3,7 +3,9 @@
 
     use DAO\OwnerDAO as OwnerDAO;
     use DAO\KeeperDAO as KeeperDAO;
-
+    use Models\Keeper as Keeper;
+    use Models\Owner as Owner;
+    
     class HomeController
     {
         /*public function Index($message = "")
@@ -23,9 +25,14 @@
             require_once(VIEWS_PATH . "home.php");
         }
 
-        public function ShowAddView() {
+        public function ShowHomeOwnerView() {
             require_once(VIEWS_PATH . "validate-session.php");
             require_once(VIEWS_PATH . "home-owner.php"); //pantalla para el usuario
+        }
+
+        public function ShowHomeKeeperView() {
+            require_once(VIEWS_PATH . "validate-session.php");
+            require_once(VIEWS_PATH . "home-keeper.php"); //pantalla para el usuario
         }
 
         public function Login($userName, $password,$userType) {
@@ -34,9 +41,13 @@
             }else if($userType=="keeper"){
                 $user = $this->keeperDAO->GetByUserName($userName);
             }
-            if(($user != null) && ($user->getPassword() === $password)) {
+            if(($user != NULL) && ($user->getPassword() == $password)) {
                 $_SESSION["loggedUser"] = $user;
-                $this->ShowAddView();                                               
+                if($userType=="owner"){
+                    $this->ShowHomeOwnerView();
+                }else{
+                    $this->ShowHomeKeeperView();
+                }                                              
             } else {
                 $this->Index("Usuario y/o contraseña incorrecta");
             }
