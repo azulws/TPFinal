@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-class DogType{
+class PetType{
 
     private $id;
     private $size;
