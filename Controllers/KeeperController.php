@@ -15,14 +15,16 @@
 
         public function ShowAddView()
         {
+            require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."add-keeper.php"); //MODIFICAR
         }
 
-        /*public function ShowListView()
+        public function ShowListView()
         {
+            require_once(VIEWS_PATH."validate-session.php");
             $keeperList = $this->keeperDAO->GetAll();
-            require_once(VIEWS_PATH."beertype-list.php"); //para mostrar una lista de los keepers?
-        }*/
+            require_once(VIEWS_PATH."keeper-list.php"); //para mostrar una lista de los keepers?
+        }
 
         public function Add($firstName,$lastName,$userName,$password,$remuneration)  
         

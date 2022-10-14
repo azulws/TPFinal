@@ -3,11 +3,10 @@
     <h1>MENU OWNER</h1>
 </div>
 <div align ="center">
-<a href="<?php echo FRONT_ROOT . "Dog/ShowAddView"?>">ADD PET - </a>
-<a href="<?php echo FRONT_ROOT . "Dog/ShowListView"?>">  MY PETS</a>
+    <a href="<?php echo FRONT_ROOT . "Keeper/ShowListView"?>">KEEPER LIST - </a>
+    <a href="<?php echo FRONT_ROOT . "Dog/ShowAddView"?>">ADD PET - </a>
+    <a href="<?php echo FRONT_ROOT . "Dog/ShowListView"?>">  MY PETS</a>
 </div>
-
-
 
 </main>
 
