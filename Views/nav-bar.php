@@ -13,13 +13,13 @@
             <li><a class="drop" href="#">Owner</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT."Owner/ShowAddView" ?>">Registrarse</a></li>
-                <li><a href="<?php echo FRONT_ROOT."Owner/ShowLoguinView" ?>">Loguearse</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Owner/ShowLoginView" ?>">Loguearse</a></li>
               </ul>
             </li>
             <li><a class="drop" href="#">Keeper</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT."BeerType/ShowAddView" ?>">Registrarse</a></li>
-                <li><a href=<?php echo FRONT_ROOT."BeerType/ShowListView" ?>>Loguearse</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Keeper/ShowAddView" ?>">Registrarse</a></li>
+                <li><a href=<?php echo FRONT_ROOT."Keeper/ShowListView" ?>>Loguearse</a></li>
               </ul>
             </li>
         </ul>

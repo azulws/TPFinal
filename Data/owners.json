@@ -12,5 +12,12 @@
         "lastName": "gottero",
         "userName": "azulws",
         "password": "asd"
+    },
+    {
+        "id": 3,
+        "firstName": "Bruno",
+        "lastName": "Pruzsi",
+        "userName": "bp",
+        "password": "asd"
     }
 ]

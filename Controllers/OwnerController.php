@@ -3,7 +3,7 @@
 
     use DAO\OwnerDAO as OwnerDAO;
     use Models\Owner as Owner;
-    use Models\Person as Person;
+    use Models\User as User;
 
 
     class OwnerController
@@ -32,9 +32,9 @@
             require_once(VIEWS_PATH."beertype-list.php"); //para mostrar una lista de los keepers?
         }*/
 
-        public function ShowLoguinView()
+        public function ShowLoginView()
         {
-            include_once(VIEWS_PATH. "loguin-owner.php");
+            include_once(VIEWS_PATH. "login-owner.php");
         }
 
         public function Add($firstName,$lastName,$userName,$password)  

@@ -1,11 +1,10 @@
 <?php 
     include_once('header.php');
-    include_once('nav-bar.php');
+    //include_once('nav-bar.php');
 ?>
 
 <div id="breadcrumb" class="hoc clear"> 
-    <h6 class="heading">Ingreso de Owner
-    </h6>
+    <h6 class="heading">Ingreso de Owner</h6>
   </div>
 </div>
 <div class="wrapper row3" >
