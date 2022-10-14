@@ -26,10 +26,6 @@ class DogType{
 
         return $this;
 
-    
-    public function getBreed()
-    {
-        return $this->breed;
     }
 
     /**
@@ -62,6 +58,14 @@ class DogType{
         $this->size = $size;
 
         return $this;
+    }
+
+    /**
+     * Get the value of breed
+     */ 
+    public function getBreed()
+    {
+        return $this->breed;
     }
     }
 
