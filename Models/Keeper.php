@@ -33,7 +33,6 @@ class Keeper extends User {
         {
                 $this->reputation = $reputation;
 
-                return $this;
         }
 
 
@@ -46,6 +45,5 @@ class Keeper extends User {
         {
                 $this->idKeeper = $idKeeper;
 
-                return $this;
         }
 }
