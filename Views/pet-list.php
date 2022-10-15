@@ -26,7 +26,7 @@
                   <tr>
                     <td><?php echo $pet->getName() ?></td>
                     <td><?php echo $pet->getPetType()->getSize() ?></td>
-                    <td><?php echo $pet->getUserName() ?></td>
+                    <td><?php echo $pet->getDescription() ?></td>
                     <td><?php echo "aca iria la img"?></td>
                     <td>
                         <button type="submit" name="id" class="btn" value="<?php echo $pet->getId() ?>"> Remove </button>

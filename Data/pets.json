@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "name": "joan",
+        "owner": 1,
+        "petType": 1,
+        "description": "amigable"
+    }
+]

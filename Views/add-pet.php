@@ -13,15 +13,15 @@
     <!-- main body -->
     <div class="content" > 
     <div id="comments" style="align-items:center;">
-        <h2>Ingresar Datos</h2>
-        <form action="<?php echo FRONT_ROOT."Pet/Add" ?>" method="post" style="background-color: #EAEDED;padding: 2rem !important;">
-        <table> 
+        <h2 align="center">Ingresar Datos</h2>
+        <form align="center" action="<?php echo FRONT_ROOT."Pet/Add" ?>" method="post" style="background-color: #EAEDED;padding: 2rem !important;" enctype="multipart/form-data">
+        <table align="center"> 
             <thead>              
             <tr>
                 <th>Name</th>
                 <th>Description</th>
                 <th>PetType</th>
-                <th>Owner</th>
+
 
 
             </tr>
@@ -48,25 +48,8 @@
                         }
                     ?>
                 </select>
-                </td> 
-                <td>
-                 
-                <input type="text" name="description" value ="
-                <?php 
+                
 
-                foreach($_SESSION["loggedUser"] as $index => $value)
-                {
-                    {
-                        
-                        $owner = $value['userName'];
-                    }
-                }
-                var_dump($owner);
-                ?> 
-                
-                "  required>
-                
-                </td>  
                 
                     
             </tr>

@@ -14,7 +14,7 @@
 
             $pet->setId($this->GetNextId());
 
-            array_push($this->petList, );
+            array_push($this->petList, $pet );
             
             $this->SaveData();
         }
@@ -22,7 +22,7 @@
         public function Remove($id) {
             $this->RetrieveData();
 
-            $this->petList = array_filter($this->petList, function() use($id) {
+            $this->petList = array_filter($this->petList, function($pet) use($id) {
                 return $pet->getId() != $id;
             });
 
@@ -33,6 +33,18 @@
             $this->RetrieveData();
 
             return $this->petList;
+        }
+
+        public function GetAllByOwner($idOwner)
+        {
+            $this->RetrieveData();
+            $pets = array_filter($this->petList, function($pet) use($idOwner) {
+                return $pet->getOwner() == $idOwner;
+            });
+
+            $pets = array_values($pets);
+
+            return $pets;
         }
 
         private function SaveData() {
