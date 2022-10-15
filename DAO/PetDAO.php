@@ -42,9 +42,9 @@
             foreach($this->petList as $pet) {
                 $value["id"] = $pet->getId();
                 $value["name"] = $pet->getName();
-                $value["idOwner"] = $pet->getIdOwner();
+                $value["owner"] = $pet->getOwner();
                 $value["petType"] = $pet->getPetType()->getId();
-                $value["description"] = $pet->getPrice();
+                $value["description"] = $pet->getDescription();
 
                 array_push($arrayEncode, $value);
             }
@@ -63,7 +63,7 @@
                     $pet = new Pet();
                     $pet->setId($value["id"]);
                     $pet->setName($value["name"]);
-                    $pet->setIdOwner($value["idOwner"]);
+                    $pet->setOwner($value["owner"]);
                     $pet->setDescription($value["description"]);
                     
                     $petTypeDAO = new PetTypeDAO();

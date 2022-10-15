@@ -9,6 +9,5 @@ use Models\PetType;
         function Remove($id);
         function GetAll();
         function Exist($id);
-        function GetNextId();
     }
 ?>

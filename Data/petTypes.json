@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "breed": "caniche",
+        "size": "chico"
+    },
+    {
+        "id": 1,
+        "breed": "pitbull",
+        "size": "mediano"
+    },
+    {
+        "id": 1,
+        "breed": "grand danes",
+        "size": "grande"
+    }
+
+]
