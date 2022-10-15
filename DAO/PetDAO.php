@@ -12,7 +12,7 @@
         public function Add(Pet $pet) {
             $this->RetrieveData();
 
-            ->setId($this->GetNextId());
+            $pet->setId($this->GetNextId());
 
             array_push($this->petList, );
             
@@ -23,7 +23,7 @@
             $this->RetrieveData();
 
             $this->petList = array_filter($this->petList, function() use($id) {
-                return ->getId() != $id;
+                return $pet->getId() != $id;
             });
 
             $this->SaveData();
@@ -39,12 +39,12 @@
             sort($this->petList);
             $arrayEncode = array();
 
-            foreach($this->petList as ) {
-                $value["id"] = ->getId();
-                $value["name"] = ->getName();
-                $value["idOwner"] = ->getIdOwner();
-                $value["petType"] = ->getPetType()->getId();
-                $value["description"] = ->getPrice();
+            foreach($this->petList as $pet) {
+                $value["id"] = $pet->getId();
+                $value["name"] = $pet->getName();
+                $value["idOwner"] = $pet->getIdOwner();
+                $value["petType"] = $pet->getPetType()->getId();
+                $value["description"] = $pet->getPrice();
 
                 array_push($arrayEncode, $value);
             }
