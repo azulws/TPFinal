@@ -2,8 +2,13 @@
     include_once('header.php');
     include_once('nav-bar.php'); 
 ?>
+<head>
+    <link rel="stylesheet" href="Views/css/style.css">
 
-<main>
+</head>
+<main class="main">
+
+  
     <div>
         <h1 align="center">WELCOME</h1>
     </div>
@@ -13,7 +18,7 @@
             <div>
                 <label for="user_name">
                     <span>UserName</span>
-                    <input type="text" id="userName" name="userName" required>
+                    <input  type="text" id="userName" name="userName" required>
                 </label>
             </div>
             <div>
@@ -32,14 +37,17 @@
                 </label>
             </div>
             <div>
-                <button type="submit" class="btn">Login</button>
+                <button class="btn-encriptar" type="submit" class="btn">Login</button>
+            </div>
+            <div>
+                <a class="btn-desencriptar" href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Registrarse</a>
             </div>
         </form>
     </div>
     <div id="pageintro" class="hoc clear"> 
     <article class="center">
       <h3 class="heading underline">Los mejores en cuidado de mascotas</h3>
-      <footer><a class="btn" href="#">Conocer Mas</a></footer>
+     <!-- <footer><a class="btn" href="#">Conocer Mas</a></footer> -->
     </article>
   </div>
 </main>

@@ -3,15 +3,18 @@
 
   <div class="wrapper row1">
     <header id="header" class="hoc clear"> 
+    <link rel="stylesheet" href="Views/css/style.css">
+   
+    <a href="<?php echo FRONT_ROOT ?>"><img src="Views/img/logo.png" class="logo"> </a>
       <div id="logo" class="fl_left">
         <h1><a href="#">Pet Hero</a></h1>
       </div>
       <!-- Add path routes below -->
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-            <li class="active"><a href="<?php echo FRONT_ROOT ?>">Menu Principal</a></li>
+            <!--<li class="active"><a href="<?php echo FRONT_ROOT ?>">Menu Principal</a></li> -->
               <ul>
-                <li><a href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Registrarse</a></li>
+                <!--<li><a href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Registrarse</a></li>-->
               </ul>
         </ul>
       </nav> 
