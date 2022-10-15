@@ -35,6 +35,10 @@
             require_once(VIEWS_PATH . "home-keeper.php"); //pantalla para el usuario
         }
 
+        public function ShowAddView(){
+            require_once(VIEWS_PATH."add-view.php");
+        }
+        
         public function Login($userName, $password,$userType) {
             if($userType=="owner"){
                 $user = $this->ownerDAO->GetByUserName($userName);

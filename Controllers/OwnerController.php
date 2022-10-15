@@ -17,7 +17,8 @@
 
         public function ShowAddView()
         {
-            require_once(VIEWS_PATH."add-owner.php"); //MODIFICAR
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."add-view.php"); 
         }
 
         public function ShowMenuView()

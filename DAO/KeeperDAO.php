@@ -12,6 +12,7 @@
             $this->retrieveData();
 
             $keeper->setIdKeeper($this->GetNextId());
+            $keeper->setRemuneration("0");
             array_push($this->keeperList,$keeper);
 
             $this->saveData();

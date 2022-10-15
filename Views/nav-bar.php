@@ -10,19 +10,10 @@
       <nav id="mainav" class="fl_right">
         <ul class="clear">
             <li class="active"><a href="<?php echo FRONT_ROOT ?>">Menu Principal</a></li>
-            <li><a class="drop" href="#">Owner</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT."Owner/ShowAddView" ?>">Registrarse</a></li>
-                <li><a href="<?php echo FRONT_ROOT."Owner/ShowLoginView" ?>">Loguearse</a></li>
+                <li><a href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Registrarse</a></li>
               </ul>
-            </li>
-            <li><a class="drop" href="#">Keeper</a>
-              <ul>
-                <li><a href="<?php echo FRONT_ROOT."Keeper/ShowAddView" ?>">Registrarse</a></li>
-                <li><a href=<?php echo FRONT_ROOT."Keeper/ShowLoginView" ?>>Loguearse</a></li>
-              </ul>
-            </li>
         </ul>
-    </nav> 
+      </nav> 
     </header>
   </div>

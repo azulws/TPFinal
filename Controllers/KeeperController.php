@@ -16,17 +16,17 @@
         public function ShowAddView()
         {
             require_once(VIEWS_PATH."validate-session.php");
-            require_once(VIEWS_PATH."add-keeper.php"); //MODIFICAR
+            require_once(VIEWS_PATH."add-view.php");
         }
 
         public function ShowListView()
         {
             require_once(VIEWS_PATH."validate-session.php");
             $keeperList = $this->keeperDAO->GetAll();
-            require_once(VIEWS_PATH."keeper-list.php"); //para mostrar una lista de los keepers?
+            require_once(VIEWS_PATH."keeper-list.php");
         }
 
-        public function Add($firstName,$lastName,$userName,$password,$remuneration)  
+        public function Add($firstName,$lastName,$userName,$password)  
         
         {
             $keeper = new Keeper();
@@ -34,7 +34,6 @@
             $keeper->setLastName($lastName);
             $keeper->setUserName($userName);
             $keeper->setPassword($password);
-            $keeper->setRemuneration($remuneration);
 
             $this->keeperDAO->Add($keeper);
 

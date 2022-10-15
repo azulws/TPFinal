@@ -42,7 +42,10 @@
               </tbody>
           </table>
           <div>
-            <input type="submit" class="btn" value="Agregar" style="background-color:#DC8E47;color:white;"/>
+            <input type="submit" class="btn" value="Owner" style="background-color:#DC8E47;color:white;"/>
+          </div>
+          <div>
+            <input type="submit" class="btn" value="Keeper" style="background-color:#DC8E47;color:white;" formaction="<?php echo FRONT_ROOT."Keeper/Add" ?>">
           </div>
         </form>
       </div>
