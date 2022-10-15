@@ -1,14 +1,14 @@
 <?php
 namespace Models;
 
-use Models\DogType as DogType;
+use Models\PetType as PetType;
     
-    class Dog {
+    class Pet {
 
         private $id;
         private $name;
         private $idOwner;
-        private $dogType;
+        private $petType;
         private $description;
 
         public function getId()
@@ -48,14 +48,14 @@ use Models\DogType as DogType;
         }
 
 
-        public function getDogType()
+        public function getPetType()
         {
-                return $this->dogType;
+                return $this->petType;
         }
 
-        public function setDogType($dogType)
+        public function setPetType($petType)
         {
-                $this->dogType = $dogType;
+                $this->petType = $petType;
 
         }
 

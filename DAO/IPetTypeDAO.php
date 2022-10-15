@@ -2,12 +2,13 @@
 
     namespace DAO;
 
-use Models\Dog;
+use Models\PetType;
 
-    interface IDogDAO {
-        function Add(Dog $dog);
+    interface IPetTypeDAO {
+        function Add(PetType $petType);
         function Remove($id);
         function GetAll();
+        function Exist($id);
         function GetNextId();
     }
 ?>
