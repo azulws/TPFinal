@@ -6,7 +6,7 @@
       <nav>
         <ul class="nospace inline pushright uppercase">
           <li><a href="home.php"><i class="fas fa-lg fa-home"></i></a></li>
-          <li><a href="<?php echo FRONT_ROOT."Home/Index"?>">Home</a></li>
+          <li><a href="<?php echo FRONT_ROOT ?>">Home</a></li>
           <li><a href="<?php echo FRONT_ROOT."Home/Logout"?>">Logout</a></li>
         </ul>
       </nav>

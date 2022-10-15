@@ -122,6 +122,15 @@
       outline: none;
      }
   
+  .texto-nav{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 150%;
+    color: #0A3871;
+    text-decoration:none;
+  }   
   .message-box{
     position: absolute;
     width: 400px;

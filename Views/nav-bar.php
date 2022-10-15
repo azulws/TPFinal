@@ -7,7 +7,7 @@
    
     <a href="<?php echo FRONT_ROOT ?>"><img src="Views/img/logo.png" class="logo"> </a>
       <div id="logo" class="fl_left">
-        <h1><a href="#">Pet Hero</a></h1>
+        <h1><a class="texto-nav" href="<?php echo FRONT_ROOT ?>">Caninos Ya</a></h1>
       </div>
       <!-- Add path routes below -->
       <nav id="mainav" class="fl_right">

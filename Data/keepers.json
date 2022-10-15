@@ -14,5 +14,13 @@
         "userName": "rakzad",
         "password": "chau",
         "remuneration": "4"
+    },
+    {
+        "id": 3,
+        "firstName": "elke",
+        "lastName": "per",
+        "userName": "kp",
+        "password": "asd",
+        "remuneration": "0"
     }
 ]
