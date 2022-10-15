@@ -1,9 +1,9 @@
 <?php
 
-    sizespace Controllers;
+    namespace Controllers;
 
-use DAO\PetTypeDAO;
-use Models\PetType;
+    use DAO\PetTypeDAO;
+    use Models\PetType;
 
     class PetTypeController {
         private $petTypeDAO;
@@ -36,7 +36,7 @@ use Models\PetType;
         }
 
         public function Remove($id) {
-            require_once(VIEWS_PATH . "validate-session.php");
+            require_once(VIEWS_PATH ."validate-session.php");
 
             $this->petTypeDAO->Remove(intval($id));
 
