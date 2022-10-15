@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <title>Flaming Moe´s Beer</title>
+  <title>Pet Hero</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link href="<?php echo CSS_PATH;?>layout.css" rel="stylesheet" type="text/css" media="all">
+  <link rel="shortcut icon" href="https://images.emojiterra.com/google/android-11/512px/1f436.png">
 </head>
 <body id="top" styles="font-family: 'Montserrat', sans-serif;">

@@ -2,7 +2,8 @@
 
     namespace DAO;
 
-    use Models\Owner;
+    use Models\Owner as Owner;
+    use DAO\IOwnerDAO as IOwnerDAO;
 
     class OwnerDAO implements IOwnerDAO {
         private $fileName = ROOT . "/Data/owners.json";
@@ -28,19 +29,18 @@
             $this->SaveData();
         }
 
-
         public function GetByUserName($userName) {
+            $owner = null;
             $this->RetrieveData();
 
-            $user = null;
-
-            $aux = array_filter($this->ownerList, function($owner) use ($userName) {
-                return $owner->getUserName() === $userName;
+            $owners = array_filter($this->ownerList, function($owner) use ($userName) {
+                return $owner->getUserName() == $userName;
             });
 
-            return (count($aux) > 0) ? $aux[0] : null;
+            $owners= array_values($owners);
+            return (count($owners) > 0) ? $owners[0] : null;
         }
-
+        
         public function GetAll() {
             $this->RetrieveData();
 

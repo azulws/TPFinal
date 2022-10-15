@@ -1,11 +1,10 @@
 <?php 
     include_once('header.php');
-    include_once('nav-bar.php');
+    //include_once('nav-bar.php');
 ?>
 
 <div id="breadcrumb" class="hoc clear"> 
-    <h6 class="heading">Ingreso de Owner
-    </h6>
+    <h6 class="heading">Ingreso de Owner</h6>
   </div>
 </div>
 <div class="wrapper row3" >
@@ -43,7 +42,10 @@
               </tbody>
           </table>
           <div>
-            <input type="submit" class="btn" value="Agregar" style="background-color:#DC8E47;color:white;"/>
+            <input type="submit" class="btn" value="Owner" style="background-color:#DC8E47;color:white;"/>
+          </div>
+          <div>
+            <input type="submit" class="btn" value="Keeper" style="background-color:#DC8E47;color:white;" formaction="<?php echo FRONT_ROOT."Keeper/Add" ?>">
           </div>
         </form>
       </div>
@@ -52,6 +54,10 @@
     <div class="clear"></div>
   </main>
 </div>
+<?php
+  echo "<script> alert('agregado con exito')";
+  echo "window.location: '../home.php';</script>";
+?>
 
 
 <?php 

@@ -3,7 +3,7 @@
 
     use DAO\OwnerDAO as OwnerDAO;
     use Models\Owner as Owner;
-    use Models\Person as Person;
+    use Models\User as User;
 
 
     class OwnerController
@@ -17,13 +17,14 @@
 
         public function ShowAddView()
         {
-            require_once(VIEWS_PATH."add-owner.php"); //MODIFICAR
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."add-view.php"); 
         }
 
         public function ShowMenuView()
         {
             require_once(VIEWS_PATH . "validate-session.php");
-            echo "te logueaste bien,imaginate un menu xd";
+            require_once(VIEWS_PATH . "home-owner.php");
         }
 
         /*public function ShowListView()
@@ -32,13 +33,12 @@
             require_once(VIEWS_PATH."beertype-list.php"); //para mostrar una lista de los keepers?
         }*/
 
-        public function ShowLoguinView()
+        public function ShowLoginView()
         {
-            include_once(VIEWS_PATH. "loguin-owner.php");
+            include_once(VIEWS_PATH. "login-owner.php");
         }
 
         public function Add($firstName,$lastName,$userName,$password)  
-        
         {
             $owner = new Owner();
             $owner->setFirstName($firstName);

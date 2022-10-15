@@ -3,11 +3,11 @@ namespace Models;
 
 use Models\Person as Person;
 
-class Keeper extends Person {
+class Keeper extends User {
 
-        $idKeeper;
-        $remuneration;
-        $reputation;
+        private $idKeeper;
+        private $remuneration;
+        private $reputation;
         
 
 
@@ -33,7 +33,6 @@ class Keeper extends Person {
         {
                 $this->reputation = $reputation;
 
-                return $this;
         }
 
 
@@ -46,6 +45,5 @@ class Keeper extends Person {
         {
                 $this->idKeeper = $idKeeper;
 
-                return $this;
         }
 }
