@@ -5,5 +5,12 @@
         "owner": 1,
         "petType": 1,
         "description": "amigable"
+    },
+    {
+        "id": 2,
+        "name": "Limon",
+        "owner": 3,
+        "petType": 1,
+        "description": "Caniche de 3 metros cubicos"
     }
 ]
