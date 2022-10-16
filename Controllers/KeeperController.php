@@ -29,7 +29,7 @@
         public function Add($firstName,$lastName,$userName,$password)  
         
         {
-            if($this->OwnerDAO->GetByUserName($userName)==NULL){
+            if($this->keeperDAO->GetByUserName($userName)==NULL){
             $keeper = new Keeper();
             $keeper->setFirstName($firstName);
             $keeper->setLastName($lastName);

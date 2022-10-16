@@ -1,7 +1,7 @@
 <?php
     namespace Models;
 
-    class Avialability{
+    class Availability{
         private $date;
         private $keeperList;
 
