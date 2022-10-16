@@ -13,8 +13,8 @@
           <thead>              
               <tr>
                 <th>Name</th>
-                <th>Description</th>
-                <th>Tamaño</th>       
+                <th>Tamaño</th>
+                <th>Description</th>       
                 <th>Imagen</th>
               </tr>
           </thead>

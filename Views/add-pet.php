@@ -37,10 +37,9 @@
                 <td>
                 <select name="petType" id="petType" class="select">
                     <?php
-                        $petTypeDAO = new PetTypeDAO();
+                        /*$petTypeDAO = new PetTypeDAO();
                         $petTypeList = $petTypeDAO->GetAll();
-                        var_dump($petTypeList);
-
+                        var_dump($petTypeList);*/
                         foreach($petTypeList as $petType) {
                         echo "<option value=". $petType->getId() .">
                         ". $petType->getSize(). "
@@ -49,9 +48,6 @@
                     ?>
                 </select>
                 
-
-                
-                    
             </tr>
             </tbody>
         </table>

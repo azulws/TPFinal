@@ -9,13 +9,16 @@
 
     class PetController {
         private $petDAO;
+        private $petTypeDAO;
 
         public function __construct() {
             $this->petDAO = new PetDAO();
+            $this->petTypeDAO = new PetTypeDAO();
         }
 
         public function ShowAddView($message = "") {
             require_once(VIEWS_PATH . "validate-session.php");
+            $petTypeList = $this->petTypeDAO->getAll();
             require_once(VIEWS_PATH . "add-pet.php");
         }
 

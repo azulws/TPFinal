@@ -22,17 +22,7 @@
         }
 
         public function Index($message = "") {
-            require_once(VIEWS_PATH . "home.php");
-        }
-
-        public function ShowHomeOwnerView() {
-            require_once(VIEWS_PATH . "validate-session.php");
-            require_once(VIEWS_PATH . "home-owner.php"); //pantalla para el usuario
-        }
-
-        public function ShowHomeKeeperView() {
-            require_once(VIEWS_PATH . "validate-session.php");
-            require_once(VIEWS_PATH . "home-keeper.php"); //pantalla para el usuario
+            require_once(VIEWS_PATH . "home.php");                      //home del tp = pantalla de login
         }
 
         public function ShowAddView(){
@@ -42,18 +32,23 @@
         public function Login($userName, $password,$userType) {
             if($userType=="owner"){
                 $user = $this->ownerDAO->GetByUserName($userName);
-            }else if($userType=="keeper"){
+            }else if($userType=="keeper"){                              //busqueda en el dao correspondiente del usuario logueando
                 $user = $this->keeperDAO->GetByUserName($userName);
             }
             if(($user != NULL) && ($user->getPassword() == $password)) {
                 $_SESSION["loggedUser"] = $user;
-                if($userType=="owner"){
-                    $this->ShowHomeOwnerView();
-                }else{
-                    $this->ShowHomeKeeperView();
-                }                                              
+                $this->showHomeView();
             } else {
                 $this->Index("Usuario y/o contraseña incorrecta");
+            }
+        }
+
+        public function ShowHomeView() {
+            require_once(VIEWS_PATH . "validate-session.php");
+            if($_SESSION["loggedUser"] instanceof Owner){
+                require_once(VIEWS_PATH . "home-owner.php");            //pantalla para el usuario owner
+            }else if($_SESSION["loggedUser"] instanceof Keeper){
+                require_once(VIEWS_PATH . "home-keeper.php");           //pantalla para el usuario keeper
             }
         }
 
