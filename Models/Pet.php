@@ -10,6 +10,7 @@ use Models\PetType as PetType;
         private $Owner;
         private $petType;
         private $description;
+        private $image;
 
         public function getId()
         {
@@ -70,8 +71,22 @@ use Models\PetType as PetType;
                 $this->description = $description;
 
         }
+
+        public function getImage()
+        {
+                return $this->image;
+        }
+
+
+        public function setImage($image)
+        {
+                $this->image = $image;
+
+        }
+
+        
     }
-    
+
 
 
 
