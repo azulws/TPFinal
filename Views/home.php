@@ -44,7 +44,6 @@
               <label for="password" class="form__label">Password</label>
              </div>
 
-
               <div>
                 <label for="user_type">
                     <span>UserType</span>
@@ -56,12 +55,13 @@
              </div>
              <div>
                 <button class="btn-encriptar" type="submit" class="btn">Login</button>
-              </div>
+            </div>
             <div>
                 <a class="btn-desencriptar" href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Registrarse</a>
             </div>
         </form>
     </div>
+
     <section class="message-box">
 
       <div class="cat">
@@ -73,6 +73,7 @@
      
       
     </section>
+
     <div id="pageintro" class="hoc clear"> 
       <article class="center">
        <!-- <h3 class="heading underline">Los mejores en cuidado de mascotas</h3>
@@ -82,4 +83,3 @@
 </main>
 
 <?php include_once('footer.php');?> 
-</div>
