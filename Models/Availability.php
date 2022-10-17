@@ -16,7 +16,7 @@
             return $this->keeperList;
         }
         public function setKeeperList($keeperList){
-            $this->keeperListe=$keeperList;
+            $this->keeperList=$keeperList;
         }
     }
 ?>
