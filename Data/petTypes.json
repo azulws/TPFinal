@@ -5,12 +5,12 @@
         "size": "chico"
     },
     {
-        "id": 1,
+        "id": 2,
         "breed": "pitbull",
         "size": "mediano"
     },
     {
-        "id": 1,
+        "id": 3,
         "breed": "grand danes",
         "size": "grande"
     }

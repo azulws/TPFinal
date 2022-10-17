@@ -1,13 +1,14 @@
 <?php
     namespace DAO;
 
+    use Models\Availability as Availability;
     use DAO\IAvailabilityDAO as IAvailabilityDAO;
 
-    class Avialability implements IAvailability{
+    class AvailabilityDAO implements IAvailabilityDAO{
         private $avialabilityList= Array();
         private $fileName = ROOT . "/Data/avialability.json";
 
-        public function Add(Avialability $avialability){
+        public function Add(Availability $avialability){
             $this->retrieveData();
 
             array_push($this->avialabilityList,$avialability);
@@ -32,12 +33,24 @@
             return (count($avialabilitys) > 0) ? $avialabilitys[0] : null;
         }
 
+        public function GetByUserName($userName) {
+            $avialability = null;
+            $this->RetrieveData();
+
+            $avialabilitys = array_filter($this->avialabilityList, function($avialability) use ($userName) {
+                return $avialability->getKeeperList() == $userName;
+            });
+
+            $avialabilitys= array_values($avialabilitys);
+            return (count($avialabilitys) > 0) ? $avialabilitys[0] : null;
+        }
+
         private function saveData(){
             $arrayToEncode= array();
 
-            foreach($this->keeperList as $keeper){
-                $value["date"]= $keeper->getDate();
-                $value["keeperList"] = $keeper->getKeeperList();
+            foreach($this->avialabilityList as $avialability){
+                $value["date"]= $avialability->getDate();
+                $value["keeperList"] = $avialability->getKeeperList();
 
                 array_push($arrayToEncode, $value);
             }
@@ -53,7 +66,7 @@
                 $arrayDecode = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
 
                 foreach($arrayDecode as $value){
-                    $avialability = new Avialability();
+                    $avialability = new Availability();
                     $avialability->setDate($value["date"]);
                     $avialability->setKeeperList($value["keeperList"]);
 

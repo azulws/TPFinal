@@ -22,5 +22,13 @@
         "userName": "kp",
         "password": "asd",
         "remuneration": "0"
+    },
+    {
+        "id": 4,
+        "firstName": "nacho",
+        "lastName": "emi",
+        "userName": "emigam",
+        "password": "asd",
+        "remuneration": "0"
     }
 ]

@@ -29,6 +29,7 @@
         public function Add($firstName,$lastName,$userName,$password)  
         
         {
+            if($this->keeperDAO->GetByUserName($userName)==NULL){
             $keeper = new Keeper();
             $keeper->setFirstName($firstName);
             $keeper->setLastName($lastName);
@@ -36,7 +37,7 @@
             $keeper->setPassword($password);
 
             $this->keeperDAO->Add($keeper);
-
+            }
             $this->ShowAddView();
         }
 

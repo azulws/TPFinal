@@ -13,8 +13,8 @@
           <thead>              
               <tr>
                 <th>Name</th>
-                <th>Description</th>
-                <th>Tamaño</th>       
+                <th>Tamaño</th>
+                <th>Description</th>       
                 <th>Imagen</th>
               </tr>
           </thead>
@@ -27,9 +27,14 @@
                     <td><?php echo $pet->getName() ?></td>
                     <td><?php echo $pet->getPetType()->getSize() ?></td>
                     <td><?php echo $pet->getDescription() ?></td>
-                    <td><?php echo "aca iria la img"?></td>
+                    <td>
+                    <img src="C:\xampp\htdocs\TPfinal\Views\img\ChoryDay\FCMKckpVgAMsVbi.jpg"> 
+                    <a href="<?php echo FRONT_ROOT . "Pet/ShowAddImgView/" . $pet->getId() ?>" class="btn"> Add Picture </a>
+                    </td>
                     <td>
                         <button type="submit" name="id" class="btn" value="<?php echo $pet->getId() ?>"> Remove </button>
+                        
+                        
                     </td>
                   </tr>
                 <?php
