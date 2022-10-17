@@ -1,3 +1,57 @@
+/*test de input field styles*/ 
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+ 
+  font-size: 62,5%;
+}
+
+
+.form__label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+  margin-top: 0.7rem;
+  display: block;
+  transition: all 0.3s;
+  transform: translateY(0rem);
+}
+
+.form__input {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+	margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-radius: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  width: 328px;
+  display: block;
+  border-bottom: 0.3rem solid transparent;
+  transition: all 0.3s;
+}
+
+.form__input:placeholder-shown + .form__label {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(-4rem);
+  transform: translateY(-4rem);
+}
+
+/*fin de test de input field styles*/ 
+
+ .monigote{
+  max-width: 100%;
+  max-height: 100%;
+ }
+ .cat {
+  height: 270px;
+  width: 270px;
+ }
+
 * {
     margin: 0;
     padding: 0;
@@ -134,11 +188,12 @@
   .message-box{
     position: absolute;
     width: 400px;
-    height: 750px;
+    height: 9000px;
     left: 70%;
-    top: 20px;
-    padding-left: 20px;
-    padding-top: 80px;
+    bottom: 40px;
+    padding-left: 10px;
+    padding-top: 50px;
+   
     /* White */
   
     background: #FFFFFF;
