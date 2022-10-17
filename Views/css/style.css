@@ -44,6 +44,7 @@
 /*fin de test de input field styles*/ 
 
  .monigote{
+  position:absolute;
   max-width: 100%;
   max-height: 100%;
  }
@@ -188,11 +189,11 @@
   .message-box{
     position: absolute;
     width: 400px;
-    height: 9000px;
+    height: 750px;
     left: 70%;
-    bottom: 40px;
-    padding-left: 10px;
-    padding-top: 50px;
+    bottom: 20px;
+    padding-left: 20px;
+    padding-top: 80px;
    
     /* White */
   
