@@ -3,7 +3,7 @@
 
     class Availability{
         private $date;
-        private $keeperList;
+        private $keeperName;
 
         public function getDate(){
             return $this->date;
@@ -12,11 +12,11 @@
             $this->date= $date;
         }
 
-        public function getKeeperList(){
-            return $this->keeperList;
+        public function getKeeperName(){
+            return $this->keeperName;
         }
-        public function setKeeperList($keeperList){
-            $this->keeperList=$keeperList;
+        public function setKeeperName($keeperName){
+            $this->keeperName=$keeperName;
         }
     }
 ?>

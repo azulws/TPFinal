@@ -33,7 +33,7 @@
             if($this->availabilityDAO->GetByDate($date)==null){
                 $availability = new Availability();
                 $availability->setDate($date);
-                $availability->setKeeperList($user);
+                $availability->setKeeperName($user);
 
                 $this->availabilityDAO->Add($availability);
             }

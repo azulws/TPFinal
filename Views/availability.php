@@ -44,11 +44,11 @@
               foreach($availabilityList as $availability)
               {
                 echo var_dump($availability);
-                if($availability->getKeeperList()== $_SESSION["loggedUser"]->getUserName()){
+                if($availability->getKeeperName()== $_SESSION["loggedUser"]->getUserName()){
                 ?>
                   <tr>
                     <td><?php echo $availability->getDate() ?></td>
-                    <td><?php echo $availability->getKeeperList() ?></td>
+                    <td><?php echo $availability->getKeeperName() ?></td>
                   </tr>
                 <?php
                 }

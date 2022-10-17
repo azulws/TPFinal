@@ -46,10 +46,14 @@
             {
                 unset($this->parameters["button"]);
                 
-                foreach($_FILES as $file)
+                foreach($_FILES as $key -> $file)
+                {
+                    $this->parameters[$key] = $file;
+                }
+                /*foreach($_FILES as $file)         //parte que esta mal?
                 {
                     array_push($this->parameters, $file);
-                }
+                }*/
             }
         }
 

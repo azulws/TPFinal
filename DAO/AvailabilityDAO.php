@@ -38,7 +38,7 @@
             $this->RetrieveData();
 
             $avialabilitys = array_filter($this->avialabilityList, function($avialability) use ($userName) {
-                return $avialability->getKeeperList() == $userName;
+                return $avialability->getKeeperName() == $userName;
             });
 
             $avialabilitys= array_values($avialabilitys);
@@ -50,7 +50,7 @@
 
             foreach($this->avialabilityList as $avialability){
                 $value["date"]= $avialability->getDate();
-                $value["keeperList"] = $avialability->getKeeperList();
+                $value["keeperName"] = $avialability->getKeeperName();
 
                 array_push($arrayToEncode, $value);
             }
@@ -68,7 +68,7 @@
                 foreach($arrayDecode as $value){
                     $avialability = new Availability();
                     $avialability->setDate($value["date"]);
-                    $avialability->setKeeperList($value["keeperList"]);
+                    $avialability->setKeeperName($value["keeperName"]);
 
                     array_push($this->avialabilityList,$avialability);
                 }
