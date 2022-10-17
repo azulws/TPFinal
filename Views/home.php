@@ -3,7 +3,10 @@
     include_once('nav-bar.php'); 
 ?>
 <head>
-    <link rel="stylesheet" href="Views/css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Views/css/style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,13 +39,13 @@
                     <input type="password" id="password" name="password" required>
                 </label>
             </div>-->
-            <div class="form__group">
+             <div class="form__group">
               <input type="password" class="form__input" id="password" name="password" placeholder="Password" required />
               <label for="password" class="form__label">Password</label>
-            </div>
+             </div>
 
 
-            <div>
+              <div>
                 <label for="user_type">
                     <span>UserType</span>
                     <select name="userType" id="userType" require>
@@ -50,31 +53,32 @@
                         <option value="keeper">Keeper</option>
                     </select>
                 </label>
-            </div>
-            <div>
+             </div>
+             <div>
                 <button class="btn-encriptar" type="submit" class="btn">Login</button>
-            </div>
+              </div>
             <div>
                 <a class="btn-desencriptar" href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Registrarse</a>
             </div>
         </form>
     </div>
     <section class="message-box">
-    <div class="cat">
-      <img class= "monigote" src="Views/img/keeper.jpg">
-    </div>
+
+      <div class="cat">
+         <img class= "monigote" src="Views/img/keeper.jpg">
+      </div>
        
         <h2>Los mejores cuidando mascotas!</h2>
         <h3>Por favor especifique que tipo de usuario es a la hora de entrar.</h3>
-      </div>      
+     
       
     </section>
     <div id="pageintro" class="hoc clear"> 
-    <article class="center">
-      <!-- <h3 class="heading underline">Los mejores en cuidado de mascotas</h3>
-     <footer><a class="btn" href="#">Conocer Mas</a></footer> -->
-    </article>
-  </div>
+      <article class="center">
+       <!-- <h3 class="heading underline">Los mejores en cuidado de mascotas</h3>
+       <footer><a class="btn" href="#">Conocer Mas</a></footer> -->
+      </article>
+    </div>
 </main>
 
 <?php include_once('footer.php');?> 
