@@ -49,6 +49,8 @@
             session_destroy();
 
             $this->Index();
+            
+
         }      
     }
 

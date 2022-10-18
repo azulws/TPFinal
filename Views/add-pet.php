@@ -1,8 +1,4 @@
-<?php 
-    include_once('header.php');
-    //include_once('nav-bar.php');
-    use DAO\PetTypeDAO;
-?>
+
 
 <div id="breadcrumb" class="hoc clear"> 
     <h6 class="heading">Join Pet</h6>

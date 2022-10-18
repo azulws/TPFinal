@@ -1,7 +1,4 @@
-<?php 
-    include('header.php');
-    include('nav-bar.php');
-?>
+
 <div class="wrapper row4">
   <main class="hoc container clear"> 
     <!-- main body -->

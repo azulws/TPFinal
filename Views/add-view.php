@@ -1,6 +1,6 @@
 <?php 
     include_once('header.php');
-    //include_once('nav-bar.php');
+    include_once('nav-bar.php');
 ?>
 
 <div id="breadcrumb" class="hoc clear"> 
@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="wrapper row3" >
-  <main class="container" style="width: 95%;"> 
+  <main class="main"> 
     <!-- main body -->
     <div class="content" > 
       <div id="comments" style="align-items:center;">

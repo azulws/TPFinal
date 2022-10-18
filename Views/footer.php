@@ -7,7 +7,9 @@
         <ul class="nospace inline pushright uppercase">
           <li><a href="home.php"><i class="fas fa-lg fa-home"></i></a></li>
           <!--<li><a href="<?php echo FRONT_ROOT."Home/ShowHomeView" ?>">Home</a></li> deberiamos moverlo al nav var? -->
-          <li><a href="<?php echo FRONT_ROOT."Home/Logout"?>">Logout</a></li>
+          <li><a href="<?php echo FRONT_ROOT."Home/Logout"?>" ><img src="Views/img/logout.png" class="logout"> </a ></li>
+          <li><a  href="<?php echo FRONT_ROOT."Home/Logout"?>">Logout</a></li>
+
         </ul>
       </nav>
     </div>
@@ -18,9 +20,5 @@
   </div>
 </div>
 <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
-<!-- JAVASCRIPTS 
-<script src="<?php echo JS_PATH ?>jquery.min.js"></script>
-<script src="<?php echo JS_PATH ?>jquery.backtotop.js"></script>
-<script src="<?php echo JS_PATH ?>jquery.mobilemenu.js"></script> -->
 </body>
 </html>
