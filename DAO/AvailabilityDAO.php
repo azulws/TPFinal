@@ -5,7 +5,7 @@
     use DAO\IAvailabilityDAO as IAvailabilityDAO;
 
     class AvailabilityDAO implements IAvailabilityDAO{
-        private $avialabilityList= Array();
+        private $avialabilityList= array();
         private $fileName = ROOT . "/Data/avialability.json";
 
         public function Add(Availability $avialability){
@@ -33,6 +33,18 @@
             return (count($avialabilitys) > 0) ? $avialabilitys[0] : null;
         }
 
+        public function GetDatesByUser($date,$user) {
+            $avialability = null;
+            $this->RetrieveData();
+
+            $avialabilitys = array_filter($this->avialabilityList, function($avialability) use ($date,$user){
+                return $avialability->getDate() == $date && $avialability->getKeeperName()==$user;
+            });
+
+            $avialabilitys= array_values($avialabilitys);
+            return (count($avialabilitys) > 0) ? $avialabilitys[0] : null;
+        }
+
         public function GetByUserName($userName) {
             $avialability = null;
             $this->RetrieveData();
@@ -43,6 +55,16 @@
 
             $avialabilitys= array_values($avialabilitys);
             return (count($avialabilitys) > 0) ? $avialabilitys[0] : null;
+        }
+
+        private function Remove($date){
+            $this->RetrieveData();
+
+            $this->avialabilityList = array_filter($this->avialabilityList, function($avialabilityList) use($date) {
+                return $avialability->getDate() != $date;
+            });
+
+            $this->SaveData();
         }
 
         private function saveData(){
