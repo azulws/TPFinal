@@ -38,5 +38,13 @@
         "userName": "nabo",
         "password": "hola",
         "remuneration": "1000"
+    },
+    {
+        "id": 6,
+        "firstName": "crisKeeper",
+        "lastName": "halm",
+        "userName": "criscris",
+        "password": "asd",
+        "remuneration": "100"
     }
 ]

@@ -30,13 +30,13 @@
         public function Add($firstName,$lastName,$userName,$password)  
         {
             if($this->OwnerDAO->GetByUserName($userName)==NULL){
-               $owner = new Owner();
-            $owner->setFirstName($firstName);
-            $owner->setLastName($lastName);
-            $owner->setUserName($userName);
-            $owner->setPassword($password);
+                $owner = new Owner();
+                $owner->setFirstName($firstName);
+                $owner->setLastName($lastName);
+                $owner->setUserName($userName);
+                $owner->setPassword($password);
 
-            $this->OwnerDAO->Add($owner);
+                $this->OwnerDAO->Add($owner);
             }
 
             $this->ShowAddView(); 

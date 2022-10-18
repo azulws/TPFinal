@@ -3,7 +3,7 @@
 <div align="center">
   <form action="<?php echo FRONT_ROOT."Keeper/Modify"?>" method="post">
   <div class="form__group">
-    <input type="number" class="form__input" name="remuneration" placeholder="Remuneration" required>
+    <input type="number" class="form__input" name="remuneration" placeholder="Remuneration" min="0" required>
     <label for="renumeration" class="form__label">Insert Remuneration</label>
     <input class="btn-desencriptar" type="submit" value="Confirm">
   </div>
