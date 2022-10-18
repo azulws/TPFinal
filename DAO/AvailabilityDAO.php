@@ -5,63 +5,63 @@
     use DAO\IAvailabilityDAO as IAvailabilityDAO;
 
     class AvailabilityDAO implements IAvailabilityDAO{
-        private $avialabilityList= array();
-        private $fileName = ROOT . "/Data/avialability.json";
+        private $availabilityList= array();
+        private $fileName = ROOT . "/Data/availability.json";
 
-        public function Add(Availability $avialability){
+        public function Add(Availability $availability){
             $this->retrieveData();
 
-            array_push($this->avialabilityList,$avialability);
+            array_push($this->availabilityList,$availability);
 
             $this->saveData();
         }
 
         public function GetAll(){
             $this->retrieveData();
-            return $this->avialabilityList;
+            return $this->availabilityList;
         }
 
         public function GetByDate($date) {
-            $avialability = null;
+            $availability = null;
             $this->RetrieveData();
 
-            $avialabilitys = array_filter($this->avialabilityList, function($avialability) use ($date) {
-                return $avialability->getDate() == $date;
+            $availabilitys = array_filter($this->availabilityList, function($availability) use ($date) {
+                return $availability->getDate() == $date;
             });
 
-            $avialabilitys= array_values($avialabilitys);
-            return (count($avialabilitys) > 0) ? $avialabilitys[0] : null;
+            $availabilitys= array_values($availabilitys);
+            return (count($availabilitys) > 0) ? $availabilitys[0] : null;
         }
 
         public function GetDatesByUser($date,$user) {
-            $avialability = null;
+            $availability = null;
             $this->RetrieveData();
 
-            $avialabilitys = array_filter($this->avialabilityList, function($avialability) use ($date,$user){
-                return $avialability->getDate() == $date && $avialability->getKeeperName()==$user;
+            $availabilitys = array_filter($this->availabilityList, function($availability) use ($date,$user){
+                return $availability->getDate() == $date && $availability->getKeeperName()==$user;
             });
 
-            $avialabilitys= array_values($avialabilitys);
-            return (count($avialabilitys) > 0) ? $avialabilitys[0] : null;
+            $availabilitys= array_values($availabilitys);
+            return (count($availabilitys) > 0) ? $availabilitys[0] : null;
         }
 
         public function GetByUserName($userName) {
-            $avialability = null;
+            $availability = null;
             $this->RetrieveData();
 
-            $avialabilitys = array_filter($this->avialabilityList, function($avialability) use ($userName) {
-                return $avialability->getKeeperName() == $userName;
+            $availabilitys = array_filter($this->availabilityList, function($availability) use ($userName) {
+                return $availability->getKeeperName() == $userName;
             });
 
-            $avialabilitys= array_values($avialabilitys);
-            return (count($avialabilitys) > 0) ? $avialabilitys[0] : null;
+            $availabilitys= array_values($availabilitys);
+            return (count($availabilitys) > 0) ? $availabilitys[0] : null;
         }
 
-        private function Remove($date){
+        public function RemoveDateByUser($date,$user){
             $this->RetrieveData();
 
-            $this->avialabilityList = array_filter($this->avialabilityList, function($avialabilityList) use($date) {
-                return $avialability->getDate() != $date;
+            $this->availabilityList = array_filter($this->availabilityList, function($availability) use($date,$user) {
+                return $availability->getDate() != $date && $availability->getKeeperName() != $user;
             });
 
             $this->SaveData();
@@ -70,9 +70,9 @@
         private function saveData(){
             $arrayToEncode= array();
 
-            foreach($this->avialabilityList as $avialability){
-                $value["date"]= $avialability->getDate();
-                $value["keeperName"] = $avialability->getKeeperName();
+            foreach($this->availabilityList as $availability){
+                $value["date"]= $availability->getDate();
+                $value["keeperName"] = $availability->getKeeperName();
 
                 array_push($arrayToEncode, $value);
             }
@@ -81,18 +81,18 @@
         }
 
         private function retrieveData(){
-            $this->avialabilityList= array();
+            $this->availabilityList= array();
 
             if(file_exists($this->fileName)){
                 $jsonToDecode = file_get_contents($this->fileName);
                 $arrayDecode = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
 
                 foreach($arrayDecode as $value){
-                    $avialability = new Availability();
-                    $avialability->setDate($value["date"]);
-                    $avialability->setKeeperName($value["keeperName"]);
+                    $availability = new Availability();
+                    $availability->setDate($value["date"]);
+                    $availability->setKeeperName($value["keeperName"]);
 
-                    array_push($this->avialabilityList,$avialability);
+                    array_push($this->availabilityList,$availability);
                 }
             }
         }

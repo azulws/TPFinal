@@ -40,9 +40,11 @@
             $this->ShowListView();
         }
 
-        public function Remove($date)
+        public function RemoveDateByUser($user,$date)
         {
-            $this->$availabilityDAO->Remove($date);
+            echo var_dump($date);
+            echo var_dump($user);
+            $this->availabilityDAO->RemoveDateByUser($date,$user);
 
             $this->ShowListView();
         }

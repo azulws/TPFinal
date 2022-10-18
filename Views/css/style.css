@@ -746,4 +746,9 @@ body {
       }
       
 
+
+      .spaceCol{
+        border-spacing: 0px 15px;
+
+      }
     } 

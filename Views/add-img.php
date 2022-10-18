@@ -14,10 +14,11 @@
     <div id="comments" style="align-items:center;">
         <h2 align="center"><?php echo $pet->getName() ?></h2>
         <form align="center" action="<?php echo FRONT_ROOT."Pet/UploadImg" ?>" method="post" style="background-color: #EAEDED;padding: 2rem !important;" enctype="multipart/form-data">
-        <table align="center"> 
+        <table align="center" class="spaceCol"> 
             <thead>              
             <tr>
-                <th>IMG</th>
+                <th >Perfil</th>
+                <th >Vaccination</th>
                 
 
 
@@ -28,13 +29,15 @@
             <tr>
                 <td style="max-width: 120px;">
                 <input type="file" name="petImg" >
+                </td>
+                <td style="max-width: 120px;">
+                <input type="file" name="vaccination" >
                 </td> 
             </tr>
             </tbody>
         </table>
         <div>
-       
-            <input type="submit" class="btn" value="Save" style="background-color:#DC8E47;color:white;"/>
+            <button type="submit" class="btn" value="<?php echo $pet->getId() ?>" style="background-color:#DC8E47;color:white;" placeholder ="Save">save</button>
         </div>
         <div>
         </form>

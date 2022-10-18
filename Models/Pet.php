@@ -11,6 +11,8 @@ use Models\PetType as PetType;
         private $petType;
         private $description;
         private $image;
+        private $vaccination;
+        private $video;
 
         public function getId()
         {
@@ -85,7 +87,33 @@ use Models\PetType as PetType;
         }
 
         
-    }
+
+
+        public function getVaccination()
+        {
+                return $this->vaccination;
+        }
+
+
+        public function setVaccination($vaccination)
+        {
+                $this->vaccination = $vaccination;
+
+
+        }
+
+        public function getVideo()
+        {
+                return $this->video;
+        }
+
+
+        public function setVideo($video)
+        {
+                $this->video = $video;
+
+        }
+}
 
 
 

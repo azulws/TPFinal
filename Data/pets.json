@@ -1,18 +1,12 @@
 [
     {
-        "id": 2,
-        "name": "Limon",
-        "owner": 3,
-        "petType": 1,
-        "description": "Caniche de 3 metros cubicos",
-        "image": null
-    },
-    {
-        "id": 3,
-        "name": "el lobo de wall street",
+        "id": "1",
+        "name": "juanramon",
         "owner": 1,
         "petType": 1,
-        "description": "un kapo",
-        "image": ""
+        "description": "un amigo ",
+        "image": "FCMKckpVgAMsVbi.jpg",
+        "vaccination": "maxresdefault.jpg",
+        "video": null
     }
 ]
