@@ -1,5 +1,3 @@
-
-
 <main class="main">
   <div align = "center">
     <h1>MENU OWNER</h1>

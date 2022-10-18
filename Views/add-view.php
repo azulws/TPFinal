@@ -1,7 +1,4 @@
-<?php 
-    include_once('header.php');
-    include_once('nav-bar.php');
-?>
+
 
 <div id="breadcrumb" class="hoc clear"> 
     <h6 class="heading">Ingreso de Owner</h6>

@@ -1,6 +1,4 @@
-<?php
- include_once('header.php');
- ?>
+
 <div> 
     <h1>Join Pet</h1>
 </div>

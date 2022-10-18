@@ -8,7 +8,7 @@
 
   <!--Logo-->
   <a style="background-color: #004882;" href="<?php echo FRONT_ROOT ?>"><img src="<?php echo IMG_PATH; ?>logo.png" class="logo" style="background-color: #004882;"> </a >
-  <h1><b><a class="texto-nav" href="<?php echo FRONT_ROOT ?>">Caninos Ya</a></b></h1>
+  <h1><a class="texto-nav" href="<?php echo FRONT_ROOT ?>">Caninos Ya!</a></h1>
 
   <!--//Meta-->
   <meta charset="utf-8">

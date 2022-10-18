@@ -8,7 +8,7 @@
           
           <li><a href="home.php"><i class="fas fa-lg fa-home"></i></a></li>
           <li><a href="<?php echo FRONT_ROOT."Home/ShowHomeView" ?>">Home</a></li>
-          <li><a href="<?php echo FRONT_ROOT."Home/Logout"?>" ><img src="Views/img/logout.png" class="logout"> </a ></li>
+          <!--<li><a href="<?php echo FRONT_ROOT."Home/Logout"?>" ><img src="Views/img/logout.png" class="logout"> </a ></li> DESACTIVADO HASTA FIXEAR LAS IMAGENES -->
           <li><a  href="<?php echo FRONT_ROOT."Home/Logout"?>">Logout</a></li>
 
 
