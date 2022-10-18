@@ -1,10 +1,3 @@
-<?php
- include_once('header.php');
- ?>
- <head>
-
- <link href="<?php echo CSS_PATH;?>style.css" rel="stylesheet" type="text/css"   media="all">
-</head>
 
 <div class="container">
   <div class="card">

@@ -5,16 +5,16 @@
     <div class="content"> 
         <div id="comments" style="align-items:center;">
             <h2 align="center">Insert New Availability</h2>
-            <form align="center" action="<?php echo FRONT_ROOT."Availability/Add" ?>" method="post" style="background-color: #EAEDED;padding: 2rem !important;" enctype="multipart/form-data">
+            <form align="center" action="<?php echo FRONT_ROOT."Availability/Add" ?>" method="post" enctype="multipart/form-data">
             <table align="center"> 
                 <thead>              
-                <tr>
-                    <th>Date:</th>
+                <tr align="center">
+                    <th ><h1 class="date-ava">Date:</h1></th>
                 </tr>
                 </thead>
                 <tbody align="center">
                 <tr>
-                    <td style="max-width: 120px;">
+                    <td>
                     <input  type="date" name="date" required>
                     </td>
                 </tr>
@@ -22,7 +22,7 @@
             </table>
             <div>
                 <input type="hidden" name="user" value="<?php echo $_SESSION["loggedUser"]->getUserName() ?>">
-                <input type="submit" class="btn" value="Confirm" style="background-color:#DC8E47;color:white;"/>
+                <input type="submit" class="btn-encriptar" value="Confirm"/>
             </div>
             <div>
             </form>
@@ -66,5 +66,5 @@
 </div>
 
 <?php 
-  include('footer.php');
+    include_once('footer.php');
 ?>

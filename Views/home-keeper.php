@@ -3,9 +3,13 @@
     <h1>MENU KEEPER</h1>
 </div>
 <div align ="center">
-    <a href="<?php echo FRONT_ROOT . "Availability/ShowListView"?>">AVAILABILITY- </a>
+    <a class="btn-encriptar" href="<?php echo FRONT_ROOT . "Availability/ShowListView"?>">AVAILABILITY </a>
 </div>
 
 
 
 </main>
+
+<?php 
+    include_once('footer.php');
+?>

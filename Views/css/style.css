@@ -1,4 +1,20 @@
-/*nav bar aca*/
+.date-ava{
+ position: relative;
+ width: 117px;
+ height: 39px;
+ left: 25%;
+ top: 10%;
+
+ font-family: 'Inter';
+ font-style:normal;
+ font-weight: 800;
+ font-size: 32px;
+ line-height: 29px;
+
+ color: #000000;
+}
+
+
 
 /*select box aca*/
 
@@ -136,6 +152,8 @@ body {
     flex-direction: row;
     align-items: flex-start;
     padding: 24px;
+
+    text-decoration:none;
   
     position: static;
     width: 328px;
@@ -375,7 +393,7 @@ body {
     left: 12%;
     top: 685px;
    }
-  #logo{ /* modificar widht y lenght para q no se deforme el doge */
+  .logo{ /* modificar widht y lenght para q no se deforme el doge */
     
     width: 93px;
     height: 107px;
