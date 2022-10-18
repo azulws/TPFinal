@@ -19,6 +19,7 @@
             <tr>
                 <th >Perfil</th>
                 <th >Vaccination</th>
+                <th >Video</th>
                 
 
 
@@ -33,6 +34,9 @@
                 <td style="max-width: 120px;">
                 <input type="file" name="vaccination" >
                 </td> 
+                <td style="max-width: 120px;">
+                <input type="file" name="video" >
+                </td>
             </tr>
             </tbody>
         </table>

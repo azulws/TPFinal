@@ -16,6 +16,7 @@
                 <th>Description</th>       
                 <th>Imagen</th>
                 <th>Vaccination</th>
+                <th>Video</th>
               </tr>
           </thead>
           <tbody>
@@ -27,8 +28,9 @@
                     <td><?php echo $pet->getName() ?></td>
                     <td><?php echo $pet->getPetType()->getSize() ?></td>
                     <td><?php echo $pet->getDescription() ?></td>
-                    <td><img src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getImage()?>" width="100" height="100"></td>
-                    <td><img src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVaccination()?>" width="100" height="100"></td>
+                    <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getImage()?>" width="100" height="100"></td>
+                    <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVaccination()?>" width="100" height="100"></td>
+                    <td><video alt="No hay imagen" controls src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVideo()?>" width="100" height="100"></td>
                     <td>
                         <a href="<?php echo FRONT_ROOT . "Pet/ShowModifyView/" . $pet->getId() ?>" class="btn"> Modify </a>
                         <button type="submit" name="id" class="btn" value="<?php echo $pet->getId() ?>"> Remove </button>

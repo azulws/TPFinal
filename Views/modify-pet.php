@@ -1,5 +1,5 @@
 <?php 
-    include('header.php');
+    
     include('nav-bar.php');
 ?>
 <div class="wrapper row4">
@@ -17,6 +17,7 @@
                 <th>Description</th>       
                 <th>Imagen</th>
                 <th>Vaccination</th>
+                <th>Video</th>
               </tr>
           </thead>
           <tbody align="center">
@@ -47,11 +48,12 @@
                 <td>
                   <input type="text" name="description" value="<?php echo $pet->getDescription() ?>" required>
                 </td>
-                <td><img src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getImage()?>" width="100" height="100"></td>
-                    <td><img src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVaccination()?>" width="100" height="100"></td>
+                <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getImage()?>" width="100" height="100"></td>
+                    <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVaccination()?>" width="100" height="100"></td>
+                    <td><video alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVideo()?>" width="100" height="100"></td>
                 <td>
                   <input type="submit" class="btn" value="Modify" style="background-color:#DC8E47;color:white;"/>
-                  <a href="<?php echo FRONT_ROOT . "Pet/ShowAddImgView/" . $pet->getId() ?>" class="btn"> Change Pics </a>
+                  <a href="<?php echo FRONT_ROOT . "Pet/ShowAddImgView/" . $pet->getId() ?>" class="btn"> Change Pics or Video </a>
               </td>
                 
               </tr>
