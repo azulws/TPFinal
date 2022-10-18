@@ -17,6 +17,9 @@
 
 
 /*select box aca*/
+td{
+  font-weight: 900;
+}
 
 body {
   margin: 0;
@@ -663,4 +666,6 @@ body {
         font-size: 14px;
         word-wrap: break-word;
       }
+
+      
     } 

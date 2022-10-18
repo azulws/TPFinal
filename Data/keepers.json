@@ -30,5 +30,13 @@
         "userName": "emigam",
         "password": "asd",
         "remuneration": "0"
+    },
+    {
+        "id": 5,
+        "firstName": "juan ",
+        "lastName": "carlos",
+        "userName": "jc",
+        "password": "asd",
+        "remuneration": "0"
     }
 ]
