@@ -14,7 +14,7 @@
     <div id="comments" style="align-items:center;">
         <h2 align="center"><?php echo $pet->getName() ?></h2>
         <form align="center" action="<?php echo FRONT_ROOT."Pet/UploadImg" ?>" method="post" style="background-color: #EAEDED;padding: 2rem !important;" enctype="multipart/form-data">
-        <table align="center" class="spaceCol"> 
+        <table > 
             <thead>              
             <tr>
                 <th >Perfil</th>

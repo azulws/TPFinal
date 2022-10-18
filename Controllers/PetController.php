@@ -116,7 +116,7 @@
             $file_typePet = $_FILES['petImg']['type'];
             $file_sizePet = $_FILES['petImg']['size'];
                 
-            
+            if(isset($_FILES['petImg'])){
             if (!((strpos($file_typePet, "png") || strpos($file_typePet, "jpeg"))  && ($file_sizePet < 100000))) {
                 echo "La extensión o el tamaño de los archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .gif o .jpg<br><li>se permiten archivos de 100 Kb máximo.</td></tr></table>";
             }else{
@@ -126,6 +126,10 @@
                         echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
                 }
             }
+            $pet->setImage($file_namePet);
+            }
+
+            if(isset($_FILES['vaccination'])){
             
                 $file_nameVac = $_FILES['vaccination']['name'];
                 $file_typeVac = $_FILES['vaccination']['type'];
@@ -141,10 +145,10 @@
                             echo "Ocurrió algún error al subir el fichero. No pudo guardarse.";
                     }    
                 }
-
-                $pet->setImage($file_namePet);
                 $pet->setVaccination($file_nameVac);
-                $this->petDAO->Modify($pet);
+            }
+
+            $this->petDAO->Modify($pet);
 
             
         }
