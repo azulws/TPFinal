@@ -7,7 +7,7 @@
     <!-- main body -->
     <div class="content"> 
       <div class="scrollable">
-      <form action="<?php echo FRONT_ROOT . "Pet/Remove" ?>" method="post">
+      <form action="<?php echo FRONT_ROOT . "Pet/Remove" ?>" method="post" enctype="multipart/form-data">
         <table style="text-align:center;">
           <thead>
           <thead>              
@@ -16,6 +16,7 @@
                 <th>Tamaño</th>
                 <th>Description</th>       
                 <th>Imagen</th>
+                <th>Vaccination</th>
               </tr>
           </thead>
           <tbody>
@@ -27,14 +28,11 @@
                     <td><?php echo $pet->getName() ?></td>
                     <td><?php echo $pet->getPetType()->getSize() ?></td>
                     <td><?php echo $pet->getDescription() ?></td>
+                    <td><img src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getImage()?>" width="100" height="100"></td>
+                    <td><img src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVaccination()?>" width="100" height="100"></td>
                     <td>
-                    <img src="C:\xampp\htdocs\TPfinal\Views\img\ChoryDay\FCMKckpVgAMsVbi.jpg"> 
-                    <a href="<?php echo FRONT_ROOT . "Pet/ShowAddImgView/" . $pet->getId() ?>" class="btn"> Add Picture </a>
-                    </td>
-                    <td>
+                        <a href="<?php echo FRONT_ROOT . "Pet/ShowModifyView/" . $pet->getId() ?>" class="btn"> Modify </a>
                         <button type="submit" name="id" class="btn" value="<?php echo $pet->getId() ?>"> Remove </button>
-                        
-                        
                     </td>
                   </tr>
                 <?php

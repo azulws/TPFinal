@@ -586,4 +586,9 @@
         font-size: 14px;
         word-wrap: break-word;
       }
+
+      .spaceCol{
+        border-spacing: 0px 15px;
+
+      }
     } 
