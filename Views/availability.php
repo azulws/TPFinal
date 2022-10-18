@@ -32,7 +32,7 @@
         </div>
         <div class="scrollable">
         <h2 align="center">Availability List: <?php echo $_SESSION["loggedUser"]->getUserName()?></h2>
-          <form action="<?php FRONT_ROOT."Availability/Remove"?>" method="post">
+          <form action="<?php echo FRONT_ROOT."Availability/RemoveDateByUser"?>" method="post">
             <table style="text-align:center;">
               <thead>              
                   <tr>
@@ -50,6 +50,7 @@
                         <td><?php echo $availability->getDate() ?></td>
                         <td><?php echo $availability->getKeeperName() ?></td>
                         <td>
+                        <input type="hidden" name="user" value="<?php echo $_SESSION["loggedUser"]->getUserName() ?>">
                         <button type="submit" name="date" class="btn" value="<?php echo $availability->getDate() ?>"> Remove </button>
                         </td>
                       </tr>
