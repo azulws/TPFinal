@@ -42,6 +42,7 @@
 
         public function Modify($remuneration) {
             $keeper = new keeper();
+            $keeper->setIdKeeper($_SESSION["loggedUser"]->getIdKeeper());
             $keeper->setFirstName($_SESSION["loggedUser"]->getFirstName());
             $keeper->setLastName($_SESSION["loggedUser"]->getLastName());
             $keeper->setUserName($_SESSION["loggedUser"]->getUserName());
