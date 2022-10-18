@@ -61,7 +61,9 @@
             $this->RetrieveData();
 
             $this->availabilityList = array_filter($this->availabilityList, function($availability) use($date,$user) {
-                return $availability->getDate() != $date && $availability->getKeeperName() != $user;
+                if($availability->getKeeperName() == $user){
+                    return $availability->getDate() != $date;
+                }          
             });
 
             $this->SaveData();

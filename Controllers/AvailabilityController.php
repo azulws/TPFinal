@@ -29,21 +29,21 @@
 
         public function Add($date,$user)
         {
-            if($this->availabilityDAO->GetDatesByUser($date,$user)==null){
+            if(date($date)>date("Y-m-d")){
+                if($this->availabilityDAO->GetDatesByUser($date,$user)==null){
                 $availability = new Availability();
                 $availability->setDate($date);
                 $availability->setKeeperName($user);
 
                 $this->availabilityDAO->Add($availability);
+                }
             }
-            
             $this->ShowListView();
+            
         }
 
         public function RemoveDateByUser($user,$date)
         {
-            echo var_dump($date);
-            echo var_dump($user);
             $this->availabilityDAO->RemoveDateByUser($date,$user);
 
             $this->ShowListView();
