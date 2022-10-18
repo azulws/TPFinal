@@ -40,6 +40,19 @@
             $this->ShowAddView();
         }
 
+        public function Modify($remuneration) {
+            $keeper = new keeper();
+            $keeper->setFirstName($_SESSION["loggedUser"]->getFirstName());
+            $keeper->setLastName($_SESSION["loggedUser"]->getLastName);
+            $keeper->setUserName($_SESSION["loggedUser"]->getUserName);
+            $keeper->setPassword($_SESSION["loggedUser"]->getPassword);
+            $keeper->setRemuneration($remuneration);
+
+            $this->keeperDAO->Modify($keeper);
+
+            $this->ShowListView();
+        }
+
         public function Remove($id)
         {
             $this->keeperDAO->Remove($id);
