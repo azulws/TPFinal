@@ -2,22 +2,12 @@
     include_once('header.php');
     include_once('nav-bar.php'); 
 ?>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Views/css/style.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
-</head>
 <main class="main">
 
   
     <div>
-        <h1 align="left">WELCOME</h1>
+        <h1 align="center">WELCOME</h1>
     </div>
   
     <div align="center">
@@ -44,12 +34,12 @@
               <label for="password" class="form__label">Password</label>
              </div>
 
-              <div>
+              <div class="box">
                 <label for="user_type">
                     <span>UserType</span>
                     <select name="userType" id="userType" require>
-                        <option value="owner">Owner</option>
-                        <option value="keeper">Keeper</option>
+                        <option style="background-color: #004882;" value="owner">Owner</option>
+                        <option style="background-color: #004882;" value="keeper">Keeper</option>
                     </select>
                 </label>
              </div>
