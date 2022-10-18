@@ -19,7 +19,7 @@
               {
                 ?>
                   <tr>
-                    <td><?php echo $keeper->getFirstName() ?> </td>
+                    <td style="font-weight: 900;"><?php echo $keeper->getFirstName() ?> </td>
                     <td><?php echo $keeper->getLastName() ?> </td>
                     <td><?php echo $keeper->getUserName() ?> </td>
                     <td><?php echo $keeper->getRemuneration() ?> </td>
