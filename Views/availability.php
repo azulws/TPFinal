@@ -32,30 +32,34 @@
         </div>
         <div class="scrollable">
         <h2 align="center">Availability List: <?php echo $_SESSION["loggedUser"]->getUserName()?></h2>
-        <table style="text-align:center;">
-          <thead>              
-              <tr>
-                <th>Date</th>
-                <th>Keeper</th>
-              </tr>
-          </thead>
-          <tbody>
-            <?php
-              foreach($availabilityList as $availability)
-              {
-                echo var_dump($availability);
-                if($availability->getKeeperName()== $_SESSION["loggedUser"]->getUserName()){
-                ?>
+          <form action="<?php FRONT_ROOT."Availability/Remove"?>" method="post">
+            <table style="text-align:center;">
+              <thead>              
                   <tr>
-                    <td><?php echo $availability->getDate() ?></td>
-                    <td><?php echo $availability->getKeeperName() ?></td>
+                    <th>Date</th>
+                    <th>Keeper</th>
                   </tr>
+              </thead>
+              <tbody>
                 <?php
-                }
-              }
-            ?>                          
-          </tbody>
-        </table>
+                  foreach($availabilityList as $availability)
+                  {
+                    if($availability->getKeeperName()== $_SESSION["loggedUser"]->getUserName()){
+                    ?>
+                      <tr>
+                        <td><?php echo $availability->getDate() ?></td>
+                        <td><?php echo $availability->getKeeperName() ?></td>
+                        <td>
+                        <button type="submit" name="date" class="btn" value="<?php echo $availability->getDate() ?>"> Remove </button>
+                        </td>
+                      </tr>
+                    <?php
+                    }
+                  }
+                ?>                          
+              </tbody>
+            </table>
+          </form>
         </div>
     </div>
     <!-- / main body -->
