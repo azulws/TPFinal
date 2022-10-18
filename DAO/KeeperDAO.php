@@ -49,7 +49,7 @@
             $this->RetrieveData();
 
             $this->keeperList = array_filter($this->keeperList, function($keeper) use($modKeeper) {
-                return $keeper->getUserName() != $modKeeper->getUserName();
+                return $keeper->getIdKeeper() != $modKeeper->getIdKeeper();
             });
 
             array_push($this->keeperList, $modKeeper);
