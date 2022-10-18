@@ -47,3 +47,7 @@
     <div class="clear"></div>
 </main>
 </div>
+
+<?php 
+    include_once('footer.php');
+?>
