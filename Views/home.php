@@ -1,6 +1,4 @@
-<?php
- include_once('header.php');
- ?>
+
 
 <main class="main">
     <div>

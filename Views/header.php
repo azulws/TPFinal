@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head style="background-color: #004882;">
+<link href="<?php echo CSS_PATH;?>style.css" rel="stylesheet" type="text/css"   media="all">
   <!--//Title-->
   <title>Caninos ya</title>
   <link rel="shortcut icon" href="https://images.emojiterra.com/google/android-11/512px/1f436.png">
@@ -16,7 +17,7 @@
   
 
   <!--//Link-->
-  <link href="<?php echo CSS_PATH;?>style.css" rel="stylesheet" type="text/css"   media="all">
+
   <link type="text/css" href="https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap" rel="stylesheet" media="all">
   <link type="text/css" rel="preconnect" href="https://fonts.googleapis.com">
   <link type="text/css" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

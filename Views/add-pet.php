@@ -1,14 +1,15 @@
+<?php
+ include_once('header.php');
+ ?>
+<div> 
+    <h1>Join Pet</h1>
+</div>
 
 
-<div id="breadcrumb" class="hoc clear"> 
-    <h6 class="heading">Join Pet</h6>
-</div>
-</div>
-<div class="wrapper row3" >
-<main class="container" style="width: 95%;"> 
+<main class="main" style="width: 95%;"> 
     <!-- main body -->
-    <div class="content" > 
-    <div id="comments" style="align-items:center;">
+     
+    <div style="align-items:center;">
         <h2 align="center">Ingresar Datos</h2>
         <form align="center" action="<?php echo FRONT_ROOT."Pet/Add" ?>" method="post" style="background-color: #EAEDED;padding: 2rem !important;" enctype="multipart/form-data">
         <table align="center"> 
@@ -31,6 +32,7 @@
                 <input type="text" name="description" required>
                 </td>                
                 <td>
+                <div class="box" style="top:40%">    
                 <select name="petType" id="petType" class="select">
                     <?php
                         /*$petTypeDAO = new PetTypeDAO();
@@ -43,7 +45,7 @@
                         }
                     ?>
                 </select>
-                
+                </div>
             </tr>
             </tbody>
         </table>
@@ -51,14 +53,14 @@
        
             <input type="submit" class="btn" value="Agregar" style="background-color:#DC8E47;color:white;"/>
         </div>
-        <div>
+        
         </form>
     </div>
-    </div>
+    
     <!-- / main body -->
     <div class="clear"></div>
 </main>
-</div>
+
 <?php
 echo "<script> alert('agregado con exito')";
   echo "window.location: '../home.php';</script>";

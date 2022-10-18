@@ -1,6 +1,4 @@
-<?php 
-require_once('nav-bar.php');
-?>
+
 
 <main class="main">
   <div align = "center">
