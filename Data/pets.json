@@ -5,8 +5,8 @@
         "owner": 1,
         "petType": 1,
         "description": "un amigo ",
-        "image": "images.jfif",
-        "vaccination": "maxresdefault.jpg",
+        "image": "100007-spy-x-family-yor.png",
+        "vaccination": "100007-spy-x-family-yor.png",
         "video": "y-qVR446jBjwePJ6.mp4"
     },
     {
@@ -18,5 +18,25 @@
         "image": "",
         "vaccination": "",
         "video": ""
+    },
+    {
+        "id": 3,
+        "name": "mascota2",
+        "owner": 1,
+        "petType": 2,
+        "description": "mas",
+        "image": "a84d33026d0a21a21792e3e1cd750f75351db906_full.jpg",
+        "vaccination": "100006-spy-x-family-loid.png",
+        "video": ""
+    },
+    {
+        "id": "4",
+        "name": "xdxd",
+        "owner": 2,
+        "petType": 3,
+        "description": "xdxd",
+        "image": null,
+        "vaccination": null,
+        "video": null
     }
 ]

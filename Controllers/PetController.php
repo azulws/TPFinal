@@ -78,7 +78,7 @@
         }
 
 
-        public function Modify($id, $name , $description, $petType) {
+        public function Modify($id, $name , $petType, $description) {
             require_once(VIEWS_PATH . "validate-session.php");
 
             $petTypeDAO = new PetTypeDAO();
@@ -97,13 +97,14 @@
 
                 $this->ShowListView();
             } else {
-                $this->ShowAddView("El tipo de mascota ingresado no existe");
+                $this->ShowListView("El tipo de mascota ingresado no existe");
             }
         }
 
 
         public function UploadImg($id)
-        {      
+        {    
+
             $pet = $this->petDAO->GetById(intval($id));
             $file_path= IMG_PATH . $_SESSION["loggedUser"]->getUserName().'/';
 
@@ -117,7 +118,7 @@
             $file_typePet = $_FILES['petImg']['type'];
             $file_sizePet = $_FILES['petImg']['size'];
 
-            if (!((strpos($file_typePet, "png") || strpos($file_typePet, "jpeg"))  && ($file_sizePet < 100000))) {
+            if (!((strpos($file_typePet, "png") || strpos($file_typePet, "jpeg"))  && ($file_sizePet < 10000000))) {
                 echo "La extensión o el tamaño de los archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .gif o .jpg<br><li>se permiten archivos de 100 Kb máximo.</td></tr></table>";
             }else{
                 if (move_uploaded_file($_FILES['petImg']['tmp_name'], $file_path.$file_namePet)){
@@ -135,7 +136,7 @@
                 $file_sizeVac = $_FILES['vaccination']['size'];
                     
                 
-                if (!((strpos($file_typeVac, "png") || strpos($file_typeVac, "jpeg"))  && ($file_sizeVac < 100000))) {
+                if (!((strpos($file_typeVac, "png") || strpos($file_typeVac, "jpeg"))  && ($file_sizeVac < 10000000))) {
                     echo "La extensión o el tamaño de los archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .gif o .jpg<br><li>se permiten archivos de 100 Kb máximo.</td></tr></table>";
                 }else{
                     if (move_uploaded_file($_FILES['vaccination']['tmp_name'], $file_path.$file_nameVac)){
@@ -153,7 +154,7 @@
                 $file_sizeVid = $_FILES['video']['size'];
                     
                 
-                if (!((strpos($file_typeVid, "mp4") || strpos($file_typeVid, "mpeg"))  && ($file_sizeVid < 1500000))) {
+                if (!((strpos($file_typeVid, "mp4") || strpos($file_typeVid, "mpeg"))  && ($file_sizeVid < 150000000))) {
                     echo "La extensión o el tamaño de los archivos no es correcta. <br><br><table><tr><td><li>Se permiten archivos .gif o .jpg<br><li>se permiten archivos de 100 Kb máximo.</td></tr></table>";
                 }else{
                     if (move_uploaded_file($_FILES['video']['tmp_name'], $file_path.$file_nameVid)){

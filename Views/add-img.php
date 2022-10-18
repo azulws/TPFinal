@@ -19,9 +19,6 @@
                 <th >Perfil</th>
                 <th >Vaccination</th>
                 <th >Video</th>
-                
-
-
 
             </tr>
             </thead>
@@ -36,11 +33,12 @@
                 <td style="max-width: 120px;">
                 <input type="file" name="video" >
                 </td>
+                <input type="hidden" name="id" value="<?php echo $pet->getId() ?>">
             </tr>
             </tbody>
         </table>
         <div>
-            <button type="submit" class="btn" value="<?php echo $pet->getId() ?>" style="background-color:#DC8E47;color:white;" placeholder ="Save">save</button>
+            <button type="submit" class="btn" name="id" value="<?php echo $pet->getId() ?>" style="background-color:#DC8E47;color:white;" placeholder ="Save">save</button>
         </div>
         <div>
         </form>
