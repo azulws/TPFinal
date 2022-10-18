@@ -18,7 +18,7 @@
                 <tbody align="center">
                 <tr>
                     <td style="max-width: 120px;">
-                    <input type="date" name="date" required>
+                    <input  type="date" name="date" required>
                     </td>
                 </tr>
                 </tbody>
