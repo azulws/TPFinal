@@ -2,11 +2,11 @@
 <body>
 <footer id="footer" class="hoc clear"> 
     <div class="center">
-      <h6 class="heading">Pet Hero</h6> 
+      
       <nav>
         <ul class="nospace inline pushright uppercase">
           <li><a href="home.php"><i class="fas fa-lg fa-home"></i></a></li>
-          <li><a href="<?php echo FRONT_ROOT."Home/ShowHomeView" ?>">Home</a></li>
+          <!--<li><a href="<?php echo FRONT_ROOT."Home/ShowHomeView" ?>">Home</a></li> deberiamos moverlo al nav var? -->
           <li><a href="<?php echo FRONT_ROOT."Home/Logout"?>">Logout</a></li>
         </ul>
       </nav>

@@ -8,17 +8,8 @@
     
     class HomeController
     {
-        /*public function Index($message = "")
-        {
-            require_once(VIEWS_PATH."home.php");
-        }  
-        */
-        private $ownerDAO;
-        private $keeperDAO;
 
         public function __construct() {
-            $this->ownerDAO = new OwnerDAO();
-            $this->keeperDAO = new KeeperDAO();
         }
 
         public function Index($message = "") {
@@ -29,11 +20,13 @@
             require_once(VIEWS_PATH."add-view.php");
         }
         
-        public function Login($userName, $password,$userType) {
+        public function Login($userName, $password,$userType) {       //busqueda en el dao correspondiente del usuario logueando
             if($userType=="owner"){
-                $user = $this->ownerDAO->GetByUserName($userName);
-            }else if($userType=="keeper"){                              //busqueda en el dao correspondiente del usuario logueando
-                $user = $this->keeperDAO->GetByUserName($userName);
+                $ownerList = new OwnerDAO();
+                $user = $ownerList->GetByUserName($userName);
+            }else if($userType=="keeper"){                              
+                $keeperList= new KeeperDAO();                    
+                $user = $keeperList->GetByUserName($userName);
             }
             if(($user != NULL) && ($user->getPassword() == $password)) {
                 $_SESSION["loggedUser"] = $user;

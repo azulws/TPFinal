@@ -27,12 +27,6 @@
             require_once(VIEWS_PATH . "home-owner.php");
         }
 
-        /*public function ShowListView()
-        {
-            $ownerList = $this->ownerDAO->GetAll();
-            require_once(VIEWS_PATH."owner-list.php"); //para mostrar una lista de los owners?
-        }*/
-
         public function Add($firstName,$lastName,$userName,$password)  
         {
             if($this->OwnerDAO->GetByUserName($userName)==NULL){
@@ -54,26 +48,6 @@
             $this->keeperDAO->Remove($id);
 
             $this->ShowListView();
-        }
-
-        public function Login($userName, $password) {
-            $owner = $this->OwnerDAO->GetByUserName($userName);
-    
-            if(($owner != null) && ($owner->getPassword() === $password)) {
-                $_SESSION["loggedUser"] = $owner;
-                $this->ShowMenuView();
-            } else {
-                echo "Usuario Incorrecto";
-                require_once(VIEWS_PATH."loguin-owner.php");
-                
-            }
-    
-        }
-    
-        public function Logout() {
-            session_destroy();
-    
-            require_once(VIEWS_PATH."home.php");
         }
     }
 ?>

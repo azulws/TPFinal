@@ -27,13 +27,12 @@
             require_once(VIEWS_PATH."availability.php");
         }
 
-        public function Add($date,$user)  
-        
+        public function Add($date,$user)
         {
-            if($this->availabilityDAO->GetByDate($date)==null){
+            if($this->availabilityDAO->GetDatesByUser($date,$user)==null){
                 $availability = new Availability();
                 $availability->setDate($date);
-                $availability->setKeeperList($user);
+                $availability->setKeeperName($user);
 
                 $this->availabilityDAO->Add($availability);
             }
@@ -41,9 +40,9 @@
             $this->ShowListView();
         }
 
-        public function Remove($id)
+        public function Remove($date)
         {
-            $this->keeperDAO->Remove($id);
+            $this->$availabilityDAO->Remove($date);
 
             $this->ShowListView();
         }
