@@ -30,13 +30,12 @@
         
         {
             if($this->keeperDAO->GetByUserName($userName)==NULL){
-            $keeper = new Keeper();
-            $keeper->setFirstName($firstName);
-            $keeper->setLastName($lastName);
-            $keeper->setUserName($userName);
-            $keeper->setPassword($password);
-
-            $this->keeperDAO->Add($keeper);
+                $keeper = new Keeper();
+                $keeper->setFirstName($firstName);
+                $keeper->setLastName($lastName);
+                $keeper->setUserName($userName);
+                $keeper->setPassword($password);
+                $this->keeperDAO->Add($keeper);
             }
             $this->ShowAddView();
         }
