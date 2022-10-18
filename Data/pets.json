@@ -7,6 +7,16 @@
         "description": "un amigo ",
         "image": "images.jfif",
         "vaccination": "maxresdefault.jpg",
-        "video": "Cachorro - 1047.mp4"
+        "video": "y-qVR446jBjwePJ6.mp4"
+    },
+    {
+        "id": 2,
+        "name": "caniche",
+        "owner": 3,
+        "petType": 3,
+        "description": "limon",
+        "image": "",
+        "vaccination": "",
+        "video": ""
     }
 ]

@@ -1,37 +1,30 @@
 
 <div> 
-    <h1>Join Pet</h1>
+    <h1>Add Pet</h1>
 </div>
 
 
-<main class="main" style="width: 95%;"> 
+<main class="main"> 
     <!-- main body -->
      
-    <div style="align-items:center;">
+    <div >
         <h2 align="center">Ingresar Datos</h2>
-        <form align="center" action="<?php echo FRONT_ROOT."Pet/Add" ?>" method="post" style="background-color: #EAEDED;padding: 2rem !important;" enctype="multipart/form-data">
-        <table align="center"> 
-            <thead>              
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>PetType</th>
-
-
-
-            </tr>
-            </thead>
-            <tbody align="center">
-            <tr>
-                <td style="max-width: 120px;">
-                <input type="text" name="name" size="22" min="0" required>
-                </td>
-                <td>
-                <input type="text" name="description" required>
-                </td>                
-                <td>
-                <div class="box" style="top:40%">    
-                <select name="petType" id="petType" class="select">
+        <form align="center" action="<?php echo FRONT_ROOT."Pet/Add" ?>" method="post" enctype="multipart/form-data">
+        
+         
+            
+            
+                <div class="form__group">
+                <input class="form__input" type="text" name="name" size="22" min="0" placeholder="Name" required>
+                <label for="name" class="form__label">Name</label>
+                </div>
+                <div class="form__group">
+                <input class="form__input" type="text" name="description" placeholder="Description" required>
+                <label for="description" class="form__label">Description</label>
+                </div>                
+                
+                <div class="box" align="center">    
+                <select name="petType" id="petType" style="background-color: #004882;"  >
                     <?php
                         /*$petTypeDAO = new PetTypeDAO();
                         $petTypeList = $petTypeDAO->GetAll();
@@ -44,19 +37,18 @@
                     ?>
                 </select>
                 </div>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-       
-            <input type="submit" class="btn" value="Agregar" style="background-color:#DC8E47;color:white;"/>
+            <
+            
+        
+        <div align="center">
+            <input type="submit" class="btn-encriptar" value="Agregar" />
         </div>
         
         </form>
     </div>
     
     <!-- / main body -->
-    <div class="clear"></div>
+    
 </main>
 
 <?php
