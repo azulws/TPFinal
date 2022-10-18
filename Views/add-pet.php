@@ -26,9 +26,6 @@
                 <div class="box" align="center">    
                 <select name="petType" id="petType" style="background-color: #004882;"  >
                     <?php
-                        /*$petTypeDAO = new PetTypeDAO();
-                        $petTypeList = $petTypeDAO->GetAll();
-                        var_dump($petTypeList);*/
                         foreach($petTypeList as $petType) {
                         echo "<option value=". $petType->getId() .">
                         ". $petType->getSize(). "
