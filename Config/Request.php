@@ -11,7 +11,7 @@
         {
             $url = filter_input(INPUT_GET, "url", FILTER_SANITIZE_URL);
 
-            $urlArray = explode("/", $url ?? '') ;
+            $urlArray = explode("/", $url);
          
             $urlArray = array_filter($urlArray);
 
@@ -46,13 +46,9 @@
             {
                 unset($this->parameters["button"]);
                 
-                /*foreach($_FILES as $key -> $file)
+                foreach($_FILES as $key => $file)
                 {
                     $this->parameters[$key] = $file;
-                }*/
-                foreach($_FILES as $file)         //parte que esta mal?
-                {
-                    array_push($this->parameters, $file);
                 }
             }
         }

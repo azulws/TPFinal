@@ -86,7 +86,7 @@
             $idOwner = $_SESSION["loggedUser"]->getIdOWner();
 
             if($type) {
-                $pet = new pet();
+                $pet = $this->petDAO->GetById(intval($id));
                 $pet->setId($id);
                 $pet->setName($name);
                 $pet->setPetType($type);
@@ -102,7 +102,7 @@
         }
 
 
-        public function UploadImg($id)
+        public function UploadImg($id , $petImg, $vaccination , $video)
         {    
 
             $pet = $this->petDAO->GetById(intval($id));
