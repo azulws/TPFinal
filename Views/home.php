@@ -2,7 +2,7 @@
     <div>
         <h1 align="center">WELCOME</h1>
     </div>
-  
+  <br>
     <div align="center">
         <form action="<?php echo FRONT_ROOT . "Home/Login"?>" method="post">
              
@@ -16,7 +16,9 @@
               <input type="password" class="form__input" id="password" name="password" placeholder="Password" required />
               <label for="password" class="form__label">Password</label>
              </div>
-
+             <br>
+             <br>
+             <br>
               <div class="box">
                 <label for="user_type">
                     <span>UserType</span>
@@ -29,6 +31,7 @@
              <div>
                 <button class="btn-encriptar" type="submit" class="btn">Login</button>
             </div>
+            <br>
             <div>
                 <a class="btn-desencriptar" href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Registrarse</a>
             </div>
