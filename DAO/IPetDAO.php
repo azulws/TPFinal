@@ -8,6 +8,6 @@ use Models\Pet;
         function Add(Pet $pet);
         function Remove($id);
         function GetAll();
-        function GetNextId();
+        function GetById($Id);
     }
 ?>

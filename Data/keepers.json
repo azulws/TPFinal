@@ -1,18 +1,50 @@
 [
     {
-        "id": 1,
-        "firstName": "zoe",
-        "lastName": "margurita",
-        "userName": "nabo",
-        "password": "hola",
-        "remuneration": "5"
-    },
-    {
         "id": 2,
         "firstName": "fer",
         "lastName": "nando",
         "userName": "rakzad",
         "password": "chau",
         "remuneration": "4"
+    },
+    {
+        "id": 3,
+        "firstName": "elke",
+        "lastName": "per",
+        "userName": "kp",
+        "password": "asd",
+        "remuneration": "0"
+    },
+    {
+        "id": 4,
+        "firstName": "nacho",
+        "lastName": "emi",
+        "userName": "emigam",
+        "password": "asd",
+        "remuneration": "0"
+    },
+    {
+        "id": 5,
+        "firstName": "juan ",
+        "lastName": "carlos",
+        "userName": "jc",
+        "password": "asd",
+        "remuneration": "0"
+    },
+    {
+        "id": 1,
+        "firstName": "zoe",
+        "lastName": "margurita",
+        "userName": "nabo",
+        "password": "hola",
+        "remuneration": "1000"
+    },
+    {
+        "id": 6,
+        "firstName": "crisKeeper",
+        "lastName": "halm",
+        "userName": "criscris",
+        "password": "asd",
+        "remuneration": "100"
     }
 ]

@@ -45,6 +45,18 @@
             $this->saveData();
         }
 
+        public function Modify(Keeper $modKeeper) {
+            $this->RetrieveData();
+
+            $this->keeperList = array_filter($this->keeperList, function($keeper) use($modKeeper) {
+                return $keeper->getIdKeeper() != $modKeeper->getIdKeeper();
+            });
+
+            array_push($this->keeperList, $modKeeper);
+
+            $this->SaveData();
+        }
+
         private function saveData(){
             $arrayToEncode= array();
 

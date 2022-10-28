@@ -13,16 +13,32 @@
             $this->RetrieveData();
 
             $pet->setId($this->GetNextId());
+            $pet->setImage("");
+            $pet->setVaccination("");
+            $pet->setVideo("");
 
-            array_push($this->petList, );
+
+            array_push($this->petList, $pet );
             
+            $this->SaveData();
+        }
+
+        public function Modify(Pet $modpet) {
+            $this->RetrieveData();
+
+            $this->petList = array_filter($this->petList, function($pet) use($modpet) {
+                return $pet->getId() != $modpet->getId();
+            });
+
+            array_push($this->petList, $modpet);
+
             $this->SaveData();
         }
 
         public function Remove($id) {
             $this->RetrieveData();
 
-            $this->petList = array_filter($this->petList, function() use($id) {
+            $this->petList = array_filter($this->petList, function($pet) use($id) {
                 return $pet->getId() != $id;
             });
 
@@ -35,6 +51,30 @@
             return $this->petList;
         }
 
+        public function GetAllByOwner($idOwner)
+        {
+            $this->RetrieveData();
+            $pets = array_filter($this->petList, function($pet) use($idOwner) {
+                return $pet->getOwner() == $idOwner;
+            });
+
+            $pets = array_values($pets);
+
+            return $pets;
+        }
+
+        public function GetById($id) {
+            $this->RetrieveData();
+
+            $aux = array_filter($this->petList, function($pet) use($id) {
+                return $pet->getId() == $id;
+            });
+
+            $aux = array_values($aux);
+
+            return (count($aux) > 0) ? $aux[0] : array();
+        }
+
         private function SaveData() {
             sort($this->petList);
             $arrayEncode = array();
@@ -42,9 +82,12 @@
             foreach($this->petList as $pet) {
                 $value["id"] = $pet->getId();
                 $value["name"] = $pet->getName();
-                $value["idOwner"] = $pet->getIdOwner();
+                $value["owner"] = $pet->getOwner();
                 $value["petType"] = $pet->getPetType()->getId();
-                $value["description"] = $pet->getPrice();
+                $value["description"] = $pet->getDescription();
+                $value["image"] = $pet->getImage();
+                $value["vaccination"] = $pet->getVaccination();
+                $value["video"] = $pet->getVideo();
 
                 array_push($arrayEncode, $value);
             }
@@ -63,8 +106,11 @@
                     $pet = new Pet();
                     $pet->setId($value["id"]);
                     $pet->setName($value["name"]);
-                    $pet->setIdOwner($value["idOwner"]);
+                    $pet->setOwner($value["owner"]);
                     $pet->setDescription($value["description"]);
+                    $pet->setImage($value["image"]);
+                    $pet->setVaccination($value["vaccination"]);
+                    $pet->setVideo($value["video"]);
                     
                     $petTypeDAO = new PetTypeDAO();
                     $petType = $petTypeDAO->Exist($value["petType"]);
@@ -82,5 +128,8 @@
             }
             return $id + 1;
         }
+
+
     }
+    
 ?>

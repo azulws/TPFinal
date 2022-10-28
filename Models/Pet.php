@@ -7,9 +7,12 @@ use Models\PetType as PetType;
 
         private $id;
         private $name;
-        private $idOwner;
+        private $Owner;
         private $petType;
         private $description;
+        private $image;
+        private $vaccination;
+        private $video;
 
         public function getId()
         {
@@ -36,15 +39,15 @@ use Models\PetType as PetType;
         }
 
 
-        public function getIdOwner()
+        public function getOwner()
         {
-                return $this->idOwner;
+                return $this->Owner;
         }
 
 
-        public function setIdOwner($idOwner)
+        public function setOwner($Owner)
         {
-                $this->idOwner = $idOwner;
+                $this->Owner = $Owner;
         }
 
 
@@ -70,8 +73,48 @@ use Models\PetType as PetType;
                 $this->description = $description;
 
         }
-    }
-    
+
+        public function getImage()
+        {
+                return $this->image;
+        }
+
+
+        public function setImage($image)
+        {
+                $this->image = $image;
+
+        }
+
+        
+
+
+        public function getVaccination()
+        {
+                return $this->vaccination;
+        }
+
+
+        public function setVaccination($vaccination)
+        {
+                $this->vaccination = $vaccination;
+
+
+        }
+
+        public function getVideo()
+        {
+                return $this->video;
+        }
+
+
+        public function setVideo($video)
+        {
+                $this->video = $video;
+
+        }
+}
+
 
 
 
