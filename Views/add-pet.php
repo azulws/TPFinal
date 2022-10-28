@@ -3,7 +3,6 @@
     <h1>Add Pet</h1>
 </div>
 
-
 <main class="main"> 
     <!-- main body -->
      
@@ -23,12 +22,13 @@
                 <label for="description" class="form__label">Description</label>
                 </div>                
                 
-                <div class="box" align="center">    
+                <div class="box" align="center"> 
+                <h3>Choice Pet Type</h3>
                 <select name="petType" id="petType" style="background-color: #004882;"  >
                     <?php
                         foreach($petTypeList as $petType) {
-                        echo "<option value=". $petType->getId() .">
-                        ". $petType->getSize(). "
+                        echo "<option    value=". $petType->getId() .">
+                        ". $petType->getSize()."-". $petType->getType() .  "
                         </option>";
                         }
                     ?>

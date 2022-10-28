@@ -9,6 +9,7 @@
           <thead>
           <thead>              
               <tr>
+                <th>Type</th>
                 <th>Name</th>
                 <th>Tamaño</th>
                 <th>Description</th>       
@@ -23,6 +24,7 @@
               {
                 ?>
                   <tr>
+                    <td><?php echo $pet->getPetType()->getType() ?></td>
                     <td><?php echo $pet->getName() ?></td>
                     <td><?php echo $pet->getPetType()->getSize() ?></td>
                     <td><?php echo $pet->getDescription() ?></td>

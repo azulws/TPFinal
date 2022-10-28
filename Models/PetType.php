@@ -5,7 +5,7 @@ class PetType{
 
     private $id;
     private $size;
-    private $breed;
+    private $type;
 
 
     public function getId()
@@ -20,9 +20,9 @@ class PetType{
     }
 
 
-    public function setBreed($breed)
+    public function setType($type)
     {
-        $this->breed = $breed;
+        $this->type = $type;
     }
 
  
@@ -39,9 +39,9 @@ class PetType{
     }
 
 
-    public function getBreed()
+    public function getType()
     {
-        return $this->breed;
+        return $this->type;
     }
     }
 

@@ -1,18 +1,23 @@
 [
     {
         "id": 1,
-        "breed": "caniche",
-        "size": "chico"
+        "type": "Dog",
+        "size": "Small"
     },
     {
         "id": 2,
-        "breed": "pitbull",
-        "size": "mediano"
+        "type": "Dog",
+        "size": "Medium"
     },
     {
         "id": 3,
-        "breed": "grand danes",
-        "size": "grande"
+        "type": "Dog",
+        "size": "Big"
+    },
+    {
+        "id": 4,
+        "type": "Cat",
+        "size": "Small"
     }
 
 ]
