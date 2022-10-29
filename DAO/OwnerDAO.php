@@ -15,12 +15,12 @@ class OwnerDAO implements IOwnerDAO
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName, password) VALUES (:firstName, :lastName, :userName, :password);";
+                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName, userPassword) VALUES (:firstName, :lastName, :userName, :userPassword);";
                 
-                $parameters["firstName"] = $student->getFirstName();
-                $parameters["lastName"] = $student->getLastName();
-                $parameters["userName"] = $student->getUserName();
-                $parameters["password"] = $student->getPassword();
+                $parameters["firstName"] = $owner->getFirstName();
+                $parameters["lastName"] = $owner->getLastName();
+                $parameters["userName"] = $owner->getUserName();
+                $parameters["userPassword"] = $owner->getPassword();
 
                 $this->connection = Connection::GetInstance();
 
