@@ -92,6 +92,43 @@
             return $id + 1;
         }
     }
-
-    
 ?>
+<?php
+    /*
+        public function Remove($id)
+        {            
+            $query = "DELETE FROM ".$this->tableName." WHERE (idOwner = :idOwner)";
+
+            $parameters["idOwner"] =  $idOwner;
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        }        
+
+        public function GetByUserName($userName)
+        {
+            $user = null;
+
+            $query = "CALL Users_GetByUserName(?)";
+
+            $parameters["userName"] = $userName;
+
+            $this->connection = Connection::GetInstance();
+
+            $results = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
+
+            foreach($results as $row)
+            {
+                $owner = new Owner();
+                $owner->setIdOwner($row["idOwner"]);
+                $owner->setFirstName($row["firstName"]);
+                $owner->setLastName($row["lastName"]);
+                $owner->setUserName($row["userName"]);
+                $owner->setPassword($row["password"]);
+            }
+
+            return $owner;
+        }  
+    }
+*/?>
