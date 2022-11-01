@@ -71,49 +71,6 @@
         }
 
         public function Exist($id) {
-<<<<<<< HEAD
-            $rta = null;
-            $this->RetrieveData();
-
-            foreach($this->petTypeList as $petType) {
-                if($petType->getId() == $id) {
-                    $rta = $petType;
-                }
-            }
-            return $rta;
-        }
-
-        private function SaveData() {
-            sort($this->petTypeList);
-            $arrayEncode = array();
-
-            foreach($this->petTypeList as $petType) {
-                $value["id"] = $petType->getId();
-                $value["type"] = $petType->getType();
-                $value["size"] = $petType->getSize();
-
-                array_push($arrayEncode, $value);
-            }
-            $jsonContent = json_encode($arrayEncode, JSON_PRETTY_PRINT);
-            file_put_contents($this->fileName, $jsonContent);
-        }
-
-        private function RetrieveData() {
-            $this->petTypeList = array();
-
-            if(file_exists($this->fileName)) {
-                $jsonContent = file_get_contents($this->fileName);
-                $arrayDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayDecode as $value) {
-                    $petType = new PetType();
-                    $petType->setId($value["id"]);
-                    $petType->setType($value["type"]);
-                    $petType->setSize($value["size"]);
-
-                    array_push($this->petTypeList, $petType);
-                }
-=======
             try{
                 $query = "SELECT * FROM ".$this->tableName ." WHERE(id==$id)";
                 $petType= new PetType();
@@ -124,7 +81,6 @@
                 return $petType;
             }catch(Exception $ex){
                 throw $ex;
->>>>>>> origin/base-de-datos
             }
         }
 
