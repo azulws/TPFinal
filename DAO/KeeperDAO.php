@@ -3,104 +3,105 @@
 
     use Models\Keeper as Keeper;
     use DAO\IkeeperDAO as IKeeperDAO;
+    use DAO\Connection as Connection;
 
-    class KeeperDAO implements IKeeper{
-        private $keeperList= Array();
-        private $fileName = ROOT . "/Data/keepers.json";
+    class KeeperDAO implements IKeeper
+    {
+        private $connection;
+        private $tableName = "keepers";
+        
+        public function Add(Keeper $keeper)
+        {
+            try{
+                $query = "INSERT INTO ".$this->tableName." (idKeeper, firstName, lastName, userName, password) VALUES (:idKeeper, :firstName, :lastName, :userName, :password)";
 
-        public function Add(Keeper $keeper){
-            $this->retrieveData();
+                $parameters["idKeeper"] =  $keeper->getIdKeeper();
+                $parameters["firstName"] = $keeper->getFirstName();
+                $parameters["lastName"] = $keeper->getLastName();
+                $parameters["userName"] = $keeper->getUserName();
+                $parameters["password"] = $keeper->getPassword();
+                $parameters["remuneration"] = $keeper->setRemuneration("0");          
 
-            $keeper->setIdKeeper($this->GetNextId());
-            $keeper->setRemuneration("0");
-            array_push($this->keeperList,$keeper);
+                $this->connection = Connection::GetInstance();
 
-            $this->saveData();
-        }
-
-        public function GetAll(){
-            $this->retrieveData();
-            return $this->keeperList;
-        }
-
-        public function GetByUserName($userName) {
-            $keeper = null;
-            $this->RetrieveData();
-
-            $keepers = array_filter($this->keeperList, function($keeper) use ($userName) {
-                return $keeper->getUserName() == $userName;
-            });
-
-            $keepers= array_values($keepers);
-            return (count($keepers) > 0) ? $keepers[0] : null;
-        }
-
-        public function Remove($id){
-            $this->retriveData();
-            
-            $this->keeperList= array_filter($this->keeperList, function($keeper) use($id){
-                return $keeper->getIdKeeper() != $id;
-            });
-
-            $this->saveData();
-        }
-
-        public function Modify(Keeper $modKeeper) {
-            $this->RetrieveData();
-
-            $this->keeperList = array_filter($this->keeperList, function($keeper) use($modKeeper) {
-                return $keeper->getIdKeeper() != $modKeeper->getIdKeeper();
-            });
-
-            array_push($this->keeperList, $modKeeper);
-
-            $this->SaveData();
-        }
-
-        private function saveData(){
-            $arrayToEncode= array();
-
-            foreach($this->keeperList as $keeper){
-                $value["id"]= $keeper->getIdKeeper();
-                $value["firstName"] = $keeper->getFirstName();
-                $value["lastName"] = $keeper->getLastName();
-                $value["userName"] = $keeper->getUserName();
-                $value["password"] = $keeper->getPassword();
-                $value["remuneration"]= $keeper->getRemuneration();
-
-                array_push($arrayToEncode, $value);
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
             }
-            $jsonContent= json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            file_put_contents($this->fileName,$jsonContent);
         }
 
-        private function retrieveData(){
-            $this->keeperList= array();
+        public function GetAll()
+        {
+            try{
+                $keeperList = array();
 
-            if(file_exists($this->fileName)){
-                $jsonToDecode = file_get_contents($this->fileName);
-                $arrayDecode = ($jsonToDecode) ? json_decode($jsonToDecode, true) : array();
+                $query = "SELECT idKeeper, firstName, lastName, userName, 'password' FROM ".$this->tableName;
 
-                foreach($arrayDecode as $value){
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                foreach($result as $row)
+                {
                     $keeper = new Keeper();
-                    $keeper->setIdKeeper($value["id"]);
-                    $keeper->setFirstName($value["firstName"]);
-                    $keeper->setLastName($value["lastName"]);
-                    $keeper->setUserName($value["userName"]);
-                    $keeper->setPassword($value["password"]);
-                    $keeper->setRemuneration($value["remuneration"]);
+                    $keeper->setIdKeeper($row["idKeeper"]);
+                    $keeper->setFirstName($row["firstName"]);
+                    $keeper->setLastName($row["lastName"]);
+                    $keeper->setUserName($row["userName"]);
+                    $keeper->setPassword($row["password"]);
+                    $keeper->setRemuneration($row["remuneration"]);
 
-                    array_push($this->keeperList,$keeper);
+                    array_push($keeperList, $keeper);
                 }
+
+                return $keeperList;
+            }catch(Exception $ex){
+                throw $ex;
             }
         }
 
-        private function GetNextId(){
-            $id = 0;
-            foreach($this->keeperList as $keeper) {
-                $id = ($keeper->getIdKeeper() > $id) ? $keeper->getIdKeeper() : $id;
+        public function Remove($id)
+        {            
+            try{
+                $query = "DELETE FROM ".$this->tableName." WHERE (idKeeper = :idKeeper)";
+
+                $parameters["idKeeper"] =  $idKeeper;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
             }
-            return $id + 1;
-        }
+        }        
+
+        public function GetByUserName($userName)
+        {
+            try{
+                $user = null;
+
+                $query = "CALL Users_GetByUserName(?)";
+
+                $parameters["userName"] = $userName;
+
+                $this->connection = Connection::GetInstance();
+
+                $results = $this->connection->Execute($query, $parameters, QueryType::StoredProcedure);
+
+                foreach($results as $row)
+                {
+                    $keeper = new Keeper();
+                    $keeper->setIdKeeper($row["idKeeper"]);
+                    $keeper->setFirstName($row["firstName"]);
+                    $keeper->setLastName($row["lastName"]);
+                    $keeper->setUserName($row["userName"]);
+                    $keeper->setPassword($row["password"]);
+                }
+
+                return $keeper;
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }  
     }
 ?>

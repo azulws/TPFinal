@@ -97,7 +97,14 @@ class OwnerDAO implements IOwnerDAO
 
 
 
-}
+        private function GetNextId() {
+            $id = 0;
+            foreach($this->ownerList as $owner) {
+                $id = ($owner->getIdOwner() > $id) ? $owner->getIdOwner() : $id;
+            }
+            return $id + 1;
+        }
+    }
 
-
+    
 ?>

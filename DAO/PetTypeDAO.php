@@ -4,37 +4,74 @@
 
     use Models\PetType;
     use DAO\IPetTypeDAO as IPetTypeDAO;
+    use DAO\Connection as Connection;
 
     class PetTypeDAO implements IPetTypeDAO {
-        private $fileName = ROOT . "/Data/petTypes.json";
-        private $petTypeList = array();
+        private $connection;
+        private $tableName = "PetType";
 
-        public function Add(PetType $petType) {
-            $this->RetrieveData();
+        public function Add(PetType $petType)
+        {
+            try{
+                $query = "INSERT INTO ".$this->tableName." (id, size, breed) VALUES (:id, :size, :breed)";
 
-            $petType->setId($this->GetNextId());
+                $parameters["id"] =  $pet->getId();
+                $parameters["size"] = $pet->getSize();
+                $parameters["breed"] = $pet->getBreed();
+    
 
-            array_push($this->petTypeList, $petType);
+                $this->connection = Connection::GetInstance();
 
-            $this->SaveData();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
-        public function Remove($id) {
-            $this->RetrieveData();
+        public function Remove($id)
+        {            
+            try{
+                $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
 
-            $this->petTypeList = array_filter($this->petTypeList, function($petType) use($id) {
-                return $petType->getId() != $id;
-            });
+                $parameters["id"] =  $id;
 
-            $this->SaveData();
-        }
+                $this->connection = Connection::GetInstance();
 
-        public function GetAll() {
-            $this->RetrieveData();
-            return $this->petTypeList;
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }  
+
+        public function GetAll()
+        {
+            try{
+                $petTypeList = array();
+
+                $query = "SELECT * FROM ".$this->tableName;
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                foreach($result as $row)
+                {
+                    $petType = new PetType();
+                    $petType->setId($row["id"]);
+                    $petType->setSize($row["size"]);
+                    $petType->setBreed($row["breed"]);
+
+                    array_push($petTypeList, $petType);
+                }
+
+                return $petTypeList;
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
         public function Exist($id) {
+<<<<<<< HEAD
             $rta = null;
             $this->RetrieveData();
 
@@ -76,6 +113,18 @@
 
                     array_push($this->petTypeList, $petType);
                 }
+=======
+            try{
+                $query = "SELECT * FROM ".$this->tableName ." WHERE(id==$id)";
+                $petType= new PetType();
+                $petType->setId($row["id"]);
+                $petType->setSize($row["size"]);
+                $petType->setBreed($row["breed"]);
+                
+                return $petType;
+            }catch(Exception $ex){
+                throw $ex;
+>>>>>>> origin/base-de-datos
             }
         }
 
