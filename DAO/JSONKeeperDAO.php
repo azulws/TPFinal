@@ -4,7 +4,7 @@
     use Models\Keeper as Keeper;
     use DAO\IkeeperDAO as IKeeperDAO;
     
-    class KeeperDAO implements IKeeper{
+    class JSONKeeperDAO implements IKeeper{
         private $keeperList= Array();
         private $fileName = ROOT . "/Data/keepers.json";
 
