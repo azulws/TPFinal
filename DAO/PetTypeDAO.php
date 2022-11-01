@@ -71,15 +71,17 @@
         }
 
         public function Exist($id) {
-            $rta = null;
-            $this->RetrieveData();
-
-            foreach($this->petTypeList as $petType) {
-                if($petType->getId() == $id) {
-                    $rta = $petType;
-                }
+            try{
+                $query = "SELECT * FROM ".$this->tableName ." WHERE(id==$id)";
+                $petType= new PetType();
+                $petType->setId($row["id"]);
+                $petType->setSize($row["size"]);
+                $petType->setBreed($row["breed"]);
+                
+                return $petType;
+            }catch(Exception $ex){
+                throw $ex;
             }
-            return $rta;
         }
 
         private function GetNextId() {
