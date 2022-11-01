@@ -88,6 +88,7 @@
                 $value["image"] = $pet->getImage();
                 $value["vaccination"] = $pet->getVaccination();
                 $value["video"] = $pet->getVideo();
+                $value["size"] = $pet->getSize();
 
                 array_push($arrayEncode, $value);
             }
@@ -111,6 +112,7 @@
                     $pet->setImage($value["image"]);
                     $pet->setVaccination($value["vaccination"]);
                     $pet->setVideo($value["video"]);
+                    $pet->setSize($value["size"]);
                     
                     $petTypeDAO = new PetTypeDAO();
                     $petType = $petTypeDAO->Exist($value["petType"]);

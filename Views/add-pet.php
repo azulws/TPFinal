@@ -28,11 +28,17 @@
                     <?php
                         foreach($petTypeList as $petType) {
                         echo "<option value=". $petType->getId() .">
-                        ". $petType->getSize(). "
+                        ". $petType->getBreed(). "
                         </option >";
                         }
                     ?>
                 </select>
+                </div >
+                <div >
+                    <input class="form__input" type="radio" name="size" value="Small">Small
+                    <input class="form__input" type="radio" name="size" value="Medium">Medium
+                    <input class="form__input" type="radio" name="size" value="Big">Big
+
                 </div>
             
             

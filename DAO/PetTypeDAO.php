@@ -53,7 +53,6 @@
             foreach($this->petTypeList as $petType) {
                 $value["id"] = $petType->getId();
                 $value["breed"] = $petType->getBreed();
-                $value["size"] = $petType->getSize();
 
                 array_push($arrayEncode, $value);
             }
@@ -72,7 +71,6 @@
                     $petType = new PetType();
                     $petType->setId($value["id"]);
                     $petType->setBreed($value["breed"]);
-                    $petType->setSize($value["size"]);
 
                     array_push($this->petTypeList, $petType);
                 }

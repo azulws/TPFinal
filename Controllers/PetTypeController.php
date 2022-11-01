@@ -27,7 +27,6 @@
             require_once(VIEWS_PATH . "validate-session.php");
 
             $petType = new PetType();
-            $petType->setSize($size);
             $petType->setBreed($breed);
 
             $this->petTypeDAO->Add($petType);

@@ -9,6 +9,7 @@
           <thead>
           <thead>              
               <tr>
+                <th>Race</th>
                 <th>Name</th>
                 <th>Tamaño</th>
                 <th>Description</th>       
@@ -23,8 +24,9 @@
               {
                 ?>
                   <tr>
+                    <td><?php echo $pet->getPetType()->getBreed() ?></td>
                     <td><?php echo $pet->getName() ?></td>
-                    <td><?php echo $pet->getPetType()->getSize() ?></td>
+                    <td><?php echo $pet->getSize() ?></td>
                     <td><?php echo $pet->getDescription() ?></td>
                     <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getImage()?>" width="100" height="100"></td>
                     <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVaccination()?>" width="100" height="100"></td>
