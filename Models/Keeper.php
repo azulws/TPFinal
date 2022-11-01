@@ -8,7 +8,7 @@ class Keeper extends User {
         private $idKeeper;
         private $remuneration;
         private $reputation;
-        
+        private $availability;
 
 
         public function getRemuneration()
@@ -45,5 +45,16 @@ class Keeper extends User {
         {
                 $this->idKeeper = $idKeeper;
 
+        }
+
+
+        public function getAvailability()
+        {
+                return $this->availability;
+        }
+
+        public function setAvailability($availability)
+        {
+                $this->availability = $availability;
         }
 }

@@ -13,6 +13,7 @@ use Models\PetType as PetType;
         private $image;
         private $vaccination;
         private $video;
+        private $size;
 
         public function getId()
         {
@@ -111,6 +112,18 @@ use Models\PetType as PetType;
         public function setVideo($video)
         {
                 $this->video = $video;
+
+        }
+
+        public function getSize()
+        {
+                return $this->size;
+        }
+
+
+        public function setSize($size)
+        {
+                $this->size = $size;
 
         }
 }
