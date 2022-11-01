@@ -8,14 +8,6 @@
         "remuneration": "4"
     },
     {
-        "id": 3,
-        "firstName": "elke",
-        "lastName": "per",
-        "userName": "kp",
-        "password": "asd",
-        "remuneration": "0"
-    },
-    {
         "id": 4,
         "firstName": "nacho",
         "lastName": "emi",
@@ -46,5 +38,13 @@
         "userName": "criscris",
         "password": "asd",
         "remuneration": "100"
+    },
+    {
+        "id": 3,
+        "firstName": "elke",
+        "lastName": "per",
+        "userName": "kp",
+        "password": "asd",
+        "remuneration": "9"
     }
 ]
