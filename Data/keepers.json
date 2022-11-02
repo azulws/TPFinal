@@ -5,7 +5,8 @@
         "lastName": "nando",
         "userName": "rakzad",
         "password": "chau",
-        "remuneration": "4"
+        "remuneration": "4",
+        "availability": []
     },
     {
         "id": 4,
@@ -13,7 +14,8 @@
         "lastName": "emi",
         "userName": "emigam",
         "password": "asd",
-        "remuneration": "0"
+        "remuneration": "0",
+        "availability": []
     },
     {
         "id": 5,
@@ -21,15 +23,8 @@
         "lastName": "carlos",
         "userName": "jc",
         "password": "asd",
-        "remuneration": "0"
-    },
-    {
-        "id": 1,
-        "firstName": "zoe",
-        "lastName": "margurita",
-        "userName": "nabo",
-        "password": "hola",
-        "remuneration": "1000"
+        "remuneration": "0",
+        "availability": []
     },
     {
         "id": 6,
@@ -37,7 +32,8 @@
         "lastName": "halm",
         "userName": "criscris",
         "password": "asd",
-        "remuneration": "100"
+        "remuneration": "100",
+        "availability": []
     },
     {
         "id": 3,
@@ -45,6 +41,40 @@
         "lastName": "per",
         "userName": "kp",
         "password": "asd",
-        "remuneration": "42"
+        "remuneration": "42",
+        "availability": []
+    },
+    {
+        "id": 7,
+        "firstName": "nico",
+        "lastName": "nico",
+        "userName": "nico",
+        "password": "nico",
+        "remuneration": "0",
+        "availability": []
+    },
+    {
+        "id": 1,
+        "firstName": "zoe",
+        "lastName": "margurita",
+        "userName": "nabo",
+        "password": "hola",
+        "remuneration": "100",
+        "availability": [
+            "2022-11-19",
+            "2022-11-27"
+        ]
+    },
+    {
+        "id": 8,
+        "firstName": "pepe",
+        "lastName": "pepe",
+        "userName": "pepe",
+        "password": "pepe",
+        "remuneration": "0",
+        "availability": [
+            "2022-11-17",
+            "2022-12-02"
+        ]
     }
 ]

@@ -8,7 +8,7 @@ class Keeper extends User {
         private $idKeeper;
         private $remuneration;
         private $reputation;
-        private $availability;
+        private $availability = array();
 
 
         public function getRemuneration()
