@@ -44,7 +44,7 @@
                       <tr>
                         <td><?php echo $availability ?></td>
                         <td>
-                        <button type="submit" name="date" class="btn" value="$availability"> Remove </button>
+                        <button type="submit" name="date" class="btn" value="<?php echo $availability ?>"> Remove </button>
                         </td>
                       </tr>
                     <?php

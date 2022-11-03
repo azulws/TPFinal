@@ -68,10 +68,9 @@
             $keeper->setUserName($_SESSION["loggedUser"]->getUserName());
             $keeper->setPassword($_SESSION["loggedUser"]->getPassword());
             $keeper->setRemuneration($_SESSION["loggedUser"]->getRemuneration());
-            var_dump($_SESSION["loggedUser"]);
-            var_dump($_SESSION["loggedUser"]->getAvailability());
+
             $dateList= $_SESSION["loggedUser"]->getAvailability();
-            var_dump($dateList);
+
             array_push($dateList,$date);
             $keeper->setAvailability($dateList);
             
@@ -89,9 +88,15 @@
             $keeper->setPassword($_SESSION["loggedUser"]->getPassword());
             $keeper->setRemuneration($_SESSION["loggedUser"]->getRemuneration());
             $dateList= $_SESSION["loggedUser"]->getAvailability();
+            $newList= array();
+            foreach($dateList as $d){
+                if($d != $date){
+                    array_push($newList,$d);
+                }
+            }
             unset($dateList[$date]); 
-            $keeper->setAvailability($dateList);
-            
+            $keeper->setAvailability($newList);
+
             $this->keeperDAO->Modify($keeper);
 
             $this->ShowAvailabilityView();

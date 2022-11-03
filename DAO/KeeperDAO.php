@@ -47,13 +47,13 @@
 
         public function Modify(Keeper $modKeeper) {
             $this->RetrieveData();
-
+            
             $this->keeperList = array_filter($this->keeperList, function($keeper) use($modKeeper) {
                 return $keeper->getIdKeeper() != $modKeeper->getIdKeeper();
             });
-
+            
             array_push($this->keeperList, $modKeeper);
-
+            
             $this->SaveData();
         }
 
@@ -68,7 +68,7 @@
                 $value["password"] = $keeper->getPassword();
                 $value["remuneration"]= $keeper->getRemuneration();
                 $value["availability"]= $keeper->getAvailability();
-
+                
                 array_push($arrayToEncode, $value);
             }
             $jsonContent= json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -91,7 +91,7 @@
                     $keeper->setPassword($value["password"]);
                     $keeper->setRemuneration($value["remuneration"]);
                     $keeper->setAvailability($value["availability"]);
-
+                    
                     array_push($this->keeperList,$keeper);
                 }
             }
