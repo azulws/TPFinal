@@ -23,10 +23,10 @@
         "lastName": "margurita",
         "userName": "nabo",
         "password": "hola",
-        "remuneration": "100",
+        "remuneration": "50",
         "availability": [
-            "2022-11-27",
-            "2022-11-25"
+            "2022-11-25",
+            "2022-11-23"
         ]
     }
 ]

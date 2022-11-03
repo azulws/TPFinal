@@ -54,7 +54,7 @@
             
             array_push($this->keeperList, $modKeeper);
             
-            $this->SaveData();
+            $this->saveData();
         }
 
         private function saveData(){

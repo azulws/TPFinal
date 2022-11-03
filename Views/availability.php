@@ -38,8 +38,7 @@
               </thead>
               <tbody>
                 <?php
-                  var_dump($_SESSION["loggedUser"]->getAvailability());
-                  foreach($_SESSION["loggedUser"]->getAvailability() as $availability){
+                  foreach($availabilityList as $availability){
                     ?>
                       <tr>
                         <td><?php echo $availability ?></td>

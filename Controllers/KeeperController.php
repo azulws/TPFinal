@@ -29,6 +29,8 @@
         public function ShowAvailabilityView()
         {
             require_once(VIEWS_PATH."validate-session.php");
+            $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName()); //traigo al usuario para ver su lista de disponibilidad
+            $availabilityList = $keeper->getAvailability();
             require_once(VIEWS_PATH."availability.php");
         }
 
@@ -47,54 +49,36 @@
         }
 
         public function Modify($remuneration) {         //modifica remuneracion
-            $keeper = new keeper();
-            $keeper->setIdKeeper($_SESSION["loggedUser"]->getIdKeeper());
-            $keeper->setFirstName($_SESSION["loggedUser"]->getFirstName());
-            $keeper->setLastName($_SESSION["loggedUser"]->getLastName());
-            $keeper->setUserName($_SESSION["loggedUser"]->getUserName());
-            $keeper->setPassword($_SESSION["loggedUser"]->getPassword());
+            $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
             $keeper->setRemuneration($remuneration);
-            $keeper->setAvailability($_SESSION["loggedUser"]->getPassword());
+
             $this->keeperDAO->Modify($keeper);
 
             $this->ShowListView();
         }
 
         public function addAvailability($date){         //modifica disponibilidad
-            $keeper = new keeper();
-            $keeper->setIdKeeper($_SESSION["loggedUser"]->getIdKeeper());
-            $keeper->setFirstName($_SESSION["loggedUser"]->getFirstName());
-            $keeper->setLastName($_SESSION["loggedUser"]->getLastName());
-            $keeper->setUserName($_SESSION["loggedUser"]->getUserName());
-            $keeper->setPassword($_SESSION["loggedUser"]->getPassword());
-            $keeper->setRemuneration($_SESSION["loggedUser"]->getRemuneration());
+            $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
+            $dateList= $keeper->getAvailability();
+            if(!in_array($date,$dateList)){
+                array_push($dateList,$date);
+                $keeper->setAvailability($dateList);
 
-            $dateList= $_SESSION["loggedUser"]->getAvailability();
-
-            array_push($dateList,$date);
-            $keeper->setAvailability($dateList);
-            
-            $this->keeperDAO->Modify($keeper);
+                $this->keeperDAO->Modify($keeper);
+            }
 
             $this->ShowAvailabilityView();
         }
 
         public function RemoveAvailability($date){
-            $keeper = new keeper();
-            $keeper->setIdKeeper($_SESSION["loggedUser"]->getIdKeeper());
-            $keeper->setFirstName($_SESSION["loggedUser"]->getFirstName());
-            $keeper->setLastName($_SESSION["loggedUser"]->getLastName());
-            $keeper->setUserName($_SESSION["loggedUser"]->getUserName());
-            $keeper->setPassword($_SESSION["loggedUser"]->getPassword());
-            $keeper->setRemuneration($_SESSION["loggedUser"]->getRemuneration());
-            $dateList= $_SESSION["loggedUser"]->getAvailability();
+            $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
+            $dateList= $keeper->getAvailability();
             $newList= array();
             foreach($dateList as $d){
                 if($d != $date){
                     array_push($newList,$d);
                 }
             }
-            unset($dateList[$date]); 
             $keeper->setAvailability($newList);
 
             $this->keeperDAO->Modify($keeper);
