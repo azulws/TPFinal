@@ -9,5 +9,16 @@
         "vaccination": "",
         "video": "",
         "size": "Small"
+    },
+    {
+        "id": 2,
+        "name": "perritoMalvado",
+        "owner": 2,
+        "petType": 1,
+        "description": "malvado de verdad",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "Medium"
     }
 ]

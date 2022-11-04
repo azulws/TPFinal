@@ -34,6 +34,12 @@
             require_once(VIEWS_PATH."availability.php");
         }
 
+        public function ShowCheckDatesView($array)
+        {
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."check-dates.php");
+        }
+
         public function Add($firstName,$lastName,$userName,$password)  
         
         {
@@ -84,6 +90,30 @@
             $this->keeperDAO->Modify($keeper);
 
             $this->ShowAvailabilityView();
+        }
+
+        public function checkDates($startDate,$endDate){
+            $keeperList= array();
+            foreach($this->keeperDAO->getAll() as $keeper){
+                $keeperA= $keeper->getAvailability();
+                if($this->checkAllDates($keeperA,$startDate,$endDate)){
+                    array_push($keeperList,$keeper);
+                }
+            }
+            
+            $this->ShowCheckDatesView($keeperList);
+        }
+
+        public function checkAllDates($array,$startDate,$endDate){
+            $date=$startDate;
+            if(in_array($startDate,$array) && in_array($endDate,$array)){
+                for($date;$date>=$endDate;strtotime($date."+ 1 days")){
+                    if(!in_array($date,$array)){
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         public function Remove($id)
