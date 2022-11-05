@@ -9,15 +9,6 @@
         "availability": []
     },
     {
-        "id": 4,
-        "firstName": "nacho",
-        "lastName": "emi",
-        "userName": "emigam",
-        "password": "asd",
-        "remuneration": "0",
-        "availability": []
-    },
-    {
         "id": 1,
         "firstName": "zoe",
         "lastName": "margurita",
@@ -26,7 +17,24 @@
         "remuneration": "50",
         "availability": [
             "2022-11-25",
-            "2022-11-11"
+            "2022-11-11",
+            "2022-11-05",
+            "2022-11-06",
+            "2022-11-07",
+            "2022-11-08"
+        ]
+    },
+    {
+        "id": 4,
+        "firstName": "nacho",
+        "lastName": "emi",
+        "userName": "emigam",
+        "password": "asd",
+        "remuneration": "0",
+        "availability": [
+            "2022-11-05",
+            "2022-11-06",
+            "2022-11-07"
         ]
     }
 ]

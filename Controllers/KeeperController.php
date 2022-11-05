@@ -37,6 +37,7 @@
         public function ShowCheckDatesView($array)
         {
             require_once(VIEWS_PATH."validate-session.php");
+            $keeperListCheck=$array;
             require_once(VIEWS_PATH."check-dates.php");
         }
 
@@ -92,28 +93,42 @@
             $this->ShowAvailabilityView();
         }
 
-        public function checkDates($startDate,$endDate){
-            $keeperList= array();
-            foreach($this->keeperDAO->getAll() as $keeper){
-                $keeperA= $keeper->getAvailability();
-                if($this->checkAllDates($keeperA,$startDate,$endDate)){
-                    array_push($keeperList,$keeper);
+        public function checkDates($startDate,$endDate){                    //devuelve lista de keepers con la disponibilidad de inicio a fin
+            $keeperList= $this->keeperDAO->getAll() ;
+            $keeperListCheck = array();
+            foreach($keeperList as $keeper){
+                $availability= $keeper->getAvailability();
+                if($this->allDatesOnArray($availability,$startDate,$endDate) != null){
+                    array_push($keeperListCheck,$keeper);
                 }
             }
             
-            $this->ShowCheckDatesView($keeperList);
+            $this->ShowCheckDatesView($keeperListCheck);
         }
 
-        public function checkAllDates($array,$startDate,$endDate){
+        public function allDatesOnArray($availability,$startDate,$endDate){  //verifica si todas las fechas del keeper estan en el rango de inicio a fin
+            $arrayDatesCheckeds=$this->checkAllDates($availability,$startDate,$endDate);
             $date=$startDate;
-            if(in_array($startDate,$array) && in_array($endDate,$array)){
-                for($date;$date>=$endDate;strtotime($date."+ 1 days")){
-                    if(!in_array($date,$array)){
-                        return false;
-                    }
+            for($date;$date<=$endDate;$date){
+                if(in_array($date,$arrayDatesCheckeds)){
+                    $nextDate=strtotime("+1 day",strtotime($date));
+                    $nextDate=date("Y-m-d",$nextDate);
+                    $date=$nextDate;
+                }else{
+                    return false;
                 }
             }
             return true;
+        }
+        
+        public function checkAllDates($array,$startDate,$endDate){  //devuelve un arreglo con las fechas entre inicio y fin que dispone el arreglo del keeper
+            $arrayDatesChecked=array();
+            foreach($array as $a){
+                if(($a>=$startDate) && ($a<=$endDate)){
+                    array_push($arrayDatesChecked,$a);
+                }
+            }
+            return $arrayDatesChecked;
         }
 
         public function Remove($id)
