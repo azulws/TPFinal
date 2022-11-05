@@ -67,11 +67,14 @@
         public function addAvailability($date){         //modifica disponibilidad
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
             $dateList= $keeper->getAvailability();
-            if(!in_array($date,$dateList)){
-                array_push($dateList,$date);
-                $keeper->setAvailability($dateList);
+            if($date>=date("Y-m-d")){
+                if(!in_array($date,$dateList)){
+                    array_push($dateList,$date);
+                    sort($dateList);
+                    $keeper->setAvailability($dateList);
 
-                $this->keeperDAO->Modify($keeper);
+                    $this->keeperDAO->Modify($keeper);
+                }
             }
 
             $this->ShowAvailabilityView();
