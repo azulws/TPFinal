@@ -68,13 +68,13 @@
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
             $dateList= $keeper->getAvailability();
             if($date>=date("Y-m-d")){
-                if(!in_array($date,$dateList)){
-                    array_push($dateList,$date);
+            if(!in_array($date,$dateList)){
+                array_push($dateList,$date);
                     sort($dateList);
-                    $keeper->setAvailability($dateList);
+                $keeper->setAvailability($dateList);
 
-                    $this->keeperDAO->Modify($keeper);
-                }
+                $this->keeperDAO->Modify($keeper);
+            }
             }
 
             $this->ShowAvailabilityView();
@@ -105,6 +105,7 @@
                     array_push($keeperListCheck,$keeper);
                 }
             }
+
             
             $this->ShowCheckDatesView($keeperListCheck);
         }
