@@ -5,7 +5,7 @@
     <div class="content"> 
         <div id="comments" style="align-items:center;">
             <h2 align="center">Insert New Availability</h2>
-            <form align="center" action="<?php echo FRONT_ROOT."Availability/Add" ?>" method="post" enctype="multipart/form-data">
+            <form align="center" action="<?php echo FRONT_ROOT."Keeper/addAvailability" ?>" method="post" enctype="multipart/form-data">
             <table align="center"> 
                 <thead>              
                 <tr align="center">
@@ -21,7 +21,6 @@
                 </tbody>
             </table>
             <div>
-                <input type="hidden" name="user" value="<?php echo $_SESSION["loggedUser"]->getUserName() ?>">
                 <input type="submit" class="btn-encriptar" value="Confirm"/>
             </div>
             <div>
@@ -29,7 +28,7 @@
         </div>
         <div class="scrollable">
         <h2 align="center">Availability List: <?php echo $_SESSION["loggedUser"]->getUserName()?></h2>
-          <form action="<?php echo FRONT_ROOT."Availability/RemoveDateByUser"?>" method="post">
+          <form action="<?php echo FRONT_ROOT."Keeper/RemoveAvailability"?>" method="post">
             <table style="text-align:center;">
               <thead>              
                   <tr>
@@ -39,20 +38,15 @@
               </thead>
               <tbody>
                 <?php
-                  foreach($availabilityList as $availability)
-                  {
-                    if($availability->getKeeperName()== $_SESSION["loggedUser"]->getUserName()){
+                  foreach($availabilityList as $availability){
                     ?>
                       <tr>
-                        <td><?php echo $availability->getDate() ?></td>
-                        <td><?php echo $availability->getKeeperName() ?></td>
+                        <td><?php echo $availability ?></td>
                         <td>
-                        <input type="hidden" name="user" value="<?php echo $_SESSION["loggedUser"]->getUserName() ?>">
-                        <button type="submit" name="date" class="btn" value="<?php echo $availability->getDate() ?>"> Remove </button>
+                        <button type="submit" name="date" class="btn" value="<?php echo $availability ?>"> Remove </button>
                         </td>
                       </tr>
                     <?php
-                    }
                   }
                 ?>                          
               </tbody>

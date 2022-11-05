@@ -6,7 +6,6 @@
         private $lastName;
         private $userName;
         private $password;
-        private $userType;
 
         function __construct(){
         }
@@ -37,18 +36,6 @@
         }
         public function setPassword($password){
             $this->password=$password;
-        }
-
-        public function getUserType()
-        {
-                return $this->userType;
-        }
-
-        public function setUserType($userType)
-        {
-                $this->userType = $userType;
-
-                return $this;
         }
     }
 ?>

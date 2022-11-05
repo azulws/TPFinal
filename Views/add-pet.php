@@ -22,17 +22,23 @@
                 <input class="form__input" type="text" name="description" placeholder="Description" required>
                 <label for="description" class="form__label">Description</label>
                 </div>                
-                
+                <br>
                 <div class="box" align="center">    
                 <select name="petType" id="petType" style="background-color: #004882;"  >
                     <?php
                         foreach($petTypeList as $petType) {
                         echo "<option value=". $petType->getId() .">
-                        ". $petType->getSize(). "
-                        </option>";
+                        ". $petType->getBreed(). "
+                        </option >";
                         }
                     ?>
                 </select>
+                </div >
+                <div >
+                    <input class="form__input" type="radio" name="size" value="Small">Small
+                    <input class="form__input" type="radio" name="size" value="Medium">Medium
+                    <input class="form__input" type="radio" name="size" value="Big">Big
+
                 </div>
             
             

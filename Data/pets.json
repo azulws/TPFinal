@@ -1,42 +1,24 @@
 [
     {
-        "id": "1",
-        "name": "juanramonu",
+        "id": 1,
+        "name": "joan",
         "owner": 1,
-        "petType": 1,
-        "description": "un amiguero",
-        "image": "FCMKckpVgAMsVbi.jpg",
-        "vaccination": "maxresdefault.jpg",
-        "video": null
+        "petType": 2,
+        "description": "maliante",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "Small"
     },
     {
         "id": 2,
-        "name": "caniche",
-        "owner": 3,
-        "petType": 3,
-        "description": "limon",
+        "name": "perritoMalvado",
+        "owner": 2,
+        "petType": 1,
+        "description": "malvado de verdad",
         "image": "",
         "vaccination": "",
-        "video": ""
-    },
-    {
-        "id": "3",
-        "name": "boliviane",
-        "owner": 1,
-        "petType": 2,
-        "description": "mas",
-        "image": "a84d33026d0a21a21792e3e1cd750f75351db906_full.jpg",
-        "vaccination": "100006-spy-x-family-loid.png",
-        "video": "Cachorro - 1047.mp4"
-    },
-    {
-        "id": "4",
-        "name": "xdxd",
-        "owner": 2,
-        "petType": 3,
-        "description": "xdxd",
-        "image": null,
-        "vaccination": null,
-        "video": null
+        "video": "",
+        "size": "Medium"
     }
 ]

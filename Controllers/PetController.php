@@ -46,7 +46,7 @@
 
 
 
-        public function Add($name, $description, $petType) {
+        public function Add($name, $description, $petType ,$size) {
             require_once(VIEWS_PATH . "validate-session.php");
 
             $petTypeDAO = new PetTypeDAO();
@@ -59,6 +59,7 @@
                 $pet->setPetType($type);
                 $pet->setOwner($idOwner);
                 $pet->setDescription($description);
+                $pet->setSize($size);
 
                 $this->petDAO->Add($pet);
 

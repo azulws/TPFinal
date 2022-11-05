@@ -5,15 +5,8 @@
         "lastName": "nando",
         "userName": "rakzad",
         "password": "chau",
-        "remuneration": "4"
-    },
-    {
-        "id": 3,
-        "firstName": "elke",
-        "lastName": "per",
-        "userName": "kp",
-        "password": "asd",
-        "remuneration": "0"
+        "remuneration": "4",
+        "availability": []
     },
     {
         "id": 4,
@@ -21,15 +14,12 @@
         "lastName": "emi",
         "userName": "emigam",
         "password": "asd",
-        "remuneration": "0"
-    },
-    {
-        "id": 5,
-        "firstName": "juan ",
-        "lastName": "carlos",
-        "userName": "jc",
-        "password": "asd",
-        "remuneration": "0"
+        "remuneration": "0",
+        "availability": [
+            "2022-11-05",
+            "2022-11-06",
+            "2022-11-07"
+        ]
     },
     {
         "id": 1,
@@ -37,14 +27,22 @@
         "lastName": "margurita",
         "userName": "nabo",
         "password": "hola",
-        "remuneration": "1000"
-    },
-    {
-        "id": 6,
-        "firstName": "crisKeeper",
-        "lastName": "halm",
-        "userName": "criscris",
-        "password": "asd",
-        "remuneration": "100"
+        "remuneration": "50",
+        "availability": [
+            "2022-11-01",
+            "2022-11-05",
+            "2022-11-06",
+            "2022-11-07",
+            "2022-11-08",
+            "2022-11-09",
+            "2022-11-11",
+            "2022-11-13",
+            "2022-11-22",
+            "2022-11-23",
+            "2022-11-25",
+            "2022-12-01",
+            "2022-12-02",
+            "2022-12-03"
+        ]
     }
 ]

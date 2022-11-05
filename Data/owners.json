@@ -29,9 +29,9 @@
     },
     {
         "id": 5,
-        "firstName": "cris1",
-        "lastName": "halm",
-        "userName": "cris",
+        "firstName": "test",
+        "lastName": "test",
+        "userName": "test",
         "password": "asd"
     }
 ]

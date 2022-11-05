@@ -4,7 +4,6 @@ namespace Models;
 class PetType{
 
     private $id;
-    private $size;
     private $breed;
 
 
@@ -25,27 +24,11 @@ class PetType{
         $this->breed = $breed;
     }
 
- 
-    public function getSize()
-    {
-        return $this->size;
-    }
-
- 
-    public function setSize($size)
-    {
-        $this->size = $size;
-
-    }
-
 
     public function getBreed()
     {
         return $this->breed;
     }
     }
-
-  
-
 
 ?>

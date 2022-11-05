@@ -13,7 +13,7 @@
     <h1>MENU KEEPER</h1>
 </div>
 <div align ="center">
-    <a class="btn-encriptar" href="<?php echo FRONT_ROOT . "Availability/ShowListView"?>">AVAILABILITY </a>
+    <a class="btn-encriptar" href="<?php echo FRONT_ROOT . "Keeper/ShowAvailabilityView"?>">AVAILABILITY </a>
 </div>
 
 
