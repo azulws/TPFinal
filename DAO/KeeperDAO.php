@@ -23,6 +23,18 @@
             return $this->keeperList;
         }
 
+        public function GetById($id) {
+            $this->RetrieveData();
+
+            $aux = array_filter($this->keeperList, function($keeper) use($id) {
+                return $keeper->getIdKeeper() == $id;
+            });
+
+            $aux = array_values($aux);
+
+            return (count($aux) > 0) ? $aux[0] : array();
+        }
+
         public function GetByUserName($userName) {
             $keeper = null;
             $this->RetrieveData();

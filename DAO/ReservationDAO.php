@@ -6,9 +6,10 @@
     use DAO\IReservationDAO as IReservationDAO;
     use DAO\KeeperDAO as KeeperDAO;
     use DAO\PetDAO as PetDAO;
+    use Models\eState;
 
     class ReservationDAO implements IReservationDAO {
-        private $fileName = ROOT . "/Data/pets.json";
+        private $fileName = ROOT . "/Data/reservations.json";
         private $reservationList = array();
 
         public function Add(reservation $reservation) {
@@ -16,11 +17,13 @@
 
             $reservation->setId($this->GetNextId());
             $reservation->setPrice("");
+            $reservation->setState("PENDING");
 
 
             array_push($this->reservationList, $reservation );
             
             $this->SaveData();
+            return $reservation->getId();
         }
 
         public function Modify(reservation $modreservation) {
@@ -81,11 +84,14 @@
 
             foreach($this->reservationList as $reservation) {
                 $value["id"] = $reservation->getId();
-                $value["keeper"] = $reservation->getKeeper()->getId();
+                $value["keeper"] = $reservation->getKeeper()->getIdKeeper();
                 $value["Pet"] = $reservation->getPet()->getId();
                 $value["startDate"] = $reservation->getStartDate();
                 $value["endDate"] = $reservation->getEndDate();
                 $value["price"] = $reservation->getPrice();
+                $value["state"] = $reservation->getState();
+                
+
 
                 array_push($arrayEncode, $value);
             }
@@ -111,24 +117,15 @@
                     $keeper = $keeperDAO->GetById($value["keeper"]);
                     $reservation->setKeeper($keeper);
                     $petDAO = new petDAO();
-                    $pet = $petDAO->GetById($value["pet"]);
+                    $pet = $petDAO->GetById($value["Pet"]);
                     $reservation->setPet($pet);
+                    $reservation->setState($value["state"]);
 
                     array_push($this->reservationList, $reservation);
                 }
             }
         }
-        public function GetById($id) {
-            $this->RetrieveData();
 
-            $aux = array_filter($this->reservationList, function($reservation) use($id) {
-                return $reservation->getId() == $id;
-            });
-
-            $aux = array_values($aux);
-
-            return (count($aux) > 0) ? $aux[0] : array();
-        }
 
         private function GetNextId() {
             $id = 0;

@@ -1,8 +1,10 @@
 <?php
 
+namespace Models;
+
 use Models\Pet as Pet;
 use Models\Keeper as Keeper;
-use Models\EnumState as State;
+use Models\eState as State;
 
 
 
@@ -13,8 +15,8 @@ class Reservation{
     private Pet $pet;
     private $startDate;
     private $endDate;
-    private State $state;
-    private $precio;
+    private $state;
+    private $price;
 
 
 
@@ -126,7 +128,7 @@ class Reservation{
      *
      * @return  self
      */ 
-    public function setState(State $state)
+    public function setState($state)
     {
         $this->state = $state;
 
@@ -136,19 +138,24 @@ class Reservation{
     /**
      * Get the value of precio
      */ 
-    public function getPrecio()
+
+    /**
+     * Get the value of price
+     */ 
+    public function getPrice()
     {
-        return $this->precio;
+        return $this->price;
     }
 
     /**
-     * Set the value of precio
+     * Set the value of price
      *
      * @return  self
      */ 
-    public function setPrecio($precio)
+    public function setPrice($price)
     {
-        $this->precio = $precio;
+        $this->price = $price;
+
     }
 }
 

@@ -1,6 +1,8 @@
 <?php
 
-enum State{
+namespace Models;
+
+enum eState{
 
     case PENDING;
     case ACCEPTED;

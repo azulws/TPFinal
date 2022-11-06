@@ -30,11 +30,11 @@
                 foreach($petTypeList as $petType) {
                   if($petType->getId() == $pet->getPetType()->getId()) {
                     echo "<option selected value=". $petType->getId() .">
-                    ". $petType->getSize(). "
+                    ". $petType->getBreed(). "
                     </option>";
                   } else {
                     echo "<option value=". $petType->getId() .">
-                    ". $petType->getSize(). "
+                    ". $petType->getBreed(). "
                     </option>";
                   }
                 }

@@ -8,6 +8,7 @@
         function GetAll();
         function Remove($id);
         function GetByUserName($userName);
+        function GetById($id);
     }
 
 ?>

@@ -19,6 +19,14 @@
             require_once(VIEWS_PATH."add-view.php");
         }
 
+        public function ShowCheckDatesView($idPet)
+        {
+            require_once(VIEWS_PATH."validate-session.php");
+            $pet = $idPet;
+            require_once(VIEWS_PATH."check-dates.php");
+        }
+
+
         public function ShowListView()
         {
             require_once(VIEWS_PATH."validate-session.php");
@@ -34,11 +42,14 @@
             require_once(VIEWS_PATH."availability.php");
         }
 
-        public function ShowCheckDatesView($array)
+        public function ShowKeepersAvailablesView($array ,$startDate, $endDate , $idPet)
         {
             require_once(VIEWS_PATH."validate-session.php");
             $keeperListCheck=$array;
-            require_once(VIEWS_PATH."check-dates.php");
+            $initialDate = $startDate;
+            $finalDate = $endDate;
+            $pet = $idPet;
+            require_once(VIEWS_PATH."keeper-available.php");
         }
 
         public function Add($firstName,$lastName,$userName,$password)  
@@ -96,7 +107,7 @@
             $this->ShowAvailabilityView();
         }
 
-        public function checkDates($startDate,$endDate){                    //devuelve lista de keepers con la disponibilidad de inicio a fin
+        public function KeepersAvailables($startDate,$endDate, $idPet){                    //devuelve lista de keepers con la disponibilidad de inicio a fin
             $keeperList= $this->keeperDAO->getAll() ;
             $keeperListCheck = array();
             foreach($keeperList as $keeper){
@@ -106,8 +117,9 @@
                 }
             }
 
+
             
-            $this->ShowCheckDatesView($keeperListCheck);
+            $this->ShowKeepersAvailablesView($keeperListCheck, $startDate, $endDate, $idPet);
         }
 
         public function allDatesOnArray($availability,$startDate,$endDate){  //verifica si todas las fechas del keeper estan en el rango de inicio a fin

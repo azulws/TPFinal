@@ -6,9 +6,12 @@
     use DAO\KeeperDAO;
     use DAO\OwnerDAO;
     use Models\Pet;
-    use Modles\Keeper;
-    use Models\State;
-    use Controllers\Keeper;
+    use Models\Keeper;
+    use DAO\ReservationDAO;
+    use Models\Reservation as Reservation;
+    use Models\eState;
+
+    
 
     class ReservationController {
         private $reservationDAO;
@@ -16,7 +19,7 @@
         private $keeperDAO;
 
         public function __construct() {
-            $this->reservationDAO = new reservationDAO();
+            $this->reservationDAO = new ReservationDAO();
             $this->petDAO = new PetDAO();
             $this->keeperDAO = new KeeperDAO();
         }
@@ -43,8 +46,8 @@
         {
             require_once(VIEWS_PATH . "validate-session.php");
             $reservation = $this->reservationDAO->GetById($id);
-            $keeper = $this->keeperDAO->GetById($idKeeper);
-            $pet = $this->petDAO->GetById($idPet);
+            $keeper = $reservation->getKeeper();
+            $pet = $reservation->getPet();
             require_once(VIEWS_PATH . "reservation-detail.php");
         }
 
@@ -62,16 +65,16 @@
                 $reservation = new Reservation();
                 $reservation->setKeeper($keeper);
                 $reservation->setPet($pet);
-                $reservation->setStartDate($startDate)
+                $reservation->setStartDate($startDate);
                 $reservation->setEndDate($endDate);
 
-                $this->reservationDAO->Add($reservation);
+                $idReservation = $this->reservationDAO->Add($reservation);
 
                 
             } else {
                 $this->ShowAddView("El keeper no existe");
             }
-            $this->ShowListView();
+            $this->ShowDetailView($idReservation, $idKeeper, $idPet);
         }
 
         public function Remove($id) {

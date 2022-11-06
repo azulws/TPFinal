@@ -34,6 +34,7 @@
                     <td>
                         <a href="<?php echo FRONT_ROOT . "Pet/ShowModifyView/" . $pet->getId() ?>" class="btn"> Modify </a>
                         <button type="submit" name="id" class="btn" value="<?php echo $pet->getId() ?>"> Remove </button>
+                        <a href="<?php echo FRONT_ROOT . "Keeper/ShowCheckDatesView/" . $pet->getId() ?>" class="btn"> Search Keeper </a>
                     </td>
                   </tr>
                 <?php
