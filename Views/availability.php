@@ -1,10 +1,12 @@
 
-<div class="wrapper row4">
-  <main class="hoc container clear"> 
+<div>
+  <main> 
     <!-- main body -->
-    <div class="content"> 
-        <div id="comments" style="align-items:center;">
+    <div> 
+        <div style="align-items:center;">
+        <br>
             <h2 align="center">Insert New Availability</h2>
+            <br>
             <form align="center" action="<?php echo FRONT_ROOT."Keeper/addAvailability" ?>" method="post" enctype="multipart/form-data">
             <table align="center"> 
                 <thead>              
@@ -20,16 +22,18 @@
                 </tr>
                 </tbody>
             </table>
+            <br>
             <div>
-                <input type="submit" class="btn-encriptar" value="Confirm"/>
+                <input type="submit" class="confirmBtn" value="Confirm"/>
             </div>
             <div>
             </form>
         </div>
-        <div class="scrollable">
+        <div >
         <h2 align="center">Availability List: <?php echo $_SESSION["loggedUser"]->getUserName()?></h2>
+        <br>
           <form action="<?php echo FRONT_ROOT."Keeper/RemoveAvailability"?>" method="post">
-            <table style="text-align:center;">
+            <table class="customTable" >
               <thead>              
                   <tr>
                     <th>Date</th>
@@ -43,7 +47,7 @@
                       <tr>
                         <td><?php echo $availability ?></td>
                         <td>
-                        <button type="submit" name="date" class="btn" value="<?php echo $availability ?>"> Remove </button>
+                        <button type="submit" name="date" class="removeBtn" value="<?php echo $availability ?>"> Remove </button>
                         </td>
                       </tr>
                     <?php

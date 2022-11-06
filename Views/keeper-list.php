@@ -1,16 +1,16 @@
-<div class="wrapper row4">
-  <main class="hoc container clear"> 
+<div>
+  <main > 
     <!-- main body -->
-    <div class="content"> 
-      <div class="scrollable">
-        <table style="text-align:center;">
+    <div > 
+      <div >
+      <table class="blueTable">
           <thead>
           <thead>              
               <tr>
-                <th> FirstName - </th>
-                <th> LastName - </th>
-                <th> UserName - </th>       
-                <th> Remuneration  </th>
+                <th> FirstName</th>
+                <th> LastName</th>
+                <th> UserName</th>       
+                <th> Remuneration</th>
               </tr>
           </thead>
           <tbody>
@@ -32,7 +32,7 @@
       </div>
     </div>
     <!-- / main body -->
-    <div class="clear"></div>
+    <div ></div>
   </main>
 </div>
 

@@ -9,6 +9,7 @@
      
     <div >
         <h2 align="center">Ingresar Datos</h2>
+        <br>
         <form align="center" action="<?php echo FRONT_ROOT."Pet/Add" ?>" method="post" enctype="multipart/form-data">
         
          
@@ -40,7 +41,7 @@
                     <input class="form__input" type="radio" name="size" value="Big">Big
 
                 </div>
-            
+            <br>
             
         
         <div align="center">

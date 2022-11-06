@@ -1,3 +1,182 @@
+/* botones pet */
+/*modify btn*/
+.modifyBtn {
+	background-color:#44c767;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:16px 31px;
+	text-decoration:none;
+}
+.modifyBtn:hover {
+	background-color:#5cbf2a;
+}
+.modifyBtn:active {
+	position:relative;
+	top:1px;
+}
+/*remove btn*/
+.removeBtn {
+	background-color:#d0451b;
+	border-radius:28px;
+	border:1px solid #942911;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:16px 31px;
+	text-decoration:none;
+}
+.removeBtn:hover {
+	background-color:#bc3315;
+}
+.removeBtn:active {
+	position:relative;
+	top:1px;
+}
+/*search btn*/
+.searchBtn {
+	background-color:#007dc1;
+	border-radius:28px;
+	border:1px solid #124d77;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	padding:16px 31px;
+	text-decoration:none;
+}
+.searchBtn:hover {
+	background-color:#0061a7;
+}
+.searchBtn:active {
+	position:relative;
+	top:1px;
+}
+
+/*table pet */
+table.customTable {
+  width: 100%;
+  background-color: #FFFFFF;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #7EA8F8;
+  border-style: solid;
+  color: #000000;
+}
+
+table.customTable td, table.customTable th {
+  border-width: 2px;
+  border-color: #7EA8F8;
+  border-style: solid;
+  padding: 5px;
+}
+
+table.customTable thead {
+  background-color: #7EA8F8;
+}
+
+/* confirm btn en availability*/
+.confirmBtn {
+	background-color:#7892c2;
+	border-radius:13px;
+	border:1px solid #4e6096;
+	display:flex;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:11px 17px;
+	text-decoration:none;
+}
+.confirmBtn:hover {
+	background-color:#476e9e;
+}
+.confirmBtn:active {
+	position:relative;
+	top:1px;
+  right:10px;
+}
+
+        
+/* table keeper test*/
+table.blueTable {
+  border: 1px solid #1C6EA4;
+  background-color: #ffffff;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.blueTable td, table.blueTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.blueTable tbody td {
+  font-size: 13px;
+}
+table.blueTable tr:nth-child(even) {
+  background: #D0E4F5;
+}
+table.blueTable thead {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  border-bottom: 2px solid #444444;
+}
+table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #000000;
+  border-left: 2px solid #000000;
+}
+table.blueTable thead th:first-child {
+  border-left: none;
+}
+
+table.blueTable tfoot td {
+  font-size: 14px;
+}
+table.blueTable tfoot .links {
+  text-align: right;
+}
+table.blueTable tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+/*header test*/
+header{
+  display: flex;
+  height:75px;
+  justify-content: space-between;
+  background-color: #004882;
+  align-items:center;
+  padding: 10px;
+}
+.logo{ /* modificar widht y lenght para q no se deforme el doge */
+   display:flex;
+   align-items:center 
+  /*
+  width: 93px;
+  height: 107px;
+  left: calc(50% - 93px/2 + 208px);
+  top: 32px;
+ */
+}
+.logo-img{
+  height: 50px;
+  margin-right: 10px;
+}
 .date-ava{
  position: relative;
  width: 117px;
@@ -14,8 +193,7 @@
  color: #000000;
 }
 
-option{ 
-  background-color: #004882;}
+
 
 /*select box aca*/
 td{
@@ -224,7 +402,7 @@ body {
   }
   
   .text-input {
-    /* Digite seu texto */
+    /**/
     text-transform:lowercase;
     position: absolute;
     width: 600px;
@@ -259,8 +437,10 @@ body {
     font-weight: 900;
     font-size: 32px;
     line-height: 150%;
-    color: #0A3871;
+    color: whitesmoke;
     text-decoration:none;
+    background-color: #004882;
+    
   }   
   .message-box{
     position: absolute;
@@ -397,13 +577,8 @@ body {
     left: 12%;
     top: 685px;
    }
-  .logo{ /* modificar widht y lenght para q no se deforme el doge */
-    
-    width: 93px;
-    height: 107px;
-    left: calc(50% - 93px/2 + 208px);
-     top: 32px;
-  }
+  
+
   .logout{ /* modificar widht y lenght para q no se deforme el doge */
     width: 46px;
     height: 53px;

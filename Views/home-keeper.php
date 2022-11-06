@@ -1,5 +1,7 @@
 <main>
+<br>
 <h3 align="center">Add renumeration:</h3>
+<br>
 <div align="center">
   <form action="<?php echo FRONT_ROOT."Keeper/Modify"?>" method="post">
   <div class="form__group">
@@ -11,6 +13,7 @@
 <br>
 <div align = "center">
     <h1>MENU KEEPER</h1>
+    <br>
 </div>
 <div align ="center">
     <a class="btn-encriptar" href="<?php echo FRONT_ROOT . "Keeper/ShowAvailabilityView"?>">AVAILABILITY </a>
