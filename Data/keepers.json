@@ -44,5 +44,17 @@
             "2022-12-02",
             "2022-12-03"
         ]
+    },
+    {
+        "id": 5,
+        "firstName": "elke",
+        "lastName": "per",
+        "userName": "kp",
+        "password": "asd",
+        "remuneration": "123",
+        "availability": [
+            "2022-11-07",
+            "2022-11-08"
+        ]
     }
 ]

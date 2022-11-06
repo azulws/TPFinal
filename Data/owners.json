@@ -1,5 +1,12 @@
 [
     {
+        "id": 3,
+        "firstName": "Bruno",
+        "lastName": "Pruzsi",
+        "userName": "bp",
+        "password": "asd"
+    },
+    {
         "id": 1,
         "firstName": "Rodrigo",
         "lastName": "Perez",
@@ -14,17 +21,17 @@
         "password": "asd"
     },
     {
-        "id": 3,
-        "firstName": "Bruno",
-        "lastName": "Pruzsi",
-        "userName": "bp",
-        "password": "asd"
-    },
-    {
         "id": 4,
         "firstName": "comi",
         "lastName": "5",
         "userName": "cd",
+        "password": "asd"
+    },
+    {
+        "id": 6,
+        "firstName": "elke",
+        "lastName": "per",
+        "userName": "kp",
         "password": "asd"
     },
     {

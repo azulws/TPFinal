@@ -20,5 +20,16 @@
         "vaccination": "",
         "video": "",
         "size": "Medium"
+    },
+    {
+        "id": 3,
+        "name": "michi",
+        "owner": 3,
+        "petType": 2,
+        "description": "revoltoso",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "Small"
     }
 ]
