@@ -17,7 +17,11 @@
 </div>
 <div align ="center">
     <a class="btn-encriptar" href="<?php echo FRONT_ROOT . "Keeper/ShowAvailabilityView"?>">AVAILABILITY </a>
+    <br>
+    <a class="btn-desencriptar" href="<?php echo FRONT_ROOT . "Reservation/ShowRecordKeeperView"?>">  MY RESERVATIONS</a>
+    <br>
 </div>
+
 
 
 

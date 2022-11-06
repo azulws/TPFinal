@@ -29,18 +29,20 @@
             require_once(VIEWS_PATH . "add-reservation.php");
         }
 
-        public function ShowRecordView() {
+
+        public function ShowRecordKeeperView() {
             require_once(VIEWS_PATH . "validate-session.php");
-            $petList = $this->petDAO->GetAllByOwner($_SESSION["loggedUser"]->getIdOwner());
-            require_once(VIEWS_PATH . "pet-list.php");
+            $reservationList = $this->reservationDAO->GetAllByKeeper($_SESSION["loggedUser"]->getIdKeeper());
+            require_once(VIEWS_PATH . "keeper-reservations.php");
         }
 
-        public function ShowRequestView($id)
-        {
+        public function ShowRecordOwnerView() {
             require_once(VIEWS_PATH . "validate-session.php");
-            $reservation = $this->reservationDAO->GetById($id);
-            require_once(VIEWS_PATH . "reservation-request.php");
+            $reservationList = $this->reservationDAO->GetAllByOwner($_SESSION["loggedUser"]->getIdOwner());
+            require_once(VIEWS_PATH . "owner-reservations.php");
         }
+
+        
 
         public function ShowDetailView($id)
         {
@@ -48,9 +50,17 @@
             $reservation = $this->reservationDAO->GetById($id);
             $keeper = $reservation->getKeeper();
             $pet = $reservation->getPet();
+
             require_once(VIEWS_PATH . "reservation-detail.php");
         }
 
+        public function CalculatePrice($startDate, $endDate, $idKeeper)
+        {
+            $keeperController = new KeeperController();
+            $keeper = $keeperController->keeperDAO->GetById($idKeeper);
+            $dates = $keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
+            return count($dates) * $keeper->getRemuneration();
+        }   
 
 
         public function Add($idKeeper, $idPet, $startDate ,$endDate) {
@@ -67,6 +77,8 @@
                 $reservation->setPet($pet);
                 $reservation->setStartDate($startDate);
                 $reservation->setEndDate($endDate);
+                $price = $this->CalculatePrice($reservation->getStartDate(), $reservation->getEndDate(), $keeper->getIdKeeper());
+                $reservation->setPrice($price);
 
                 $idReservation = $this->reservationDAO->Add($reservation);
 
@@ -74,7 +86,7 @@
             } else {
                 $this->ShowAddView("El keeper no existe");
             }
-            $this->ShowDetailView($idReservation, $idKeeper, $idPet);
+            $this->ShowDetailView($idReservation);
         }
 
         public function Remove($id) {
@@ -82,7 +94,16 @@
 
             $this->reservationDAO->Remove(intval($id));
 
-            $this->ShowListView();
+            $this->ShowRecordOwnerView();
+        }
+
+        public function Confirm($state , $id) {         //modifica remuneracion
+            $reservation = $this->reservationDAO->GetById($id);
+            $reservation->setState($state);
+
+            $this->reservationDAO->Modify($reservation);
+
+            $this->ShowRecordKeeperView();
         }
 
     }

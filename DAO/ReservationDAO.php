@@ -16,7 +16,6 @@
             $this->RetrieveData();
 
             $reservation->setId($this->GetNextId());
-            $reservation->setPrice("");
             $reservation->setState("PENDING");
 
 
@@ -54,11 +53,23 @@
             return $this->reservationList;
         }
 
+        public function GetAllByOwner($idOwner)
+        {
+            $this->RetrieveData();
+            $reservations = array_filter($this->reservationList, function($reservation) use($idOwner) {
+                return $reservation->getPet()->GetOwner() == $idOwner;
+            });
+
+            $reservations = array_values($reservations);
+
+            return $reservations;
+        }   
+
         public function GetAllByKeeper($idKeeper)
         {
             $this->RetrieveData();
             $reservations = array_filter($this->reservationList, function($reservation) use($idKeeper) {
-                return $reservation->getKeeper()->getId() == $idKeeper;
+                return $reservation->getKeeper()->getIdKeeper() == $idKeeper;
             });
 
             $reservations = array_values($reservations);

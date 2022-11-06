@@ -11,6 +11,9 @@
     <br>
     <a class="btn-desencriptar" href="<?php echo FRONT_ROOT . "Pet/ShowListView"?>">  MY PETS</a>
     <br>
+    <br>
+    <a class="btn-desencriptar" href="<?php echo FRONT_ROOT . "Reservation/ShowRecordOwnerView"?>">  MY RESERVATIONS</a>
+    <br>
     
     <?php /*<a class="btn-desencriptar" href="<?php echo FRONT_ROOT . "Keeper/checkAllDates"?>">  CHECK DATES</a>
     <br>*/?>

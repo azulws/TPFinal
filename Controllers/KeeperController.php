@@ -4,9 +4,10 @@
     use DAO\KeeperDAO as KeeperDAO;
     use Models\Keeper as Keeper;
 
+
     class KeeperController
     {
-        private $keeperDAO;
+        public $keeperDAO;
 
         public function __construct()
         {
@@ -51,6 +52,7 @@
             $pet = $idPet;
             require_once(VIEWS_PATH."keeper-available.php");
         }
+
 
         public function Add($firstName,$lastName,$userName,$password)  
         
@@ -116,11 +118,10 @@
                     array_push($keeperListCheck,$keeper);
                 }
             }
-
-
             
             $this->ShowKeepersAvailablesView($keeperListCheck, $startDate, $endDate, $idPet);
         }
+
 
         public function allDatesOnArray($availability,$startDate,$endDate){  //verifica si todas las fechas del keeper estan en el rango de inicio a fin
             $arrayDatesCheckeds=$this->checkAllDates($availability,$startDate,$endDate);
