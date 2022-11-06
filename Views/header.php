@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-<head style="background-color: #004882;">
-<link href="<?php echo CSS_PATH;?>style.css" rel="stylesheet" type="text/css"   media="all">
+<head >
+  <link href="<?php echo CSS_PATH;?>style.css" rel="stylesheet" type="text/css"   media="all">
   <!--//Title-->
   <title>Caninos ya</title>
   <link rel="shortcut icon" href="https://images.emojiterra.com/google/android-11/512px/1f436.png">
-
-  <!--Logo-->
-  <a style="background-color: #004882;" href="<?php echo FRONT_ROOT ?>"><img src="<?php echo IMG_PATH; ?>logo.png" class="logo" style="background-color: #004882;"> </a >
-  <h1><a class="texto-nav" href="<?php echo FRONT_ROOT ?>">Caninos Ya!</a></h1>
 
   <!--//Meta-->
   <meta charset="utf-8">
@@ -23,4 +19,13 @@
   <link type="text/css" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link type="text/css" href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" > 
 </head>
-<body id="top" styles="font-family: 'Montserrat', sans-serif;">
+<body styles="font-family: 'Montserrat', sans-serif;">
+<header>
+   <!--Logo-->
+    <a class="logo" style="background-color: #004882;" href="<?php echo FRONT_ROOT ?>">
+     <img src="Views/img/logo.png" class="logo-img" style="background-color: #004882;"> 
+    </a >
+  
+  
+   <h1 class="texto-nav"><a class="texto-nav" href="<?php echo FRONT_ROOT ?>">Caninos Ya!</a></h1>
+  </header>
