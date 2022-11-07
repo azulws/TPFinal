@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "name": "bartolito",
         "owner": 1,
         "petType": 1,
@@ -8,7 +8,7 @@
         "image": "images.jfif",
         "vaccination": "maxresdefault.jpg",
         "video": "Cachorro - 1047.mp4",
-        "size": "MEDIUM"
+        "size": "SMALL"
     },
     {
         "id": 2,
