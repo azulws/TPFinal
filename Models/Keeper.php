@@ -9,6 +9,7 @@ class Keeper extends User {
         private $remuneration;
         private $reputation;
         private $availability = array();
+        private $sizes = array();
 
 
         public function getRemuneration()
@@ -56,5 +57,24 @@ class Keeper extends User {
         public function setAvailability($availability)
         {
                 $this->availability = $availability;
+        }
+
+        /**
+         * Get the value of sizes
+         */ 
+        public function getSizes()
+        {
+                return $this->sizes;
+        }
+
+        /**
+         * Set the value of sizes
+         *
+         * @return  self
+         */ 
+        public function setSizes($sizes)
+        {
+                $this->sizes = $sizes;
+
         }
 }

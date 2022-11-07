@@ -80,6 +80,7 @@
                 $value["password"] = $keeper->getPassword();
                 $value["remuneration"]= $keeper->getRemuneration();
                 $value["availability"]= $keeper->getAvailability();
+                $value["sizes"]= $keeper->getSizes();
                 
                 array_push($arrayToEncode, $value);
             }
@@ -103,6 +104,7 @@
                     $keeper->setPassword($value["password"]);
                     $keeper->setRemuneration($value["remuneration"]);
                     $keeper->setAvailability($value["availability"]);
+                    $keeper->setSizes($value["sizes"]);
                     
                     array_push($this->keeperList,$keeper);
                 }

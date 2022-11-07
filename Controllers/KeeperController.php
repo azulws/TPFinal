@@ -53,6 +53,13 @@
             require_once(VIEWS_PATH."keeper-available.php");
         }
 
+        public function ShowEditSizesView()
+        {
+            require_once(VIEWS_PATH."validate-session.php");
+            $sizesList = $_SESSION["loggedUser"]->getSizes();
+            require_once(VIEWS_PATH."edit-sizes.php");
+        }
+
 
         public function Add($firstName,$lastName,$userName,$password)  
         
@@ -75,6 +82,16 @@
             $this->keeperDAO->Modify($keeper);
 
             $this->ShowListView();
+        }
+
+        public function EditSize($size)
+        {
+            $_SESSION["loggedUser"]->setSizes($size);
+            $this->keeperDAO->Modify($_SESSION["loggedUser"]);
+
+            $this->ShowEditSizesView();
+
+        
         }
 
         public function addAvailability($date){         //modifica disponibilidad

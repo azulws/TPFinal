@@ -20,6 +20,8 @@
     <br>
     <a class="btn-desencriptar" href="<?php echo FRONT_ROOT . "Reservation/ShowRecordKeeperView"?>">  MY RESERVATIONS</a>
     <br>
+    <a class="btn-desencriptar" href="<?php echo FRONT_ROOT . "Keeper/ShowEditSizesView"?>">  EDIT SIZES</a>
+    <br>
 </div>
 
 
