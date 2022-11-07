@@ -2,24 +2,25 @@
  require_once(VIEWS_PATH . "validate-session.php");
 ?>
 
-<div id="breadcrumb" class="hoc clear"> 
-    <h6 class="heading">Join Pet</h6>
+<div > 
+
 </div>
 </div>
-<div class="wrapper row3" >
-<main class="container" style="width: 95%;"> 
+<div  >
+<main  style="width: 95%;"> 
     <!-- main body -->
     <div class="content" > 
     <div id="comments" style="align-items:center;">
+    <br>
         <h2 align="center"><?php echo $pet->getName() ?></h2>
-        <form align="center" action="<?php echo FRONT_ROOT."Pet/UploadImg" ?>" method="post" style="background-color: #EAEDED;padding: 2rem !important;" enctype="multipart/form-data">
-        <table > 
+        <form align="center" action="<?php echo FRONT_ROOT."Pet/UploadImg" ?>" method="post"  enctype="multipart/form-data">
+        <br>
+        <table class="customTable"> 
             <thead>              
             <tr>
                 <th >Perfil</th>
                 <th >Vaccination</th>
                 <th >Video</th>
-
             </tr>
             </thead>
             <tbody align="center">
@@ -37,8 +38,10 @@
             </tr>
             </tbody>
         </table>
-        <div>
-            <button type="submit" class="btn" name="id" value="<?php echo $pet->getId() ?>" style="background-color:#DC8E47;color:white;" placeholder ="Save">save</button>
+        <br>
+        <br>
+        <div align="center">
+            <button type="submit" class="btn-encriptar" name="id" value="<?php echo $pet->getId() ?>"  placeholder ="Save">save</button>
         </div>
         <div>
         </form>
