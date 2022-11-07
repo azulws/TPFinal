@@ -21,7 +21,7 @@
               <div class="form__group">
                 <td >
                   <input type="hidden" name="id" value="<?php echo $pet->getId() ?>">
-                  <input type="text" class="form__input" name="name" value="<?php echo $pet->getName() ?>" required>
+                  <input type="text" name="name" value="<?php echo $pet->getName() ?>" required>
                 </td>
               </div>  
               <div class="box">
@@ -51,9 +51,9 @@
                 </div>
                 </td>   
               </div>
-              <div class="form__group">
+              <div >
                 <td>
-                  <input type="text" class="form__input" name="description" value="<?php echo $pet->getDescription() ?>" required>
+                  <input type="text"  name="description" value="<?php echo $pet->getDescription() ?>" required>
                 </td>
               </div>  
                 <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getImage()?>" width="100" height="100"></td>

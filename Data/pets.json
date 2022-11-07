@@ -31,5 +31,16 @@
         "vaccination": "",
         "video": "",
         "size": "MEDIUM"
+    },
+    {
+        "id": 4,
+        "name": "rufus",
+        "owner": 3,
+        "petType": 1,
+        "description": "un caniche feo",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "SMALL"
     }
 ]
