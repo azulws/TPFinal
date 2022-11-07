@@ -1,10 +1,10 @@
-<div class="wrapper row4">
-  <main class="hoc container clear"> 
+<div >
+  <main > 
     <!-- main body -->
-    <div class="content"> 
-      <div class="scrollable">
+    <div > 
+      <div >
       <form action="<?php echo FRONT_ROOT . "Pet/Modify" ?>" method="post" >
-        <table style="text-align:center;">
+        <table class="customTable">
           <thead>
           <thead>              
               <tr>
@@ -18,12 +18,15 @@
           </thead>
           <tbody align="center">
               <tr>
-                <td style="max-width: 100px;">
+              <div class="form__group">
+                <td >
                   <input type="hidden" name="id" value="<?php echo $pet->getId() ?>">
-                  <input type="text" name="name" value="<?php echo $pet->getName() ?>" required>
+                  <input type="text" class="form__input" name="name" value="<?php echo $pet->getName() ?>" required>
                 </td>
+              </div>  
+              <div class="box">
                 <td>
-                  <select name="petType" id="petType" class="select">
+                  <select name="petType" >
                     <?php
                 
                 
@@ -41,9 +44,12 @@
                 ?>
                   </select>
                 </td>   
+              </div>
+              <div class="form__group">
                 <td>
-                  <input type="text" name="description" value="<?php echo $pet->getDescription() ?>" required>
+                  <input type="text" class="form__input" name="description" value="<?php echo $pet->getDescription() ?>" required>
                 </td>
+              </div>  
                 <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getImage()?>" width="100" height="100"></td>
                     <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVaccination()?>" width="100" height="100"></td>
                     <td><video alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVideo()?>" width="100" height="100"></td>
