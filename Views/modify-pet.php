@@ -60,8 +60,11 @@
                     <td><img alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVaccination()?>" width="100" height="100"></td>
                     <td><video alt="No hay imagen" src="<?php echo FRONT_ROOT . IMG_PATH . $_SESSION["loggedUser"]->getUserName()."/". $pet->getVideo()?>" width="100" height="100"></td>
                 <td>
-                  <input type="submit" class="btn" value="Modify" style="background-color:#DC8E47;color:white;"/>
-                  <a href="<?php echo FRONT_ROOT . "Pet/ShowAddImgView/" . $pet->getId() ?>" class="btn"> Change Pics or Video </a>
+                  <input type="submit" class="modifyBtn" value="Modify" />
+                  <br>
+                  <br>
+  
+                  <a href="<?php echo FRONT_ROOT . "Pet/ShowAddImgView/" . $pet->getId() ?>" class="searchBtn"> Change Pics or Video </a>
               </td>
                 
               </tr>
