@@ -57,7 +57,7 @@
         {
             $this->RetrieveData();
             $reservations = array_filter($this->reservationList, function($reservation) use($idOwner) {
-                return $reservation->getPet()->GetOwner() == $idOwner;
+                return $reservation->getPet()->GetOwner()->getIdOwner() == $idOwner;
             });
 
             $reservations = array_values($reservations);

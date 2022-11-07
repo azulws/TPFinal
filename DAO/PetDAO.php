@@ -55,7 +55,7 @@
         {
             $this->RetrieveData();
             $pets = array_filter($this->petList, function($pet) use($idOwner) {
-                return $pet->getOwner() == $idOwner;
+                return $pet->getOwner()->getIdOwner() == $idOwner;
             });
 
             $pets = array_values($pets);
@@ -82,7 +82,7 @@
             foreach($this->petList as $pet) {
                 $value["id"] = $pet->getId();
                 $value["name"] = $pet->getName();
-                $value["owner"] = $pet->getOwner();
+                $value["owner"] = $pet->getOwner()->getIdOwner();
                 $value["petType"] = $pet->getPetType()->getId();
                 $value["description"] = $pet->getDescription();
                 $value["image"] = $pet->getImage();
@@ -107,12 +107,15 @@
                     $pet = new Pet();
                     $pet->setId($value["id"]);
                     $pet->setName($value["name"]);
-                    $pet->setOwner($value["owner"]);
                     $pet->setDescription($value["description"]);
                     $pet->setImage($value["image"]);
                     $pet->setVaccination($value["vaccination"]);
                     $pet->setVideo($value["video"]);
                     $pet->setSize($value["size"]);
+
+                    $ownerDAO = new ownerDAO();
+                    $owner = $ownerDAO->GetById($value["owner"]);
+                    $pet->setOwner($owner);
                     
                     $petTypeDAO = new PetTypeDAO();
                     $petType = $petTypeDAO->Exist($value["petType"]);

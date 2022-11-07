@@ -2,55 +2,10 @@
     {
         "id": 1,
         "keeper": 1,
-        "Pet": 1,
-        "startDate": "2022-11-05",
-        "endDate": "2022-11-05",
-        "price": "",
-        "state": "ACCEPTED"
-    },
-    {
-        "id": 4,
-        "keeper": 5,
-        "Pet": 3,
-        "startDate": "2022-11-06",
-        "endDate": "2022-11-08",
-        "price": "",
-        "state": "ACCEPTED"
-    },
-    {
-        "id": 5,
-        "keeper": 1,
-        "Pet": 1,
-        "startDate": "2022-11-05",
-        "endDate": "2022-11-06",
-        "price": 100,
-        "state": "CANCELED"
-    },
-    {
-        "id": 6,
-        "keeper": 1,
-        "Pet": 1,
+        "Pet": 2,
         "startDate": "2022-11-05",
         "endDate": "2022-11-05",
         "price": 50,
-        "state": "PENDING"
-    },
-    {
-        "id": 7,
-        "keeper": 1,
-        "Pet": 4,
-        "startDate": "2022-11-05",
-        "endDate": "2022-11-06",
-        "price": 100,
-        "state": "PENDING"
-    },
-    {
-        "id": 8,
-        "keeper": 1,
-        "Pet": 4,
-        "startDate": "2022-11-05",
-        "endDate": "2022-11-06",
-        "price": 100,
         "state": "PENDING"
     }
 ]

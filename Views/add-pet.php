@@ -36,9 +36,9 @@
                 </select>
                 </div >
                 <div >
-                    <input class="form__input" type="radio" name="size" value="Small">Small
-                    <input class="form__input" type="radio" name="size" value="Medium">Medium
-                    <input class="form__input" type="radio" name="size" value="Big">Big
+                    <input class="form__input" type="radio" name="size" value="SMALL">Small
+                    <input class="form__input" type="radio" name="size" value="MEDIUM">Medium
+                    <input class="form__input" type="radio" name="size" value="BIG">Big
 
                 </div>
             <br>

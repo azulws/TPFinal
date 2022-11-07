@@ -1,46 +1,24 @@
 [
     {
         "id": 1,
-        "name": "joan",
-        "owner": 1,
-        "petType": 2,
-        "description": "maliante",
-        "image": "EyEblS8VIAE4dhQ.jpg",
-        "vaccination": "maxresdefault.jpg",
-        "video": "",
-        "size": "Small"
-    },
-    {
-        "id": 2,
-        "name": "perritoMalvado",
-        "owner": 2,
-        "petType": 1,
-        "description": "malvado de verdad",
-        "image": "",
-        "vaccination": "",
-        "video": "",
-        "size": "Medium"
-    },
-    {
-        "id": 3,
-        "name": "michi",
-        "owner": 3,
-        "petType": 2,
-        "description": "revoltoso",
-        "image": "",
-        "vaccination": "",
-        "video": "",
-        "size": "Small"
-    },
-    {
-        "id": 4,
         "name": "bartolito",
         "owner": 1,
         "petType": 1,
-        "description": "el locura master",
+        "description": "maliante",
         "image": "",
         "vaccination": "",
         "video": "",
-        "size": "Big"
+        "size": "MEDIUM"
+    },
+    {
+        "id": 2,
+        "name": "San",
+        "owner": 1,
+        "petType": 1,
+        "description": "un amigo ",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "SMALL"
     }
 ]

@@ -51,13 +51,12 @@
 
             $petTypeDAO = new PetTypeDAO();
             $type = $petTypeDAO->Exist(intval($petType));
-            $idOwner = $_SESSION["loggedUser"]->getIdOWner();
 
             if($type) {
                 $pet = new pet();
                 $pet->setName($name);
                 $pet->setPetType($type);
-                $pet->setOwner($idOwner);
+                $pet->setOwner($_SESSION["loggedUser"]);
                 $pet->setDescription($description);
                 $pet->setSize($size);
 
@@ -73,6 +72,7 @@
         public function Remove($id) {
             require_once(VIEWS_PATH . "validate-session.php");
 
+
             $this->petDAO->Remove(intval($id));
 
             $this->ShowListView();
@@ -84,14 +84,13 @@
 
             $petTypeDAO = new PetTypeDAO();
             $type = $petTypeDAO->Exist(intval($petType));
-            $idOwner = $_SESSION["loggedUser"]->getIdOWner();
 
             if($type) {
                 $pet = $this->petDAO->GetById(intval($id));
                 $pet->setId($id);
                 $pet->setName($name);
                 $pet->setPetType($type);
-                $pet->setOwner($idOwner);
+                $pet->setOwner($_SESSION["loggedUser"]);
                 $pet->setDescription($description);
 
                 $this->petDAO->Modify($pet);

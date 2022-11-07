@@ -31,8 +31,14 @@
                     <td><?php echo $reservation->getState() ?></td>
                     
                     <td>
-                        
-                        <button type="submit" name ="id" class="removeBtn" value="<?php echo $reservation->getId() ?>"> Remove </button>
+                        <?php 
+                        if($reservation->getState()== 'PENDING') 
+                        {
+                        ?>
+                        <button type="submit" name ="id" class="removeBtn" value="<?php echo $reservation->getId() ?>"> Cancel </button>
+                        <?php 
+                        }
+                        ?>
 
                     </td>
                 </tr>
