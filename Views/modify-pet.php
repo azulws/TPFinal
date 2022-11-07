@@ -43,6 +43,12 @@
                 }
                 ?>
                   </select>
+                <div >
+                    <input class="form__input" type="radio" name="size" value="SMALL" required>Small
+                    <input class="form__input" type="radio" name="size" value="MEDIUM">Medium
+                    <input class="form__input" type="radio" name="size" value="BIG">Big
+
+                </div>
                 </td>   
               </div>
               <div class="form__group">

@@ -1,35 +1,35 @@
 [
     {
         "id": 1,
-        "name": "joan",
+        "name": "bartolito",
         "owner": 1,
-        "petType": 2,
+        "petType": 1,
         "description": "maliante",
-        "image": "",
-        "vaccination": "",
-        "video": "",
-        "size": "Small"
+        "image": "images.jfif",
+        "vaccination": "maxresdefault.jpg",
+        "video": "Cachorro - 1047.mp4",
+        "size": "MEDIUM"
     },
     {
         "id": 2,
-        "name": "perritoMalvado",
-        "owner": 2,
+        "name": "San",
+        "owner": 1,
         "petType": 1,
-        "description": "malvado de verdad",
-        "image": "",
+        "description": "un amigo ",
+        "image": "FCMKckpVgAMsVbi.jpg",
         "vaccination": "",
         "video": "",
-        "size": "Medium"
+        "size": "SMALL"
     },
     {
         "id": 3,
-        "name": "michi",
-        "owner": 3,
+        "name": "Santiaguito",
+        "owner": 1,
         "petType": 2,
-        "description": "revoltoso",
+        "description": "un kapo",
         "image": "",
         "vaccination": "",
         "video": "",
-        "size": "Small"
+        "size": "MEDIUM"
     }
 ]

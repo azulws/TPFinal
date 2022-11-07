@@ -40,6 +40,18 @@
             $owners= array_values($owners);
             return (count($owners) > 0) ? $owners[0] : null;
         }
+
+        public function GetById($id) {
+            $this->RetrieveData();
+
+            $aux = array_filter($this->ownerList, function($owner) use($id) {
+                return $owner->getIdOwner() == $id;
+            });
+
+            $aux = array_values($aux);
+
+            return (count($aux) > 0) ? $aux[0] : array();
+        }
         
         public function GetAll() {
             $this->RetrieveData();

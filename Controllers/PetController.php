@@ -3,22 +3,21 @@
     namespace Controllers;
 
     use DAO\PetDAO;
-    use DAO\PetTypeDAO;
     use Models\Pet;
     use Models\PetType;
 
     class PetController {
-        private $petDAO;
-        private $petTypeDAO;
+        public $petDAO;
+        private $petTypeController;
 
         public function __construct() {
             $this->petDAO = new PetDAO();
-            $this->petTypeDAO = new PetTypeDAO();
+            $this->petTypeController = new PetTypeController();
         }
 
         public function ShowAddView($message = "") {
             require_once(VIEWS_PATH . "validate-session.php");
-            $petTypeList = $this->petTypeDAO->getAll();
+            $petTypeList = $this->petTypeController->petTypeDAO->getAll();
             require_once(VIEWS_PATH . "add-pet.php");
         }
 
@@ -32,7 +31,7 @@
         {
             require_once(VIEWS_PATH . "validate-session.php");
             $pet = $this->petDAO->GetById($id);
-            $petTypeList = $this->petTypeDAO->getAll();
+            $petTypeList = $this->petTypeController->petTypeDAO->getAll();
             require_once(VIEWS_PATH . "modify-pet.php");
         }
 
@@ -49,15 +48,14 @@
         public function Add($name, $description, $petType ,$size) {
             require_once(VIEWS_PATH . "validate-session.php");
 
-            $petTypeDAO = new PetTypeDAO();
-            $type = $petTypeDAO->Exist(intval($petType));
-            $idOwner = $_SESSION["loggedUser"]->getIdOWner();
+            
+            $type = $this->petTypeController->petTypeDAO->Exist(intval($petType));
 
             if($type) {
                 $pet = new pet();
                 $pet->setName($name);
                 $pet->setPetType($type);
-                $pet->setOwner($idOwner);
+                $pet->setOwner($_SESSION["loggedUser"]);
                 $pet->setDescription($description);
                 $pet->setSize($size);
 
@@ -73,34 +71,30 @@
         public function Remove($id) {
             require_once(VIEWS_PATH . "validate-session.php");
 
+
             $this->petDAO->Remove(intval($id));
 
             $this->ShowListView();
         }
 
 
-        public function Modify($id, $name , $petType, $description) {
+        public function Modify($id, $name , $size, $description) {
             require_once(VIEWS_PATH . "validate-session.php");
 
-            $petTypeDAO = new PetTypeDAO();
-            $type = $petTypeDAO->Exist(intval($petType));
-            $idOwner = $_SESSION["loggedUser"]->getIdOWner();
-
-            if($type) {
+            
                 $pet = $this->petDAO->GetById(intval($id));
                 $pet->setId($id);
                 $pet->setName($name);
                 $pet->setPetType($type);
-                $pet->setOwner($idOwner);
+                $pet->setOwner($_SESSION["loggedUser"]);
                 $pet->setDescription($description);
 
                 $this->petDAO->Modify($pet);
 
                 $this->ShowListView();
-            } else {
-                $this->ShowListView("El tipo de mascota ingresado no existe");
+            
             }
-        }
+        
 
 
         public function UploadImg($id , $petImg, $vaccination , $video)

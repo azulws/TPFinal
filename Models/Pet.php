@@ -7,7 +7,7 @@ use Models\PetType as PetType;
 
         private $id;
         private $name;
-        private $Owner;
+        private Owner $Owner;
         private $petType;
         private $description;
         private $image;
@@ -46,7 +46,7 @@ use Models\PetType as PetType;
         }
 
 
-        public function setOwner($Owner)
+        public function setOwner(Owner $Owner)
         {
                 $this->Owner = $Owner;
         }
