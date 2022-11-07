@@ -3,22 +3,21 @@
     namespace Controllers;
 
     use DAO\PetDAO;
-    use DAO\PetTypeDAO;
     use Models\Pet;
     use Models\PetType;
 
     class PetController {
         public $petDAO;
-        private $petTypeDAO;
+        private $petTypeController;
 
         public function __construct() {
             $this->petDAO = new PetDAO();
-            $this->petTypeDAO = new PetTypeDAO();
+            $this->petTypeController = new PetTypeController();
         }
 
         public function ShowAddView($message = "") {
             require_once(VIEWS_PATH . "validate-session.php");
-            $petTypeList = $this->petTypeDAO->getAll();
+            $petTypeList = $this->petTypeController->petTypeDAO->getAll();
             require_once(VIEWS_PATH . "add-pet.php");
         }
 
@@ -32,7 +31,7 @@
         {
             require_once(VIEWS_PATH . "validate-session.php");
             $pet = $this->petDAO->GetById($id);
-            $petTypeList = $this->petTypeDAO->getAll();
+            $petTypeList = $this->petTypeController->petTypeDAO->getAll();
             require_once(VIEWS_PATH . "modify-pet.php");
         }
 
@@ -49,8 +48,8 @@
         public function Add($name, $description, $petType ,$size) {
             require_once(VIEWS_PATH . "validate-session.php");
 
-            $petTypeDAO = new PetTypeDAO();
-            $type = $petTypeDAO->Exist(intval($petType));
+            
+            $type = $this->petTypeController->petTypeDAO->Exist(intval($petType));
 
             if($type) {
                 $pet = new pet();

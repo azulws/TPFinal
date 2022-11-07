@@ -71,7 +71,8 @@
             "2022-12-03"
         ],
         "sizes": [
-            "SMALL"
+            "SMALL",
+            "MEDIUM"
         ]
     }
 ]

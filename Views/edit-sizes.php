@@ -28,7 +28,7 @@
             
         
         <div align="center">
-            <input type="submit" class="btn-encriptar" value="Agregar" />
+            <input type="submit" class="btn-encriptar" value="Add" />
         </div>
         
         </form>

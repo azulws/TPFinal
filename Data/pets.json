@@ -16,9 +16,20 @@
         "owner": 1,
         "petType": 1,
         "description": "un amigo ",
-        "image": "",
+        "image": "FCMKckpVgAMsVbi.jpg",
         "vaccination": "",
         "video": "",
         "size": "SMALL"
+    },
+    {
+        "id": 3,
+        "name": "Santiaguito",
+        "owner": 1,
+        "petType": 2,
+        "description": "un kapo",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "MEDIUM"
     }
 ]
