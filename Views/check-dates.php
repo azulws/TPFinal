@@ -1,39 +1,47 @@
 
-<main class="main">
-    <div  id="comments" style="align-items:center;">
-            <h2 align="center">Insert Dates </h2>
+<main >
+    <div style="align-items:center;">
+    <br>
+            <h1 align="center">Insert Dates </h1>
+            <br>
             <form align="center" action="<?php echo FRONT_ROOT."Keeper/KeepersAvailables" ?>" method="post" enctype="multipart/form-data">
-            <table align="center"> 
+            <table class="searchTable" align="center"> 
                 <thead>              
                 <tr align="center">
-                    <th ><h1 class="date-ava">Start Date:</h1></th>
+                    <div align="center">
+                     <th  ><h1 >Start Date:</h1></th>
+                    </div>
                 </tr>
                 </thead>
+                <br>
                 <tbody align="center">
                 <tr>
                     <td>
                         <br>
-                        <input  type="date" name="startDate" required>
+                        <input  class="date-search" type="date" name="startDate" required>
                     </td>
                 </tr>
                 </tbody>
                 <tr align="center">
-                    <th ><h1 class="date-ava">End Date:</h1></th>
+                    
+                    <th ><h1 align="center" >End Date:</h1></th>
+                    
                 </tr>
                 </thead>
                 <tbody align="center">
                 <tr>
                     <td>
                         <br>
-                        <input  type="date" name="endDate" required>
+                        <input class="date-search" type="date" name="endDate" required>
                         <input type="hidden" name="idPet" value="<?php echo $pet ?>" >
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <div>
+            <br>
+            <div align="center">
     
-                <input type="submit" class="btn-encriptar" value="search"/>
+                <input type="submit" class="btn-encriptar" value="Search"/>
             </div>
             <div>
             </form>

@@ -1,9 +1,9 @@
 /* botones pet */
 /*modify btn*/
 .modifyBtn {
-	background-color:#44c767;
+	background-color:#1b552a;
 	border-radius:28px;
-	border:1px solid #18ab29;
+	border:1px solid #0f6318;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
@@ -21,9 +21,9 @@
 }
 /*remove btn*/
 .removeBtn {
-	background-color:#d0451b;
+	background-color:#832c12;
 	border-radius:28px;
-	border:1px solid #942911;
+	border:1px solid #681502;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
@@ -33,7 +33,7 @@
 	text-decoration:none;
 }
 .removeBtn:hover {
-	background-color:#bc3315;
+	background-color:#53180a;
 }
 .removeBtn:active {
 	position:relative;
@@ -41,9 +41,9 @@
 }
 /*search btn*/
 .searchBtn {
-	background-color:#007dc1;
+	background-color:#004882;
 	border-radius:28px;
-	border:1px solid #124d77;
+	border:1px solid #186196;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
@@ -84,7 +84,7 @@ table.customTable thead {
 
 /* confirm btn en availability*/
 .confirmBtn {
-	background-color:#7892c2;
+	background-color:#004882;
 	border-radius:13px;
 	border:1px solid #4e6096;
 	display:flex;
@@ -189,10 +189,36 @@ header{
  font-weight: 800;
  font-size: 32px;
  line-height: 29px;
+ background-color: #b1dcff;
 
  color: #000000;
 }
+/* view de search date owner*/
+.date-search{
+  position: relative;
+  width: 117px;
+  height: 39px;
+  
+ 
+  font-family: 'Inter';
+  font-style:normal;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 29px;
+ 
+  color: #000000;
+ }
 
+ table.searchTable {
+  width: 100%;
+  background-color: #E9ECF8;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #E9ECF8;
+  border-style: solid;
+  color: #000000;
+}
+ 
 
 
 /*select box aca*/

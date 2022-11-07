@@ -11,13 +11,13 @@
             <table align="center"> 
                 <thead>              
                 <tr align="center">
-                    <th ><h1 class="date-ava">Date:</h1></th>
+                    <th ><h1 >Date:</h1></th>
                 </tr>
                 </thead>
                 <tbody align="center">
                 <tr>
                     <td>
-                    <input  type="date" name="date" required>
+                    <input  class="date-ava" type="date" name="date" required>
                     </td>
                 </tr>
                 </tbody>
