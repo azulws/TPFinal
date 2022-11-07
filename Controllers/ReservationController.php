@@ -15,18 +15,13 @@
 
     class ReservationController {
         private $reservationDAO;
-        private $petDAO;
-        private $keeperDAO;
+        private $petController;
+        private $keeperController;
 
         public function __construct() {
             $this->reservationDAO = new ReservationDAO();
-            $this->petDAO = new PetDAO();
-            $this->keeperDAO = new KeeperDAO();
-        }
-
-        public function ShowAddView($message = "") {
-            require_once(VIEWS_PATH . "validate-session.php");
-            require_once(VIEWS_PATH . "add-reservation.php");
+            $this->petController = new PetController();
+            $this->keeperController = new KeeperController();
         }
 
 
@@ -56,9 +51,9 @@
 
         public function CalculatePrice($startDate, $endDate, $idKeeper)
         {
-            $keeperController = new KeeperController();
-            $keeper = $keeperController->keeperDAO->GetById($idKeeper);
-            $dates = $keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
+            //$keeperController = new KeeperController();
+            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+            $dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
             return count($dates) * $keeper->getRemuneration();
         }   
 
@@ -67,11 +62,23 @@
             require_once(VIEWS_PATH . "validate-session.php");
 
             
-            $keeper = $this->keeperDAO->GetById($idKeeper);
-            $pet = $this->petDAO->GetById($idPet);
+           // $keeper = $this->keeperDAO->GetById($idKeeper);
+            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+           // $pet = $this->petDAO->GetById($idPet);
+            $pet = $this->petController->petDAO->GetById($idPet);
+            $sizes = $keeper->getSizes();
+            $flag = 0;
 
+            
 
-            if($keeper) {
+            foreach($sizes as $size)
+            {
+                if($size == $pet->getSize()){
+                    $flag = 1;
+                }
+            }
+
+            if($flag == 1) {
                 $reservation = new Reservation();
                 $reservation->setKeeper($keeper);
                 $reservation->setPet($pet);
@@ -81,12 +88,12 @@
                 $reservation->setPrice($price);
 
                 $idReservation = $this->reservationDAO->Add($reservation);
-
+                $this->ShowDetailView($idReservation);
                 
             } else {
-                $this->ShowAddView("El keeper no existe");
+                $this->keeperController->ShowCheckDatesView($idPet, 'the size of the pet does not match with the keeper');
             }
-            $this->ShowDetailView($idReservation);
+            
         }
 
         public function Remove($id) {

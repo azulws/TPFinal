@@ -1,7 +1,8 @@
 
 <main >
     <div style="align-items:center;">
-    <br>
+    <br>    
+            <h2><?php echo $message ?></h2>
             <h1 align="center">Insert Dates </h1>
             <br>
             <form align="center" action="<?php echo FRONT_ROOT."Keeper/KeepersAvailables" ?>" method="post" enctype="multipart/form-data">

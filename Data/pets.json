@@ -31,5 +31,16 @@
         "vaccination": "",
         "video": "",
         "size": "Small"
+    },
+    {
+        "id": 4,
+        "name": "bartolito",
+        "owner": 1,
+        "petType": 1,
+        "description": "el locura master",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "Big"
     }
 ]

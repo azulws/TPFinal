@@ -20,7 +20,7 @@
             require_once(VIEWS_PATH."add-view.php");
         }
 
-        public function ShowCheckDatesView($idPet)
+        public function ShowCheckDatesView($idPet, $message ='')
         {
             require_once(VIEWS_PATH."validate-session.php");
             $pet = $idPet;

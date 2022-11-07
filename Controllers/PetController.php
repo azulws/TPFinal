@@ -8,7 +8,7 @@
     use Models\PetType;
 
     class PetController {
-        private $petDAO;
+        public $petDAO;
         private $petTypeDAO;
 
         public function __construct() {
