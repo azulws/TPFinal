@@ -79,13 +79,10 @@
         }
 
 
-        public function Modify($id, $name , $petType, $description) {
+        public function Modify($id, $name , $size, $description) {
             require_once(VIEWS_PATH . "validate-session.php");
 
-            $petTypeDAO = new PetTypeDAO();
-            $type = $petTypeDAO->Exist(intval($petType));
-
-            if($type) {
+            
                 $pet = $this->petDAO->GetById(intval($id));
                 $pet->setId($id);
                 $pet->setName($name);
@@ -96,10 +93,9 @@
                 $this->petDAO->Modify($pet);
 
                 $this->ShowListView();
-            } else {
-                $this->ShowListView("El tipo de mascota ingresado no existe");
+            
             }
-        }
+        
 
 
         public function UploadImg($id , $petImg, $vaccination , $video)

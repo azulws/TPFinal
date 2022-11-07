@@ -23,23 +23,12 @@
                   <input type="text" name="name" value="<?php echo $pet->getName() ?>" required>
                 </td>
                 <td>
-                  <select name="petType" id="petType" class="select">
-                    <?php
-                
-                
-                foreach($petTypeList as $petType) {
-                  if($petType->getId() == $pet->getPetType()->getId()) {
-                    echo "<option selected value=". $petType->getId() .">
-                    ". $petType->getBreed(). "
-                    </option>";
-                  } else {
-                    echo "<option value=". $petType->getId() .">
-                    ". $petType->getBreed(). "
-                    </option>";
-                  }
-                }
-                ?>
-                  </select>
+                <div >
+                    <input class="form__input" type="radio" name="size" value="SMALL" required>Small
+                    <input class="form__input" type="radio" name="size" value="MEDIUM">Medium
+                    <input class="form__input" type="radio" name="size" value="BIG">Big
+
+                </div>
                 </td>   
                 <td>
                   <input type="text" name="description" value="<?php echo $pet->getDescription() ?>" required>
