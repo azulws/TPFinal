@@ -55,17 +55,10 @@
     },
     {
         "id": 7,
-<<<<<<< HEAD
         "keeper": 1,
         "Pet": 3,
         "startDate": "2022-11-17",
         "endDate": "2022-11-18",
-=======
-        "keeper": 5,
-        "Pet": "4",
-        "startDate": "2022-11-08",
-        "endDate": "2022-11-09",
->>>>>>> 1b990e590381de723310cdafc7ad8ebadd290cd3
         "price": 246,
         "state": "PENDING"
     }
