@@ -39,7 +39,8 @@
         {
             require_once(VIEWS_PATH."validate-session.php");
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName()); //traigo al usuario para ver su lista de disponibilidad
-            $availabilityList = $keeper->getAvailability();
+            $array = $keeper->getAvailability();
+            $availabilityList = $this->getCurrentDates($array);
             require_once(VIEWS_PATH."availability.php");
         }
 
@@ -163,6 +164,15 @@
                 }
             }
             return $arrayDatesChecked;
+        }
+
+        public function getCurrentDates($array){            //retorna un arreglo con las fechas del dia de hoy en adelante
+            $availabilityList= array();
+            foreach($array as $availability){
+                if($availability>=date("Y-m-d"))
+                    array_push($availabilityList,$availability);
+            }
+            return $availabilityList;
         }
 
         public function Remove($id)

@@ -42,5 +42,27 @@
         "vaccination": "",
         "video": "",
         "size": "MEDIUM"
+    },
+    {
+        "id": 5,
+        "name": "perritoMalvado",
+        "owner": 2,
+        "petType": 1,
+        "description": "malo",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "MEDIUM"
+    },
+    {
+        "id": 6,
+        "name": "donGato",
+        "owner": 2,
+        "petType": 2,
+        "description": "capo",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "SMALL"
     }
 ]

@@ -59,39 +59,42 @@
 
 
         public function Add($idKeeper, $idPet, $startDate ,$endDate) {
-            require_once(VIEWS_PATH . "validate-session.php");
-
+            //require_once(VIEWS_PATH . "validate-session.php");
+            if($startDate>=date("Y-m-d")){
             
-           // $keeper = $this->keeperDAO->GetById($idKeeper);
-            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
-           // $pet = $this->petDAO->GetById($idPet);
-            $pet = $this->petController->petDAO->GetById($idPet);
-            $sizes = $keeper->getSizes();
-            $flag = 0;
+            // $keeper = $this->keeperDAO->GetById($idKeeper);
+                $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+            // $pet = $this->petDAO->GetById($idPet);
+                $pet = $this->petController->petDAO->GetById($idPet);
+                $sizes = $keeper->getSizes();
+                $flag = 0;
 
-            
-
-            foreach($sizes as $size)
-            {
-                if($size == $pet->getSize()){
-                    $flag = 1;
-                }
-            }
-
-            if($flag == 1) {
-                $reservation = new Reservation();
-                $reservation->setKeeper($keeper);
-                $reservation->setPet($pet);
-                $reservation->setStartDate($startDate);
-                $reservation->setEndDate($endDate);
-                $price = $this->CalculatePrice($reservation->getStartDate(), $reservation->getEndDate(), $keeper->getIdKeeper());
-                $reservation->setPrice($price);
-
-                $idReservation = $this->reservationDAO->Add($reservation);
-                $this->ShowDetailView($idReservation);
                 
-            } else {
-                $this->keeperController->ShowCheckDatesView($idPet, 'the size of the pet does not match with the keeper');
+
+                foreach($sizes as $size)
+                {
+                    if($size == $pet->getSize()){
+                        $flag = 1;
+                    }
+                }
+
+                if($flag == 1) {
+                    $reservation = new Reservation();
+                    $reservation->setKeeper($keeper);
+                    $reservation->setPet($pet);
+                    $reservation->setStartDate($startDate);
+                    $reservation->setEndDate($endDate);
+                    $price = $this->CalculatePrice($reservation->getStartDate(), $reservation->getEndDate(), $keeper->getIdKeeper());
+                    $reservation->setPrice($price);
+
+                    $idReservation = $this->reservationDAO->Add($reservation);
+                    $this->ShowDetailView($idReservation);
+                    
+                } else {
+                    $this->keeperController->ShowCheckDatesView($idPet, 'the size of the pet does not match with the keeper');
+                }
+            }else{
+                $this->ShowRecordOwnerView();
             }
             
         }
