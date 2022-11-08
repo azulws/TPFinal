@@ -39,8 +39,8 @@
         {
             require_once(VIEWS_PATH."validate-session.php");
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName()); //traigo al usuario para ver su lista de disponibilidad
-            $array = $keeper->getAvailability();
-            $availabilityList = $this->getCurrentDates($array);
+            $availabilityList = $keeper->getAvailability();
+            $this->removeOldDates($availabilityList);
             require_once(VIEWS_PATH."availability.php");
         }
 
@@ -99,13 +99,13 @@
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
             $dateList= $keeper->getAvailability();
             if($date>=date("Y-m-d")){
-            if(!in_array($date,$dateList)){
-                array_push($dateList,$date);
-                    sort($dateList);
-                $keeper->setAvailability($dateList);
+                if(!in_array($date,$dateList)){
+                    array_push($dateList,$date);
+                        sort($dateList);
+                    $keeper->setAvailability($dateList);
 
-                $this->keeperDAO->Modify($keeper);
-            }
+                    $this->keeperDAO->Modify($keeper);
+                }
             }
 
             $this->ShowAvailabilityView();
@@ -173,6 +173,15 @@
                     array_push($availabilityList,$availability);
             }
             return $availabilityList;
+        }
+
+        public function removeOldDates($array){             //elimina las fechas antiguas del arreglo del keeper
+            $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
+            $dateList= $keeper->getAvailability();
+            $newList= $this->getCurrentDates($dateList);
+            $keeper->setAvailability($newList);
+
+            $this->keeperDAO->Modify($keeper);
         }
 
         public function Remove($id)
