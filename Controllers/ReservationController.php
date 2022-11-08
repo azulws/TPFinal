@@ -49,6 +49,24 @@
             require_once(VIEWS_PATH . "reservation-detail.php");
         }
 
+        public function RaceValidation($idKeeper , $idPet, $startDate, $endDate)
+        {
+            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+            $pet = $this->petController->petDAO->GetById($idPet);
+            $reservationList = $this->reservationDAO->GetAllByKeeper($keeper->getIdKeeper());
+            $dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
+            foreach($reservationList as $reservation){
+                foreach($dates as $date){
+                    if(($reservation->getPet()->getPetType()->getBreed() == $pet->getPetType()->getBreed()) && ($reservation->getStartDate() || $reservation->getEndDate())){
+
+                        return false;
+                    }
+                }
+            }
+            return true;
+
+        }
+
         public function CalculatePrice($startDate, $endDate, $idKeeper)
         {
             //$keeperController = new KeeperController();
@@ -62,9 +80,8 @@
             //require_once(VIEWS_PATH . "validate-session.php");
             if($startDate>=date("Y-m-d")){
             
-            // $keeper = $this->keeperDAO->GetById($idKeeper);
                 $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
-            // $pet = $this->petDAO->GetById($idPet);
+
                 $pet = $this->petController->petDAO->GetById($idPet);
                 $sizes = $keeper->getSizes();
                 $flag = 0;
@@ -76,6 +93,11 @@
                     if($size == $pet->getSize()){
                         $flag = 1;
                     }
+                }
+                if(!$this->RaceValidation($idKeeper, $idPet, $startDate, $endDate))
+                {
+                    $flag = 0;
+                    
                 }
 
                 if($flag == 1) {

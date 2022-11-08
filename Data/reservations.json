@@ -24,7 +24,7 @@
         "startDate": "2022-11-06",
         "endDate": "2022-11-07",
         "price": 100,
-        "state": "PENDING"
+        "state": "ACCEPTED"
     },
     {
         "id": 4,
@@ -55,10 +55,10 @@
     },
     {
         "id": 7,
-        "keeper": 5,
-        "Pet": "4",
-        "startDate": "2022-11-08",
-        "endDate": "2022-11-09",
+        "keeper": 1,
+        "Pet": 3,
+        "startDate": "2022-11-17",
+        "endDate": "2022-11-18",
         "price": 246,
         "state": "PENDING"
     },
