@@ -16,5 +16,23 @@
         "endDate": "2022-11-01",
         "price": 50,
         "state": "CANCELED"
+    },
+    {
+        "id": 3,
+        "keeper": 1,
+        "Pet": 4,
+        "startDate": "2022-11-06",
+        "endDate": "2022-11-07",
+        "price": 100,
+        "state": "PENDING"
+    },
+    {
+        "id": 4,
+        "keeper": 5,
+        "Pet": 4,
+        "startDate": "2022-11-07",
+        "endDate": "2022-11-09",
+        "price": 369,
+        "state": "PENDING"
     }
 ]

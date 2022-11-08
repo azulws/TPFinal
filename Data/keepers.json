@@ -30,24 +30,6 @@
         ]
     },
     {
-        "id": 5,
-        "firstName": "elke",
-        "lastName": "per",
-        "userName": "kp",
-        "password": "asd",
-        "remuneration": "123",
-        "availability": [
-            "2022-11-07",
-            "2022-11-08",
-            "2022-11-10",
-            "2022-11-25"
-        ],
-        "sizes": [
-            "SMALL",
-            "BIG"
-        ]
-    },
-    {
         "id": 1,
         "firstName": "zoe",
         "lastName": "margurita",
@@ -69,6 +51,25 @@
             "2022-12-01",
             "2022-12-02",
             "2022-12-03"
+        ],
+        "sizes": [
+            "SMALL",
+            "MEDIUM"
+        ]
+    },
+    {
+        "id": 5,
+        "firstName": "elke",
+        "lastName": "per",
+        "userName": "kp",
+        "password": "asd",
+        "remuneration": "123",
+        "availability": [
+            "2022-11-07",
+            "2022-11-08",
+            "2022-11-09",
+            "2022-11-10",
+            "2022-11-25"
         ],
         "sizes": [
             "SMALL",

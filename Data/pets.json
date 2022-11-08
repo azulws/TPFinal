@@ -34,13 +34,13 @@
     },
     {
         "id": 4,
-        "name": "rufus",
+        "name": "cuchuchu",
         "owner": 3,
         "petType": 1,
-        "description": "un caniche feo",
+        "description": "golden",
         "image": "",
         "vaccination": "",
         "video": "",
-        "size": "SMALL"
+        "size": "MEDIUM"
     }
 ]
