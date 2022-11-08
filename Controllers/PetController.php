@@ -85,7 +85,7 @@
                 $pet = $this->petDAO->GetById(intval($id));
                 $pet->setId($id);
                 $pet->setName($name);
-                $pet->setPetType($type);
+                $pet->setSize($size);
                 $pet->setOwner($_SESSION["loggedUser"]);
                 $pet->setDescription($description);
 
