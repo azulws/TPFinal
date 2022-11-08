@@ -20,7 +20,7 @@
     {
         "id": 3,
         "keeper": 1,
-        "Pet": 4,
+        "Pet": "4",
         "startDate": "2022-11-06",
         "endDate": "2022-11-07",
         "price": 100,
@@ -29,7 +29,7 @@
     {
         "id": 4,
         "keeper": 5,
-        "Pet": 4,
+        "Pet": "4",
         "startDate": "2022-11-07",
         "endDate": "2022-11-09",
         "price": 369,
@@ -38,7 +38,7 @@
     {
         "id": 5,
         "keeper": 5,
-        "Pet": 4,
+        "Pet": "4",
         "startDate": "2022-11-07",
         "endDate": "2022-11-09",
         "price": 369,
@@ -47,7 +47,7 @@
     {
         "id": 6,
         "keeper": 5,
-        "Pet": 4,
+        "Pet": "4",
         "startDate": "2022-11-07",
         "endDate": "2022-11-09",
         "price": 369,
@@ -55,10 +55,17 @@
     },
     {
         "id": 7,
+<<<<<<< HEAD
         "keeper": 1,
         "Pet": 3,
         "startDate": "2022-11-17",
         "endDate": "2022-11-18",
+=======
+        "keeper": 5,
+        "Pet": "4",
+        "startDate": "2022-11-08",
+        "endDate": "2022-11-09",
+>>>>>>> 1b990e590381de723310cdafc7ad8ebadd290cd3
         "price": 246,
         "state": "PENDING"
     }
