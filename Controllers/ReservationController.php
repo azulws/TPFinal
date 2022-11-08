@@ -59,6 +59,25 @@
             return count($dates) * $keeper->getRemuneration();
         }   
 
+        public function RaceValidation($idKeeper , $idPet, $startDate, $endDate)
+        {
+            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+            $pet = $this->petController->petDAO->GetById($idPet);
+            $reservationList = $this->reservationDAO->GetAllByKeeper($keeper->getIdKeeper());
+            //$dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
+            $date=$startDate;
+            for($date;$date<=$endDate;$date){
+                $nextDate=strtotime("+1 day",strtotime($date));
+                $nextDate=date("Y-m-d",$nextDate);
+                $date=$nextDate;
+                foreach($reservationList as $reservation){
+                    if($pet->getPetType()->getBreed()!=$reservation->getPet()->getPetType()->getBreed()){
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
 
         public function Add($idPet, $startDate, $endDate ,$idKeeper) {
             //require_once(VIEWS_PATH . "validate-session.php");
@@ -77,8 +96,9 @@
                         $flag = 1;
                     }
                 }
-
-                if($flag == 1) {
+                //var_dump($this->RaceValidation($idKeeper , $idPet, $startDate, $endDate));
+                if($this->RaceValidation($idKeeper , $idPet, $startDate, $endDate)){
+                if($flag == 1 ) {
                     $reservation = new Reservation();
                     $reservation->setKeeper($keeper);
                     $reservation->setPet($pet);
@@ -93,8 +113,11 @@
                 } else {
                     $this->keeperController->ShowCheckDatesView($idPet, 'the size of the pet does not match with the keeper');
                 }
+                }else{
+                    $this->petController->ShowListView('animal distinto');
+                }
             }else{
-                $this->ShowRecordOwnerView();
+                $this->keeperController->ShowCheckDatesView($idPet, 'fecha mala');
             }
             
         }

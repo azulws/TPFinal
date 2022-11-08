@@ -23,7 +23,7 @@
             require_once(VIEWS_PATH . "add-pet.php");
         }
 
-        public function ShowListView() {
+        public function ShowListView($message = "") {
             require_once(VIEWS_PATH . "validate-session.php");
             $petList = $this->petDAO->GetAllByOwner($_SESSION["loggedUser"]->getIdOwner());
             $this->keeperControler->removeOldDates();
