@@ -9,10 +9,12 @@
     class PetController {
         public $petDAO;
         private $petTypeController;
+        private $keeperControler;
 
         public function __construct() {
             $this->petDAO = new PetDAO();
             $this->petTypeController = new PetTypeController();
+            $this->keeperControler = new KeeperController();
         }
 
         public function ShowAddView($message = "") {
@@ -24,6 +26,7 @@
         public function ShowListView() {
             require_once(VIEWS_PATH . "validate-session.php");
             $petList = $this->petDAO->GetAllByOwner($_SESSION["loggedUser"]->getIdOwner());
+            $this->keeperControler->removeOldDates();
             require_once(VIEWS_PATH . "pet-list.php");
         }
 
