@@ -1,8 +1,8 @@
-<div class="wrapper row4">
-<main class="hoc container clear"> 
+<div >
+<main > 
     <!-- main body -->
-    <div class="content"> 
-    <div class="scrollable">
+    <div > 
+    <div >
     <form action="<?php echo FRONT_ROOT . "Reservation/Remove" ?>" method="post" enctype="multipart/form-data">
         <table  class="customTable">
         <thead>
