@@ -63,7 +63,8 @@
         ],
         "sizes": [
             "SMALL",
-            "MEDIUM"
+            "MEDIUM",
+            "BIG"
         ]
     }
 ]
