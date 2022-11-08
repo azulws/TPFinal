@@ -77,7 +77,7 @@
             }
             else{
                 $this->keeperDAO->Add($keeper);
-                $_SESSION["loggedUser"]=$keeper;
+                /*$_SESSION["loggedUser"]=$keeper;*/
                 $this->ShowAddView();
             }
 

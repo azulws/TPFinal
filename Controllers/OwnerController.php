@@ -39,7 +39,7 @@
             }
             else{
                 $this->OwnerDAO->Add($owner);
-                $_SESSION["loggedUser"]=$owner;
+                /*$_SESSION["loggedUser"]=$owner;*/
                 $this->ShowAddView();
             }
 
