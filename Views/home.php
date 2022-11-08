@@ -1,4 +1,4 @@
-<main class="main">
+<main>
     <div align="center">
     <?php if ($message) {
       echo $message;
