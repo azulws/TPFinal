@@ -63,20 +63,32 @@
         {
             $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
             $pet = $this->petController->petDAO->GetById($idPet);
-            $reservationList = $this->reservationDAO->GetAllByKeeper($keeper->getIdKeeper());
-            //$dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
-            $date=$startDate;
-            for($date;$date<=$endDate;$date){
-                $nextDate=strtotime("+1 day",strtotime($date));
-                $nextDate=date("Y-m-d",$nextDate);
-                $date=$nextDate;
-                foreach($reservationList as $reservation){
-                    if($pet->getPetType()->getBreed()!=$reservation->getPet()->getPetType()->getBreed()){
+            $allReservationList = $this->reservationDAO->GetAllByKeeper($keeper->getIdKeeper());
+
+            $actualDate=$startDate;
+            foreach($allReservationList as $reservation){
+                $dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
+                foreach($dates as $d){
+                    //var_dump($this->getPetByDay($d));
+                    if(!$this->getPetByDay($d)){
+                        return true;
+                    }else if($pet->getPetType()->getBreed()!=$this->getPetByDay($d)){
                         return false;
                     }
                 }
             }
+
             return true;
+        }
+
+
+        public function getPetByDay($date){
+            $all=$this->reservationDAO->getAll();
+            foreach($all as $a){
+                if($a->getStartDate()==$date){
+                    return $a->getPet()->getPetType()->getBreed();
+                }
+            }
         }
 
         public function Add($idPet, $startDate, $endDate ,$idKeeper) {
@@ -96,7 +108,6 @@
                         $flag = 1;
                     }
                 }
-                //var_dump($this->RaceValidation($idKeeper , $idPet, $startDate, $endDate));
                 if($this->RaceValidation($idKeeper , $idPet, $startDate, $endDate)){
                 if($flag == 1 ) {
                     $reservation = new Reservation();
