@@ -4,16 +4,6 @@
     <div > 
       <div align="center">
         <form action="<?php echo FRONT_ROOT."Owner/Add" ?>" method="post" >
-         
-            <!--<thead>              
-              <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>User Name</th>
-                <th>Password</th>
-              </tr>
-            </thead>-->
-            
               
                 <div class="form__group">
                   <input class="form__input" type="text"  name="firstName" size="22" min="0" placeholder="First name" required />
@@ -31,9 +21,6 @@
                   <input class="form__input" type="password" name="password" min="0" placeholder="Password" required>
                   <label for="password" class="form__label">Password</label>
                 </div>            
-              
-              
-          
           <div align="center">
             <input type="submit" class="btn-encriptar" value="Owner" />
           </div>
@@ -42,8 +29,8 @@
           </div>
         </form>
       </div>
-    </div>
-    <!-- / main body -->
+   
+
     <div class="clear"></div>
   </main>
 <?php

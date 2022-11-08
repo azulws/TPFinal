@@ -3,7 +3,6 @@
 
     use DAO\OwnerDAO as OwnerDAO;
     use Models\Owner as Owner;
-    use Models\User as User;
 
 
     class OwnerController
@@ -27,7 +26,26 @@
             require_once(VIEWS_PATH . "home-owner.php");
         }
 
-        public function Add($firstName,$lastName,$userName,$password)  
+        public function Add($firstName,$lastName,$userName,$password)
+        {
+            $owner = new Owner();
+            $owner->setFirstName($firstName);
+            $owner->setLastName($lastName);
+            $owner->setUserName($userName);
+            $owner->setPassword($password);
+            
+            if($this->OwnerDAO->GetByUserName($owner->getUserName())){
+                $this->ShowAddView("Ya existe un usuario con ese Username",null);
+            }
+            else{
+                $this->OwnerDAO->Add($owner);
+                $_SESSION["loggedUser"]=$owner;
+                $this->ShowAddView();
+            }
+
+        }
+
+        /*public function Add($firstName,$lastName,$userName,$password)  
         {
             if($this->OwnerDAO->GetByUserName($userName)==NULL){
                 $owner = new Owner();
@@ -42,7 +60,7 @@
             $this->ShowAddView(); 
                 
         }
-
+*/
         public function Remove($id)
         {
             $this->keeperDAO->Remove($id);

@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-use Models\Person as Person;
+
 
 class Keeper extends User {
 
