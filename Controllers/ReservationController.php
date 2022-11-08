@@ -22,6 +22,7 @@
             $this->reservationDAO = new ReservationDAO();
             $this->petController = new PetController();
             $this->keeperController = new KeeperController();
+
         }
 
 
@@ -59,10 +60,9 @@
         }   
 
 
-        public function Add($idKeeper, $idPet, $startDate ,$endDate) {
+        public function Add($idPet, $startDate, $endDate ,$idKeeper) {
             //require_once(VIEWS_PATH . "validate-session.php");
             if($startDate>=date("Y-m-d")){
-            
                 $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
 
                 $pet = $this->petController->petDAO->GetById($idPet);
