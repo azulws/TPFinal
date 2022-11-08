@@ -35,6 +35,13 @@
         "password": "asd"
     },
     {
+        "id": 7,
+        "firstName": "ramiro",
+        "lastName": "salas",
+        "userName": "rs",
+        "password": "123"
+    },
+    {
         "id": 5,
         "firstName": "test",
         "lastName": "test",

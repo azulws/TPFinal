@@ -64,11 +64,19 @@
     },
     {
         "id": 8,
+<<<<<<< HEAD
         "keeper": 1,
         "Pet": "1",
         "startDate": "2022-11-08",
         "endDate": "2022-11-08",
         "price": 123,
+=======
+        "keeper": 5,
+        "Pet": "4",
+        "startDate": "2022-11-08",
+        "endDate": "2022-11-09",
+        "price": 246,
+>>>>>>> 9e1f13a2e22fc6686b650eb97cdf5cfbc8d67975
         "state": "PENDING"
     }
 ]

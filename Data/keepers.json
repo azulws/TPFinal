@@ -66,5 +66,15 @@
             "MEDIUM",
             "BIG"
         ]
+    },
+    {
+        "id": 6,
+        "firstName": "franco alejandro",
+        "lastName": "pascuzzo",
+        "userName": "fp",
+        "password": "asd",
+        "remuneration": "0",
+        "availability": [],
+        "sizes": []
     }
 ]

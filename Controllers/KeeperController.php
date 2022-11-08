@@ -64,8 +64,26 @@
             require_once(VIEWS_PATH."edit-sizes.php");
         }
 
+        public function Add($firstName,$lastName,$userName,$password)
+        {
+            $keeper = new Keeper();
+            $keeper->setFirstName($firstName);
+            $keeper->setLastName($lastName);
+            $keeper->setUserName($userName);
+            $keeper->setPassword($password);
+            
+            if($this->keeperDAO->GetByUserName($keeper->getUserName())){
+                $this->ShowAddView("Ya existe un usuario con ese Username",null);
+            }
+            else{
+                $this->keeperDAO->Add($keeper);
+                /*$_SESSION["loggedUser"]=$keeper;*/
+                $this->ShowAddView();
+            }
 
-        public function Add($firstName,$lastName,$userName,$password)  
+        }
+/*
+        public function Add($firstName,$lastName,$userName,$password)  funcion anterior, no tocar en caso de q la de arriba no ande XD
         
         {
             if($this->keeperDAO->GetByUserName($userName)==NULL){
@@ -78,7 +96,7 @@
             }
             $this->ShowAddView();
         }
-
+*/
         public function Modify($remuneration) {         //modifica remuneracion
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
             $keeper->setRemuneration($remuneration);
