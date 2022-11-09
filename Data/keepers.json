@@ -33,7 +33,6 @@
         "password": "asd",
         "remuneration": "123",
         "availability": [
-            "2022-11-08",
             "2022-11-09",
             "2022-11-10",
             "2022-11-25"
@@ -44,6 +43,16 @@
         ]
     },
     {
+        "id": 6,
+        "firstName": "franco alejandro",
+        "lastName": "pascuzzo",
+        "userName": "fp",
+        "password": "asd",
+        "remuneration": "0",
+        "availability": [],
+        "sizes": []
+    },
+    {
         "id": 1,
         "firstName": "zoe",
         "lastName": "margurita",
@@ -51,7 +60,6 @@
         "password": "hola",
         "remuneration": "123",
         "availability": [
-            "2022-11-08",
             "2022-11-11",
             "2022-11-16",
             "2022-11-17",
@@ -66,15 +74,5 @@
             "MEDIUM",
             "BIG"
         ]
-    },
-    {
-        "id": 6,
-        "firstName": "franco alejandro",
-        "lastName": "pascuzzo",
-        "userName": "fp",
-        "password": "asd",
-        "remuneration": "0",
-        "availability": [],
-        "sizes": []
     }
 ]
