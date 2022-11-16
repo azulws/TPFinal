@@ -105,32 +105,10 @@
                 $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
 
                 $pet = $this->petController->petDAO->GetById($idPet);
-                $sizes = $keeper->getSizes();
-                $flag = 0;
-                $flag2 = 0;
-                
-                $allReservationList = $this->reservationDAO->GetAllByKeeper($idKeeper); 
-                foreach($allReservationList as $reservation){
-                    if($reservation->getState()!="CANCELED"){       //permito crear reservas cuando ya hay una reserva en esas fechas pero el estado es CANCELED
-                        $arrayValidate = $this->createArrayReservation($reservation->getStartDate(),$reservation->getEndDate());
-                    
-                        if(in_array($startDate,$arrayValidate)||in_array($endDate,$arrayValidate)||($startDate<$reservation->getStartDate()&&$endDate>$reservation->getEndDate())){
-                            if($pet==$reservation->getPet()){
-                                $flag2 = 1;
-                            }
-                        }
-                    }
-                }
 
-                foreach($sizes as $size)                
-                {
-                    if($size == $pet->getSize()){
-                        $flag = 1;
-                    }
-                }
-                if($flag2 !=1){                     //confirmo si ya tiene reservas con ese rango de fechas
+                if($this->validateRepeatedDates($keeper,$pet,$startDate,$endDate)){                     //confirmo si ya tiene reservas con ese rango de fechas
                     if($this->RaceValidation($idKeeper , $idPet, $startDate, $endDate)){        //confirmo si es el mismo tipo de animal
-                        if($flag == 1 ) {                           //confirmo si cuida ese tamaño de animal
+                        if($this->validateSize($keeper,$pet)) {                           //confirmo si cuida ese tamaño de animal
                             $reservation = new Reservation();
                             $reservation->setKeeper($keeper);
                             $reservation->setPet($pet);
@@ -154,7 +132,33 @@
             }else{
                 $this->keeperController->ShowCheckDatesView($idPet, 'fecha mala');
             }
-            
+        }
+
+        public function validateSize($keeper,$pet){
+            $sizes = $keeper->getSizes();
+            foreach($sizes as $size)                
+            {
+                if($size == $pet->getSize()){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public function validateRepeatedDates($keeper,$pet,$startDate,$endDate){
+            $allReservationList = $this->reservationDAO->GetAllByKeeper($keeper->getIdKeeper()); 
+            foreach($allReservationList as $reservation){
+                if($reservation->getState()!="CANCELED"){       //permito crear reservas cuando ya hay una reserva en esas fechas pero el estado es CANCELED
+                    $arrayValidate = $this->createArrayReservation($reservation->getStartDate(),$reservation->getEndDate());
+                    
+                    if(in_array($startDate,$arrayValidate)||in_array($endDate,$arrayValidate)||($startDate<$reservation->getStartDate()&&$endDate>$reservation->getEndDate())){
+                        if($pet==$reservation->getPet()){
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public function Remove($id) {
