@@ -63,7 +63,7 @@
             $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
             $pet = $this->petController->petDAO->GetById($idPet);
 
-            $allConfirmList=$this->getAllConfirmReservations($keeper->getIdKeeper());
+            $allConfirmList=$this->getAllStateReservations($keeper->getIdKeeper(),"ACCEPTED");
 
             foreach($allConfirmList as $reservation){
                 $arrayValidate = $this->createArrayReservation($reservation->getStartDate(),$reservation->getEndDate());
@@ -89,17 +89,17 @@
             return $array;
         }
 
-        public function getAllConfirmReservations($idKeeper){                           //devuelve un array con las reservas en estado "ACCEPTED"
+        public function getAllStateReservations($idKeeper,$state){                           //devuelve un array con las reservas en estado "ACCEPTED"
             $allReservationList = $this->reservationDAO->GetAllByKeeper($idKeeper);
             $confirmList= array();
             foreach($allReservationList as $reservation){
-                var_dump($reservation->getState());
-                if($reservation->getState()=="ACCEPTED"){
+                if($reservation->getState()==$state){
                     array_push($confirmList,$reservation);
                 }
             }
             return $confirmList;
         }
+
         public function Add($idPet, $startDate, $endDate ,$idKeeper) {
             if($startDate>=date("Y-m-d")){
                 $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
@@ -149,11 +149,24 @@
             $this->ShowRecordOwnerView();
         }
 
-        public function Confirm($state , $id) {         //modifica remuneracion
+        public function Confirm($state , $id) {         //modifica el estado de la reserva
             $reservation = $this->reservationDAO->GetById($id);
             $reservation->setState($state);
 
             $this->reservationDAO->Modify($reservation);
+            
+            $allPendingList=$this->getAllStateReservations($reservation->getKeeper()->getIdKeeper(),"PENDING");
+            foreach($allPendingList as $reservationPending){
+                $arrayValidate = $this->createArrayReservation($reservation->getStartDate(),$reservation->getEndDate());
+                $startDate=$reservationPending->getStartDate();
+                $endDate=$reservationPending->getEndDate();
+                if(in_array($startDate,$arrayValidate)||in_array($endDate,$arrayValidate)||($startDate<$reservation->getStartDate()&&$endDate>$reservation->getEndDate())){
+                    if($reservation->getPet()->getPetType()->getBreed()!=$reservationPending->getPet()->getPetType()->getBreed()){
+                        $reservationPending->setState("CANCELED");
+                        $this->reservationDAO->Modify($reservationPending);
+                    }
+                }
+            }
 
             $this->ShowRecordKeeperView();
         }
