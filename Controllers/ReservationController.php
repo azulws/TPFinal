@@ -53,7 +53,6 @@
 
         public function CalculatePrice($startDate, $endDate, $idKeeper)
         {
-            //$keeperController = new KeeperController();
             $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
             $dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
             return count($dates) * $keeper->getRemuneration();
@@ -63,16 +62,13 @@
         {
             $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
             $pet = $this->petController->petDAO->GetById($idPet);
-            $allReservationList = $this->reservationDAO->GetAllByKeeper($keeper->getIdKeeper());
 
-            $actualDate=$startDate;
-            foreach($allReservationList as $reservation){
-                $dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
-                foreach($dates as $d){
-                    //var_dump($this->getPetByDay($d));
-                    if(!$this->getPetByDay($d)){
-                        return true;
-                    }else if($pet->getPetType()->getBreed()!=$this->getPetByDay($d)){
+            $allConfirmList=$this->getAllConfirmReservations($keeper->getIdKeeper());
+
+            foreach($allConfirmList as $reservation){
+                $arrayValidate = $this->createArrayReservation($reservation->getStartDate(),$reservation->getEndDate());
+                if(in_array($startDate,$arrayValidate)||in_array($endDate,$arrayValidate)||($startDate<$reservation->getStartDate()&&$endDate>$reservation->getEndDate())){
+                    if($pet->getPetType()->getBreed()!=$reservation->getPet()->getPetType()->getBreed()){
                         return false;
                     }
                 }
@@ -81,19 +77,30 @@
             return true;
         }
 
-
-
-        public function getPetByDay($date){
-            $all=$this->reservationDAO->getAll();
-            foreach($all as $a){
-                if($a->getStartDate()==$date){
-                    return $a->getPet()->getPetType()->getBreed();
-                }
+        public function createArrayReservation($startDate,$endDate){        //genera un arreglo para validar los dias entre inicio y fin
+            $array= array();
+            $date=$startDate;
+            for($date;$date<=$endDate;$date){
+                array_push($array,$date);
+                $nextDate=strtotime("+1 day",strtotime($date));
+                $nextDate=date("Y-m-d",$nextDate);
+                $date=$nextDate;
             }
+            return $array;
         }
 
+        public function getAllConfirmReservations($idKeeper){                           //devuelve un array con las reservas en estado "ACCEPTED"
+            $allReservationList = $this->reservationDAO->GetAllByKeeper($idKeeper);
+            $confirmList= array();
+            foreach($allReservationList as $reservation){
+                var_dump($reservation->getState());
+                if($reservation->getState()=="ACCEPTED"){
+                    array_push($confirmList,$reservation);
+                }
+            }
+            return $confirmList;
+        }
         public function Add($idPet, $startDate, $endDate ,$idKeeper) {
-            //require_once(VIEWS_PATH . "validate-session.php");
             if($startDate>=date("Y-m-d")){
                 $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
 
