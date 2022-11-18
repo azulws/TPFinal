@@ -14,7 +14,8 @@
 
         public function Add(reservation $reservation) {
             try{
-                $query = "INSERT INTO ".$this->tableName." (idKeeper, idPet, startDate, endDate, price) VALUES (:idKeeper, :idPet, :startDate, :endDate, :price)";
+                //$query = "INSERT INTO ".$this->tableName." (idKeeper, idPet, startDate, endDate, price) VALUES (:idKeeper, :idPet, :startDate, :endDate, :price)";
+                $query = "CALL reservation_Add(:idKeeper,:idPet,:startDate,:endDate,:price)";
 
                 $parameters["idKeeper"] = $reservation->getKeeper()->getIdKeeper();
                 $parameters["idPet"] = $reservation->getPet()->getId();
@@ -24,7 +25,12 @@
 
                 $this->connection = Connection::GetInstance();
 
-                $this->connection->ExecuteNonQuery($query, $parameters);
+                $resultSet= $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);
+                return $resultSet;
+                /*if(!empty($resultSet)){
+                    $id=$resultSet[0]["last_insert_id()"];
+                    return $id;
+                }*/
             }catch(Exception $ex){
                 throw $ex;
             }
