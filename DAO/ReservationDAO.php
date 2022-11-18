@@ -9,50 +9,100 @@
     use Models\eState;
 
     class ReservationDAO implements IReservationDAO {
-        private $fileName = ROOT . "/Data/reservations.json";
-        private $reservationList = array();
+        private $connection;
+        private $tableName = "reservations";
 
         public function Add(reservation $reservation) {
-            $this->RetrieveData();
-
-            $reservation->setId($this->GetNextId());
-            $reservation->setState("PENDING");
-
-
-            array_push($this->reservationList, $reservation );
             
-            $this->SaveData();
             return $reservation->getId();
-        }
+            try{
+                $query = "INSERT INTO ".$this->tableName." (id, idKeeper, idPet, startDate, endDate, price) VALUES (:id, :keeper, :pet, :startDate, :endDate, :state, :price)";
 
-        public function Modify(reservation $modreservation) {
-            $this->RetrieveData();
+                $parameters["id"] =  $pet->getId();
+                $parameters["idKeeper"] = $pet->getKeeper()->getIdKeeper();
+                $parameters["idPet"] = $pet->getPet()->getIdPet();
+                $parameters["startDate"] = $pet->getStartDate();
+                $parameters["endDate"] = $pet->getEndDate();
+                $parameters["price"] = $pet->getPrice();
 
-            $this->reservationList = array_filter($this->reservationList, function($reservation) use($modreservation) {
-                return $reservation->getId() != $modreservation->getId();
-            });
+                $this->connection = Connection::GetInstance();
 
-            array_push($this->reservationList, $modreservation);
-
-            $this->SaveData();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
         public function Remove($id) {
-            $this->RetrieveData();
+            try{
+                $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
 
-            $this->reservationList = array_filter($this->reservationList, function($reservation) use($id) {
-                return $reservation->getId() != $id;
-            });
+                $parameters["id"] =  $id;
 
-            $this->SaveData();
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
         public function GetAll() {
-            $this->RetrieveData();
+            try{
+                $reservationList = array();
 
-            return $this->reservationList;
+                $query = "SELECT * FROM ".$this->tableName;
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                foreach($result as $row)
+                {
+                    $reservation = new Reservation();
+                    $reservation->setId($row["id"]);
+
+                    $keeperDAO= new KeeperDAO();
+                    $keeper= $keeperDAO->GetById($row["idKeeper"]);
+                    $reservation->setName($keeper);
+
+                    $petDAO= new PetDAO();
+                    $pet= $petDAO->GetById($rew["idPet"]);
+                    $reservation->setOwner($pet);
+
+                    $reservation->setStartDate($row["startDate"]);
+                    $reservation->setEndDate($row["endDate"]);
+                    $reservation->setState($row["state"]);
+                    $reservation->setPrice($row["price"]);
+
+                    array_push($reservationList, $reservation);
+                }
+
+                return $reservationList;
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
+        
+        public function Modify(reservation $modreservation) {
+            try{
+                $query = "UPDATE ".$this->tableName." SET  startDate = :startDate, endDate= :endDate, state= :state, price = :price where id = :id;" ;
+
+                $parameters["id"] =  $modpet->getId();
+                $parameters["startDate"] = $modpet->getStartDate();
+                $parameters["endDate"] = $modpet->getEndDate();
+                $parameters["state"] = $modpet->getState();
+                $parameters["price"] = $modpet->getPrice();
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }
+        
         public function GetAllByOwner($idOwner)
         {
             $this->RetrieveData();
@@ -63,87 +113,78 @@
             $reservations = array_values($reservations);
 
             return $reservations;
-        }   
+        }  
 
         public function GetAllByKeeper($idKeeper)
         {
-            $this->RetrieveData();
-            $reservations = array_filter($this->reservationList, function($reservation) use($idKeeper) {
-                return $reservation->getKeeper()->getIdKeeper() == $idKeeper;
-            });
+            try{
+                $reservationsList = array();
 
-            $reservations = array_values($reservations);
+                $query = "SELECT * FROM ".$this->tableName." WHERE (idKeeper = :idKeeper)";
 
-            return $reservations;
+                $parameters["idKeeper"] = $idKeeper;
+
+                $this->connection = Connection::GetInstance();
+
+                $results = $this->connection->Execute($query, $parameters);
+
+                foreach($results as $row)
+                {
+                    $reservation = new Reservation();
+                    $reservation->setId($row["id"]);
+
+                    $keeperDAO= new KeeperDAO();
+                    $keeper= $keeperDAO->GetById($row["idKeeper"]);
+                    $reservation->setName($keeper);
+
+                    $petDAO= new PetDAO();
+                    $pet= $petDAO->GetById($rew["idPet"]);
+                    $reservation->setOwner($pet);
+
+                    $reservation->setStartDate($row["startDate"]);
+                    $reservation->setEndDate($row["endDate"]);
+                    $reservation->setState($row["state"]);
+                    $reservation->setPrice($row["price"]);
+
+                    array_push($reservationList, $reservation);           
+                }
+
+                return $petList;
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
         public function GetById($id) {
-            $this->RetrieveData();
+            $query = "select * from ". $this->tableName . "            
+            WHERE id = '$id'";
+            
+            try{
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query); 
+                if(!empty($resultSet)){
+                    $reservation = new Reservation();
+                    $reservation->setId($resultSet[0]["id"]);                   
 
-            $aux = array_filter($this->reservationList, function($reservation) use($id) {
-                return $reservation->getId() == $id;
-            });
-
-            $aux = array_values($aux);
-
-            return (count($aux) > 0) ? $aux[0] : array();
-        }
-
-        private function SaveData() {
-            sort($this->reservationList);
-            $arrayEncode = array();
-
-            foreach($this->reservationList as $reservation) {
-                $value["id"] = $reservation->getId();
-                $value["keeper"] = $reservation->getKeeper()->getIdKeeper();
-                $value["Pet"] = $reservation->getPet()->getId();
-                $value["startDate"] = $reservation->getStartDate();
-                $value["endDate"] = $reservation->getEndDate();
-                $value["price"] = $reservation->getPrice();
-                $value["state"] = $reservation->getState();
-                
-
-
-                array_push($arrayEncode, $value);
-            }
-            $jsonContent = json_encode($arrayEncode, JSON_PRETTY_PRINT);
-            file_put_contents($this->fileName, $jsonContent);
-        }
-
-        private function RetrieveData() {
-            $this->reservationList = array();
-
-            if(file_exists($this->fileName)) {
-                $jsonContent = file_get_contents($this->fileName);
-                $arrayDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayDecode as $value) {
-                    $reservation = new reservation();
-                    $reservation->setId($value["id"]);
-                    $reservation->setStartDate($value["startDate"]);
-                    $reservation->setEndDate($value["endDate"]);
-                    $reservation->setPrice($value["price"]);
-                    
-                    $keeperDAO = new keeperDAO();
-                    $keeper = $keeperDAO->GetById($value["keeper"]);
+                    $keeperDAO = new KeeperDAO();
+                    $keeper = $keeperDAO->GetById($resultSet[0]["idKeeper"]);
                     $reservation->setKeeper($keeper);
-                    $petDAO = new petDAO();
-                    $pet = $petDAO->GetById($value["Pet"]);
+
+                    $petDAO = new PetDAO();
+                    $pet = $petDAO->GetById($resultSet[0]["idPet"]);
                     $reservation->setPet($pet);
-                    $reservation->setState($value["state"]);
 
-                    array_push($this->reservationList, $reservation);
-                }
+                    $reservation->setStartDate($resultSet[0]["startDate"]);
+                    $reservation->setEndDate($resultSet[0]["endDate"]);
+                    $reservation->setState($resultSet[0]["state"]);
+                    $reservation->setPrice($resultSet[0]["price"]);
+                    return $reservation;                       
+                
             }
-        }
-
-
-        private function GetNextId() {
-            $id = 0;
-            foreach($this->reservationList as $reservation) {
-                $id = ($reservation->getId() > $id) ? $reservation->getId() : $id;
             }
-            return $id + 1;
+            catch(Exception $ex){
+                throw $ex;
+            }           
         }
 
 

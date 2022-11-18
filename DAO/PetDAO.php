@@ -21,7 +21,6 @@
                 $parameters["id"] =  $pet->getId();
                 $parameters["name"] = $pet->getName();
                 $parameters["idOwner"] = $pet->getOwner()->getIdOwner();
-                var_dump($pet->getOwner());
                 $parameters["idPetType"] = $pet->getPetType()->getId();
                 $parameters["description"] = $pet->getDescription();
                 $parameters["petsize"] = $pet->getSize();

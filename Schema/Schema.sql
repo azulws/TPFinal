@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2022 a las 20:00:12
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 18-11-2022 a las 21:37:24
+-- Versión del servidor: 5.7.36
+-- Versión de PHP: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `pethero`
 --
+CREATE DATABASE IF NOT EXISTS `pethero` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `pethero`;
 
 -- --------------------------------------------------------
 
@@ -27,10 +29,13 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `availability`
 --
 
-CREATE TABLE `availability` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `availability`;
+CREATE TABLE IF NOT EXISTS `availability` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date DEFAULT NULL,
-  `idKeeper` int(11) DEFAULT NULL
+  `idKeeper` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_idKeeper` (`idKeeper`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -39,14 +44,16 @@ CREATE TABLE `availability` (
 -- Estructura de tabla para la tabla `keeper`
 --
 
-CREATE TABLE `keeper` (
-  `idKeeper` int(11) NOT NULL,
+DROP TABLE IF EXISTS `keeper`;
+CREATE TABLE IF NOT EXISTS `keeper` (
+  `idKeeper` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(50) DEFAULT NULL,
   `lastName` varchar(50) DEFAULT NULL,
   `userName` varchar(50) DEFAULT NULL,
   `userPassword` varchar(50) DEFAULT NULL,
-  `remuneration` int(50) DEFAULT 0,
-  `reputation` int(50) DEFAULT 0
+  `remuneration` int(50) DEFAULT '0',
+  `reputation` int(50) DEFAULT '0',
+  PRIMARY KEY (`idKeeper`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -55,13 +62,15 @@ CREATE TABLE `keeper` (
 -- Estructura de tabla para la tabla `owner`
 --
 
-CREATE TABLE `owner` (
-  `idOwner` int(11) NOT NULL,
+DROP TABLE IF EXISTS `owner`;
+CREATE TABLE IF NOT EXISTS `owner` (
+  `idOwner` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(50) DEFAULT NULL,
   `lastName` varchar(50) DEFAULT NULL,
   `userName` varchar(50) DEFAULT NULL,
-  `userPassword` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `userPassword` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idOwner`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `owner`
@@ -76,8 +85,9 @@ INSERT INTO `owner` (`idOwner`, `firstName`, `lastName`, `userName`, `userPasswo
 -- Estructura de tabla para la tabla `pet`
 --
 
-CREATE TABLE `pet` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `pet`;
+CREATE TABLE IF NOT EXISTS `pet` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `idOwner` int(11) DEFAULT NULL,
   `idPetType` int(11) DEFAULT NULL,
@@ -85,8 +95,11 @@ CREATE TABLE `pet` (
   `petsize` varchar(50) DEFAULT NULL,
   `image` varchar(50) DEFAULT NULL,
   `vaccination` varchar(50) DEFAULT NULL,
-  `video` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `video` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_idOwner` (`idOwner`),
+  KEY `fk_idPetType` (`idPetType`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `pet`
@@ -101,10 +114,12 @@ INSERT INTO `pet` (`id`, `name`, `idOwner`, `idPetType`, `description`, `petsize
 -- Estructura de tabla para la tabla `petsize`
 --
 
-CREATE TABLE `petsize` (
-  `id` int(11) NOT NULL,
-  `petsize` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DROP TABLE IF EXISTS `petsize`;
+CREATE TABLE IF NOT EXISTS `petsize` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `petsize` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `petsize`
@@ -121,9 +136,11 @@ INSERT INTO `petsize` (`id`, `petsize`) VALUES
 -- Estructura de tabla para la tabla `pettype`
 --
 
-CREATE TABLE `pettype` (
+DROP TABLE IF EXISTS `pettype`;
+CREATE TABLE IF NOT EXISTS `pettype` (
   `id` int(11) NOT NULL,
-  `breed` varchar(50) DEFAULT NULL
+  `breed` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -137,105 +154,38 @@ INSERT INTO `pettype` (`id`, `breed`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `reservation`
+--
+
+DROP TABLE IF EXISTS `reservation`;
+CREATE TABLE IF NOT EXISTS `reservation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idKeeper` int(11) NOT NULL,
+  `idPet` int(11) NOT NULL,
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL,
+  `state` varchar(100) NOT NULL DEFAULT 'PENDING',
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Keeper` (`idKeeper`),
+  KEY `FK_Pet` (`idPet`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `size_x_keeper`
 --
 
-CREATE TABLE `size_x_keeper` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `size_x_keeper`;
+CREATE TABLE IF NOT EXISTS `size_x_keeper` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idPetSize` int(11) DEFAULT NULL,
-  `idKeeper` int(11) DEFAULT NULL
+  `idKeeper` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_sizeXkeeper` (`idPetSize`,`idKeeper`),
+  KEY `idKeeper` (`idKeeper`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `availability`
---
-ALTER TABLE `availability`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_idKeeper` (`idKeeper`);
-
---
--- Indices de la tabla `keeper`
---
-ALTER TABLE `keeper`
-  ADD PRIMARY KEY (`idKeeper`);
-
---
--- Indices de la tabla `owner`
---
-ALTER TABLE `owner`
-  ADD PRIMARY KEY (`idOwner`);
-
---
--- Indices de la tabla `pet`
---
-ALTER TABLE `pet`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_idOwner` (`idOwner`),
-  ADD KEY `fk_idPetType` (`idPetType`);
-
---
--- Indices de la tabla `petsize`
---
-ALTER TABLE `petsize`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `pettype`
---
-ALTER TABLE `pettype`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `size_x_keeper`
---
-ALTER TABLE `size_x_keeper`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uc_sizeXkeeper` (`idPetSize`,`idKeeper`),
-  ADD KEY `idKeeper` (`idKeeper`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `availability`
---
-ALTER TABLE `availability`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `keeper`
---
-ALTER TABLE `keeper`
-  MODIFY `idKeeper` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `owner`
---
-ALTER TABLE `owner`
-  MODIFY `idOwner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `pet`
---
-ALTER TABLE `pet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `petsize`
---
-ALTER TABLE `petsize`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `size_x_keeper`
---
-ALTER TABLE `size_x_keeper`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

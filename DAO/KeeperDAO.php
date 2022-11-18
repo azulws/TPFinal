@@ -15,7 +15,7 @@ class KeeperDAO implements IKeeper
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName, userPassword, remuneration, reputation) VALUES (:firstName, :lastName, :userName, :userPassword, :remuneration, :reputation);";
+                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName, userPassword) VALUES (:firstName, :lastName, :userName, :userPassword);";
         
                 $parameters["firstName"] = $keeper->getFirstName();
                 $parameters["lastName"] = $keeper->getLastName();
@@ -167,7 +167,7 @@ class KeeperDAO implements IKeeper
                 $dateList = array();
 
                 $query = "select fecha from availability          
-                WHERE idKeeper = '$idKeeper'";
+                WHERE idKeeper = '$idKeeper' ORDER BY fecha";
 
                 $this->connection = Connection::GetInstance();
 
@@ -272,6 +272,7 @@ class KeeperDAO implements IKeeper
                     $keeper->setIdKeeper($resultSet[0]["idKeeper"]);                   
                     $keeper->setFirstName($resultSet[0]["firstName"]);
                     $keeper->setLastName($resultSet[0]["lastName"]);
+                    $keeper->setUserName($resultSet[0]["userName"]);
                     $keeper->setPassword($resultSet[0]["userPassword"]);
                     $keeper->setRemuneration($resultSet[0]["remuneration"]);
                     $keeper->setReputation($resultSet[0]["reputation"]);
@@ -290,7 +291,7 @@ class KeeperDAO implements IKeeper
 
     public function Modify(Keeper $keeper) {
         try{
-            $query = "UPDATE ".$this->tableName." SET  firstName = :firstName, lastName = :lastName, userName= :userName, userPassword = :userPassword ,remuneration = :remuneration, reputation= :reputation where idKeeper = :idKeeper;" ;
+            $query = "UPDATE ".$this->tableName." SET  firstName = :firstName, lastName = :lastName, userName = :userName, userPassword = :userPassword ,remuneration = :remuneration, reputation= :reputation where idKeeper = :idKeeper;" ;
 
             $parameters["idKeeper"] =  $keeper->getIdKeeper();
             $parameters["firstName"] = $keeper->getFirstName();

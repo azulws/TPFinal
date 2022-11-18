@@ -42,7 +42,6 @@
             require_once(VIEWS_PATH."validate-session.php");
             $this->removeOldDates();
             $keeper = $this->keeperDAO->getById($_SESSION["loggedUser"]->getIdKeeper()); //traigo al usuario para ver su lista de disponibilidad
-            var_dump($_SESSION["loggedUser"]);
             $availabilityList = $keeper->getAvailability();
             
             require_once(VIEWS_PATH."availability.php");
@@ -83,21 +82,7 @@
             }
 
         }
-/*
-        public function Add($firstName,$lastName,$userName,$password)  funcion anterior, no tocar en caso de q la de arriba no ande XD
-        
-        {
-            if($this->keeperDAO->GetByUserName($userName)==NULL){
-                $keeper = new Keeper();
-                $keeper->setFirstName($firstName);
-                $keeper->setLastName($lastName);
-                $keeper->setUserName($userName);
-                $keeper->setPassword($password);
-                $this->keeperDAO->Add($keeper);
-            }
-            $this->ShowAddView();
-        }
-*/
+
         public function Modify($remuneration) {         //modifica remuneracion
             $keeper = $this->keeperDAO->getById($_SESSION["loggedUser"]->getIdKeeper());
             $keeper->setRemuneration($remuneration);
