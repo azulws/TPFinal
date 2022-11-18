@@ -4,87 +4,95 @@
 
     use Models\PetType;
     use DAO\IPetTypeDAO as IPetTypeDAO;
+    use DAO\Connection as Connection;
 
     class PetTypeDAO implements IPetTypeDAO {
-        private $fileName = ROOT . "/Data/petTypes.json";
-        private $petTypeList = array();
+        private $connection;
+        private $tableName = "PetType";
 
-        public function Add(PetType $petType) {
-            $this->RetrieveData();
+        public function Add(PetType $petType)
+        {
+            try{
+                $query = "INSERT INTO ".$this->tableName." (id, breed) VALUES (:id, :breed)";
 
-            $petType->setId($this->GetNextId());
+                $parameters["id"] =  $pet->getId();
+                $parameters["breed"] = $pet->getBreed();
+    
 
-            array_push($this->petTypeList, $petType);
+                $this->connection = Connection::GetInstance();
 
-            $this->SaveData();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
-        public function Remove($id) {
-            $this->RetrieveData();
+        public function Remove($id)
+        {            
+            try{
+                $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
 
-            $this->petTypeList = array_filter($this->petTypeList, function($petType) use($id) {
-                return $petType->getId() != $id;
-            });
+                $parameters["id"] =  $id;
 
-            $this->SaveData();
-        }
+                $this->connection = Connection::GetInstance();
 
-        public function GetAll() {
-            $this->RetrieveData();
-            return $this->petTypeList;
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }  
+
+        public function GetAll()
+        {
+            try{
+                $petTypeList = array();
+
+                $query = "SELECT * FROM ".$this->tableName;
+
+                $this->connection = Connection::GetInstance();
+
+                $result = $this->connection->Execute($query);
+
+                foreach($result as $row)
+                {
+                    $petType = new PetType();
+                    $petType->setId($row["id"]);
+                    $petType->setBreed($row["breed"]);
+
+                    array_push($petTypeList, $petType);
+                }
+
+                return $petTypeList;
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
         public function Exist($id) {
-            $rta = null;
-            $this->RetrieveData();
 
-            foreach($this->petTypeList as $petType) {
-                if($petType->getId() == $id) {
-                    $rta = $petType;
+                $query = "select * from ". $this->tableName . "            
+                WHERE id = '$id'";
+                    
+                try{
+                        $this->connection = Connection::GetInstance();
+                        $resultSet = $this->connection->Execute($query); 
+                        if(!empty($resultSet)){
+                            $petType = new PetType();
+                            $petType->setId($resultSet[0]["id"]);                   
+                            $petType->setBreed($resultSet[0]["breed"]);
+                            return $petType;                       
+                        
                 }
-            }
-            return $rta;
-        }
-
-        private function SaveData() {
-            sort($this->petTypeList);
-            $arrayEncode = array();
-
-            foreach($this->petTypeList as $petType) {
-                $value["id"] = $petType->getId();
-                $value["breed"] = $petType->getBreed();
-
-                array_push($arrayEncode, $value);
-            }
-            $jsonContent = json_encode($arrayEncode, JSON_PRETTY_PRINT);
-            file_put_contents($this->fileName, $jsonContent);
-        }
-
-        private function RetrieveData() {
-            $this->petTypeList = array();
-
-            if(file_exists($this->fileName)) {
-                $jsonContent = file_get_contents($this->fileName);
-                $arrayDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayDecode as $value) {
-                    $petType = new PetType();
-                    $petType->setId($value["id"]);
-                    $petType->setBreed($value["breed"]);
-
-                    array_push($this->petTypeList, $petType);
                 }
+                catch(Exception $ex){
+                        throw $ex;
+                }           
+                    
+            
             }
+        
         }
 
-        private function GetNextId() {
-            $id = 0;
 
-            foreach($this->petTypeList as $petType) {
-                $id = ($petType->getId() > $id) ? $petType->getId() : $id;
-            }
-
-            return $id + 1;
-        }
-    }
+    
 ?>

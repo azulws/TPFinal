@@ -9,6 +9,9 @@
         function Remove($id);
         function GetByUserName($userName);
         function GetById($id);
+        function setAvailability(keeper $keeper);
+        function SetSizes(keeper $keeper);
+
     }
 
 ?>
