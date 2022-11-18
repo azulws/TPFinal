@@ -6,7 +6,7 @@ use DAO\IOwnerDAO as IOwnerDAO;
 use \Exception as Exception;
 use DAO\Connection as Connection;
 
-class OwnerDAO implements IOwnerDAO
+class OwnerDAODB implements IOwnerDAO
 {
     private $connection;
     private $tableName = "owner";
@@ -15,8 +15,9 @@ class OwnerDAO implements IOwnerDAO
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName, userPassword) VALUES (:firstName, :lastName, :userName, :userPassword);";
+                $query = "INSERT INTO ".$this->tableName." (idOwner, firstName, lastName, userName, userPassword) VALUES (:idOwner, :firstName, :lastName, :userName, :userPassword);";
                 
+                $parameters["idOwner"] = $owner->getIdOwner();
                 $parameters["firstName"] = $owner->getFirstName();
                 $parameters["lastName"] = $owner->getLastName();
                 $parameters["userName"] = $owner->getUserName();

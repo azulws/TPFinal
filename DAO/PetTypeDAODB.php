@@ -6,17 +6,16 @@
     use DAO\IPetTypeDAO as IPetTypeDAO;
     use DAO\Connection as Connection;
 
-    class PetTypeDAO implements IPetTypeDAO {
+    class PetTypeDAODB implements IPetTypeDAO {
         private $connection;
         private $tableName = "PetType";
 
         public function Add(PetType $petType)
         {
             try{
-                $query = "INSERT INTO ".$this->tableName." (id, size, breed) VALUES (:id, :size, :breed)";
+                $query = "INSERT INTO ".$this->tableName." (id, breed) VALUES (:id, :size, :breed)";
 
                 $parameters["id"] =  $pet->getId();
-                $parameters["size"] = $pet->getSize();
                 $parameters["breed"] = $pet->getBreed();
     
 
@@ -58,7 +57,6 @@
                 {
                     $petType = new PetType();
                     $petType->setId($row["id"]);
-                    $petType->setSize($row["size"]);
                     $petType->setBreed($row["breed"]);
 
                     array_push($petTypeList, $petType);
@@ -75,7 +73,6 @@
                 $query = "SELECT * FROM ".$this->tableName ." WHERE(id==$id)";
                 $petType= new PetType();
                 $petType->setId($row["id"]);
-                $petType->setSize($row["size"]);
                 $petType->setBreed($row["breed"]);
                 
                 return $petType;

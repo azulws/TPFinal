@@ -6,14 +6,14 @@
     use DAO\IPetDAO as IPetDAO;
     use DAO\Conection as Conection;
 
-    class PetDAO implements IPetDAO {
+    class PetDAODB implements IPetDAO {
         private $connection;
         private $tableName = "pets";
 
         public function Add(Pet $pet)
         {
             try{
-                $query = "INSERT INTO ".$this->tableName." (id, name, Owner, petType, description, image, vaccination, video) VALUES (:id, :name, :Owner, :petType, :description, :image, :vaccination, :video)";
+                $query = "INSERT INTO ".$this->tableName." (id, name, Owner, petType, description, image, vaccination, video, size) VALUES (:id, :name, :Owner, :petType, :description, :image, :vaccination, :video, :size)";
 
                 $parameters["id"] =  $pet->getId();
                 $parameters["name"] = $pet->getName();
@@ -23,6 +23,7 @@
                 $parameters["image"] = $pet->getImage();
                 $parameters["vaccination"] = $pet->setVaccination();
                 $parameters["video"] = $pet->getVideo();
+                $parameters["size"] = $pet->getSize();
 
                 $this->connection = Connection::GetInstance();
 
@@ -69,6 +70,7 @@
                     $pet->setImage($row["image"]);
                     $pet->setVaccination($row["vaccination"]);
                     $pet->setVideo($row["video"]);
+                    $pet->setSize($row["size"]);
 
                     array_push($petList, $pet);
                 }
@@ -103,6 +105,7 @@
                     $pet->setImage($row["image"]);
                     $pet->setVaccination($row["vaccination"]);
                     $pet->setVideo($row["video"]);
+                    $pet->setSize($row["size"]);
                 }
 
                 return $pet;
@@ -135,6 +138,7 @@
                     $pet->setImage($row["image"]);
                     $pet->setVaccination($row["vaccination"]);
                     $pet->setVideo($row["video"]);
+                    $pet->setSize($row["size"]);
                 }
 
                 return $user;
