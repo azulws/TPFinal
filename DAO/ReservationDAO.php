@@ -10,20 +10,17 @@
 
     class ReservationDAO implements IReservationDAO {
         private $connection;
-        private $tableName = "reservations";
+        private $tableName = "reservation";
 
         public function Add(reservation $reservation) {
-            
-            return $reservation->getId();
             try{
-                $query = "INSERT INTO ".$this->tableName." (id, idKeeper, idPet, startDate, endDate, price) VALUES (:id, :keeper, :pet, :startDate, :endDate, :state, :price)";
+                $query = "INSERT INTO ".$this->tableName." (idKeeper, idPet, startDate, endDate, price) VALUES (:idKeeper, :idPet, :startDate, :endDate, :price)";
 
-                $parameters["id"] =  $pet->getId();
-                $parameters["idKeeper"] = $pet->getKeeper()->getIdKeeper();
-                $parameters["idPet"] = $pet->getPet()->getIdPet();
-                $parameters["startDate"] = $pet->getStartDate();
-                $parameters["endDate"] = $pet->getEndDate();
-                $parameters["price"] = $pet->getPrice();
+                $parameters["idKeeper"] = $reservation->getKeeper()->getIdKeeper();
+                $parameters["idPet"] = $reservation->getPet()->getId();
+                $parameters["startDate"] = $reservation->getStartDate();
+                $parameters["endDate"] = $reservation->getEndDate();
+                $parameters["price"] = $reservation->getPrice();
 
                 $this->connection = Connection::GetInstance();
 
@@ -64,11 +61,11 @@
 
                     $keeperDAO= new KeeperDAO();
                     $keeper= $keeperDAO->GetById($row["idKeeper"]);
-                    $reservation->setName($keeper);
+                    $reservation->setKeeper($keeper);
 
                     $petDAO= new PetDAO();
-                    $pet= $petDAO->GetById($rew["idPet"]);
-                    $reservation->setOwner($pet);
+                    $pet= $petDAO->GetById($row["idPet"]);
+                    $reservation->setPet($pet);
 
                     $reservation->setStartDate($row["startDate"]);
                     $reservation->setEndDate($row["endDate"]);
@@ -89,11 +86,11 @@
             try{
                 $query = "UPDATE ".$this->tableName." SET  startDate = :startDate, endDate= :endDate, state= :state, price = :price where id = :id;" ;
 
-                $parameters["id"] =  $modpet->getId();
-                $parameters["startDate"] = $modpet->getStartDate();
-                $parameters["endDate"] = $modpet->getEndDate();
-                $parameters["state"] = $modpet->getState();
-                $parameters["price"] = $modpet->getPrice();
+                $parameters["id"] =  $modreservation->getId();
+                $parameters["startDate"] = $modreservation->getStartDate();
+                $parameters["endDate"] = $modreservation->getEndDate();
+                $parameters["state"] = $modreservation->getState();
+                $parameters["price"] = $modreservation->getPrice();
 
                 $this->connection = Connection::GetInstance();
 
@@ -103,7 +100,7 @@
             }
         }
         
-        public function GetAllByOwner($idOwner)
+        /*public function GetAllByOwner($idOwner)
         {
             $this->RetrieveData();
             $reservations = array_filter($this->reservationList, function($reservation) use($idOwner) {
@@ -113,12 +110,50 @@
             $reservations = array_values($reservations);
 
             return $reservations;
-        }  
+            try{
+                $petList = array();
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE (idOwner = :idOwner)";
+
+                $parameters["idOwner"] = $idOwner;
+
+                $this->connection = Connection::GetInstance();
+
+                $results = $this->connection->Execute($query, $parameters);
+
+                foreach($results as $row)
+                {
+                    $pet = new Pet();
+                    $pet->setId($row["id"]);
+                    $pet->setName($row["name"]);
+
+                    $ownerDAO = new OwnerDAO();
+                    $owner = $ownerDAO->GetById($row["idOwner"]);
+                    $pet->setOwner($owner);
+
+                    $petTypeDAO = new PetTypeDAO();
+                    $petType = $petTypeDAO->Exist($row["idPetType"]);
+                    $pet->setPetType($petType);
+
+                    $pet->setDescription($row["description"]);
+                    $pet->setImage($row["image"]);
+                    $pet->setVaccination($row["vaccination"]);
+                    $pet->setVideo($row["video"]);
+                    $pet->setSize($row["petsize"]);
+
+                    array_push($petList, $pet);              
+                }
+
+                return $petList;
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }  */
 
         public function GetAllByKeeper($idKeeper)
         {
             try{
-                $reservationsList = array();
+                $reservationList = array();
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE (idKeeper = :idKeeper)";
 
@@ -135,11 +170,11 @@
 
                     $keeperDAO= new KeeperDAO();
                     $keeper= $keeperDAO->GetById($row["idKeeper"]);
-                    $reservation->setName($keeper);
+                    $reservation->setKeeper($keeper);
 
                     $petDAO= new PetDAO();
-                    $pet= $petDAO->GetById($rew["idPet"]);
-                    $reservation->setOwner($pet);
+                    $pet= $petDAO->GetById($row["idPet"]);
+                    $reservation->setPet($pet);
 
                     $reservation->setStartDate($row["startDate"]);
                     $reservation->setEndDate($row["endDate"]);
@@ -149,7 +184,7 @@
                     array_push($reservationList, $reservation);           
                 }
 
-                return $petList;
+                return $reservationList;
             }catch(Exception $ex){
                 throw $ex;
             }
@@ -180,7 +215,7 @@
                     $reservation->setPrice($resultSet[0]["price"]);
                     return $reservation;                       
                 
-            }
+                }
             }
             catch(Exception $ex){
                 throw $ex;
