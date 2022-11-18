@@ -1,8 +1,8 @@
-<div class="wrapper row4">
-  <main class="hoc container clear"> 
+<div >
+  <main > 
     <!-- main body -->
-    <div class="content"> 
-      <div class="scrollable">
+    <div > 
+      <div >
       <form action="<?php echo FRONT_ROOT . "Reservation/Add" ?>" method="post" enctype="multipart/form-data">
         <table style="text-align:center;">
           <thead>
@@ -27,20 +27,19 @@
               foreach($keeperListCheck as $keeper)
               {
                 ?>
-                  <tr>
-                  
+                  <tr>  
                     <td><?php echo $keeper->getFirstName()?></td>                    
                     <td><?php echo $keeper->getLastName() ?></td>
                     <td><?php echo $keeper->getUserName() ?></td>
                     <td><?php echo $keeper->getRemuneration() ?></td>
                     <td>
-                      <input type="hidden"name="idKeeper" value="<?php echo $keeper->getIdKeeper() ?>">
+                      
                       <input type="hidden"name="idPet" value="<?php echo $pet ?>">
                       <input type="hidden"name="startDate" value="<?php echo $initialDate ?>">
                       <input type="hidden"name="endDate" value="<?php echo $endDate ?>">
                     </td>
             
-                    <td><input type="submit" class="btn-encriptar" value="Reservar" /></td>
+                    <td><button type="submit" class="modifyBtn" name="idKeeper" value="<?php echo $keeper->getIdKeeper() ?>"> Reservar </button></td>
                 
               
                   </tr>

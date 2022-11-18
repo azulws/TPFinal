@@ -19,7 +19,7 @@
             
                 <h3>What size of pets do you want to take care of? </h3>
                 <div >
-                    <input class="form__input" type="checkbox" name="size[]" value="SMALL">Small
+                    <input class="form__input" type="checkbox" name="size[]" value="SMALL" checked>Small
                     <input class="form__input" type="checkbox" name="size[]" value="MEDIUM">Medium
                     <input class="form__input" type="checkbox" name="size[]" value="BIG">Big
 
@@ -28,7 +28,7 @@
             
         
         <div align="center">
-            <input type="submit" class="btn-encriptar" value="Agregar" />
+            <input type="submit" class="btn-encriptar" value="Add" />
         </div>
         
         </form>

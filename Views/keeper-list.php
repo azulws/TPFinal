@@ -3,7 +3,7 @@
     <!-- main body -->
     <div > 
       <div >
-      <table class="blueTable">
+      <table class="customTable">
           <thead>
           <thead>              
               <tr>

@@ -1,14 +1,14 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "name": "bartolito",
         "owner": 1,
         "petType": 1,
         "description": "maliante",
-        "image": "",
-        "vaccination": "",
-        "video": "",
-        "size": "MEDIUM"
+        "image": "images.jfif",
+        "vaccination": "maxresdefault.jpg",
+        "video": "Cachorro - 1047.mp4",
+        "size": "SMALL"
     },
     {
         "id": 2,
@@ -16,9 +16,75 @@
         "owner": 1,
         "petType": 1,
         "description": "un amigo ",
+        "image": "FCMKckpVgAMsVbi.jpg",
+        "vaccination": "",
+        "video": "",
+        "size": "SMALL"
+    },
+    {
+        "id": 3,
+        "name": "Santiaguito",
+        "owner": 1,
+        "petType": 2,
+        "description": "un kapo",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "MEDIUM"
+    },
+    {
+        "id": "4",
+        "name": "cuchuchu",
+        "owner": 3,
+        "petType": 1,
+        "description": "golden lindo",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "MEDIUM"
+    },
+    {
+        "id": 5,
+        "name": "perritoMalvado",
+        "owner": 2,
+        "petType": 1,
+        "description": "malo",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "MEDIUM"
+    },
+    {
+        "id": 6,
+        "name": "donGato",
+        "owner": 2,
+        "petType": 2,
+        "description": "capo",
         "image": "",
         "vaccination": "",
         "video": "",
         "size": "SMALL"
+    },
+    {
+        "id": 7,
+        "name": "grande",
+        "owner": 2,
+        "petType": 1,
+        "description": "grandote",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "BIG"
+    },
+    {
+        "id": 8,
+        "name": "pelusa",
+        "owner": 2,
+        "petType": 2,
+        "description": "gato grande",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "BIG"
     }
 ]

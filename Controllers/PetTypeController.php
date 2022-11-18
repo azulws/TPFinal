@@ -6,7 +6,7 @@
     use Models\PetType;
 
     class PetTypeController {
-        private $petTypeDAO;
+        public $petTypeDAO;
 
         public function __construct() {
             $this->petTypeDAO = new PetTypeDAO();

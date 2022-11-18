@@ -23,6 +23,7 @@
         public function ShowCheckDatesView($idPet, $message ='')
         {
             require_once(VIEWS_PATH."validate-session.php");
+            
             $pet = $idPet;
             require_once(VIEWS_PATH."check-dates.php");
         }
@@ -31,6 +32,7 @@
         public function ShowListView()
         {
             require_once(VIEWS_PATH."validate-session.php");
+            $this->removeOldDates();
             $keeperList = $this->keeperDAO->GetAll();
             require_once(VIEWS_PATH."keeper-list.php");
         }
@@ -38,8 +40,10 @@
         public function ShowAvailabilityView()
         {
             require_once(VIEWS_PATH."validate-session.php");
+            $this->removeOldDates();
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName()); //traigo al usuario para ver su lista de disponibilidad
             $availabilityList = $keeper->getAvailability();
+            
             require_once(VIEWS_PATH."availability.php");
         }
 
@@ -60,8 +64,26 @@
             require_once(VIEWS_PATH."edit-sizes.php");
         }
 
+        public function Add($firstName,$lastName,$userName,$password)
+        {
+            $keeper = new Keeper();
+            $keeper->setFirstName($firstName);
+            $keeper->setLastName($lastName);
+            $keeper->setUserName($userName);
+            $keeper->setPassword($password);
+            
+            if($this->keeperDAO->GetByUserName($keeper->getUserName())){
+                $this->ShowAddView("Ya existe un usuario con ese Username",null);
+            }
+            else{
+                $this->keeperDAO->Add($keeper);
+                /*$_SESSION["loggedUser"]=$keeper;*/
+                $this->ShowAddView();
+            }
 
-        public function Add($firstName,$lastName,$userName,$password)  
+        }
+/*
+        public function Add($firstName,$lastName,$userName,$password)  funcion anterior, no tocar en caso de q la de arriba no ande XD
         
         {
             if($this->keeperDAO->GetByUserName($userName)==NULL){
@@ -74,7 +96,7 @@
             }
             $this->ShowAddView();
         }
-
+*/
         public function Modify($remuneration) {         //modifica remuneracion
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
             $keeper->setRemuneration($remuneration);
@@ -98,13 +120,13 @@
             $keeper = $this->keeperDAO->getByUserName($_SESSION["loggedUser"]->getUserName());
             $dateList= $keeper->getAvailability();
             if($date>=date("Y-m-d")){
-            if(!in_array($date,$dateList)){
-                array_push($dateList,$date);
-                    sort($dateList);
-                $keeper->setAvailability($dateList);
+                if(!in_array($date,$dateList)){
+                    array_push($dateList,$date);
+                        sort($dateList);
+                    $keeper->setAvailability($dateList);
 
-                $this->keeperDAO->Modify($keeper);
-            }
+                    $this->keeperDAO->Modify($keeper);
+                }
             }
 
             $this->ShowAvailabilityView();
@@ -130,6 +152,7 @@
             $keeperList= $this->keeperDAO->getAll() ;
             $keeperListCheck = array();
             foreach($keeperList as $keeper){
+                $this->removeOldDates();
                 $availability= $keeper->getAvailability();
                 if($this->allDatesOnArray($availability,$startDate,$endDate) != null){
                     array_push($keeperListCheck,$keeper);
@@ -163,6 +186,26 @@
                 }
             }
             return $arrayDatesChecked;
+        }
+
+        public function getCurrentDates($array){            //retorna un arreglo con las fechas del dia de hoy en adelante
+            $availabilityList= array();
+            foreach($array as $availability){
+                if($availability>=date("Y-m-d"))
+                    array_push($availabilityList,$availability);
+            }
+            return $availabilityList;
+        }
+
+        public function removeOldDates(){             //elimina las fechas antiguas del arreglo del keeper
+            $keeperList= $this->keeperDAO->getAll();
+            foreach($keeperList as $keeper){
+                $dateList= $keeper->getAvailability();
+                $newList= $this->getCurrentDates($dateList);
+                $keeper->setAvailability($newList);
+
+                $this->keeperDAO->Modify($keeper);
+            }
         }
 
         public function Remove($id)

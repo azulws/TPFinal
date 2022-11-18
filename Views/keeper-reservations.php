@@ -32,7 +32,7 @@
                     <td><?php echo $reservation->getEndDate() ?></td>
                     <td><?php echo $reservation->getPrice() ?></td>
                     <td>
-                        <input  type="radio" name="state" value="CANCELED">CANCEL
+                        <input  type="radio" name="state" value="CANCELED" required>CANCEL
                         <input  type="radio" name="state" value="ACCEPTED">ACCEPT
                     </td>
                     

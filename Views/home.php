@@ -1,5 +1,8 @@
 <main class="main">
-    <div>
+    <div align="center">
+    <?php if ($message) {
+      echo $message;
+    } ?>
         <br>
         <h1 align="center">WELCOME</h1>
     </div>

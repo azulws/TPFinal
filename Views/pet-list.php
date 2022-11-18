@@ -1,4 +1,8 @@
-
+<div align="center">
+    <?php if ($message) {
+      echo $message;
+    } ?>
+    <br>
 <div class="wrapper row4">
   <main class="hoc container clear"> 
     <!-- main body -->

@@ -2,10 +2,28 @@
     {
         "id": 1,
         "keeper": 1,
-        "Pet": 2,
-        "startDate": "2022-11-05",
-        "endDate": "2022-11-05",
-        "price": 50,
+        "Pet": 6,
+        "startDate": "2022-11-16",
+        "endDate": "2022-11-18",
+        "price": 300,
+        "state": "PENDING"
+    },
+    {
+        "id": 2,
+        "keeper": 1,
+        "Pet": 8,
+        "startDate": "2022-11-17",
+        "endDate": "2022-11-18",
+        "price": 200,
+        "state": "PENDING"
+    },
+    {
+        "id": 3,
+        "keeper": 1,
+        "Pet": 7,
+        "startDate": "2022-11-25",
+        "endDate": "2022-11-26",
+        "price": 200,
         "state": "PENDING"
     }
 ]

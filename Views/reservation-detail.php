@@ -3,7 +3,7 @@
     <!-- main body -->
     <div class="content"> 
     <div class="scrollable">
-        <table style="text-align:center;">
+        <table class="customTable" style="text-align:center;">
         <thead>
         <thead>              
             <tr>
