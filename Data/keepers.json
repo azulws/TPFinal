@@ -56,10 +56,12 @@
         "lastName": "margurita",
         "userName": "nabo",
         "password": "hola",
-        "remuneration": "123",
+        "remuneration": "100",
         "availability": [
+            "2022-11-16",
             "2022-11-17",
             "2022-11-18",
+            "2022-11-19",
             "2022-11-25",
             "2022-11-26",
             "2022-12-09",

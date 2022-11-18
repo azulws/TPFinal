@@ -49,7 +49,7 @@
         "owner": 2,
         "petType": 1,
         "description": "malo",
-        "image": "asunya.png",
+        "image": "",
         "vaccination": "",
         "video": "",
         "size": "MEDIUM"
@@ -71,6 +71,17 @@
         "owner": 2,
         "petType": 1,
         "description": "grandote",
+        "image": "",
+        "vaccination": "",
+        "video": "",
+        "size": "BIG"
+    },
+    {
+        "id": 8,
+        "name": "pelusa",
+        "owner": 2,
+        "petType": 2,
+        "description": "gato grande",
         "image": "",
         "vaccination": "",
         "video": "",
