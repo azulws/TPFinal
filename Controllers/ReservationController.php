@@ -46,7 +46,6 @@
             $reservation = $this->reservationDAO->GetById($id);
             $keeper = $reservation->getKeeper();
             $pet = $reservation->getPet();
-
             require_once(VIEWS_PATH . "reservation-detail.php");
         }
         
@@ -101,7 +100,7 @@
         }
 
         public function Add($idPet, $startDate, $endDate ,$idKeeper) {
-            if($startDate>=date("Y-m-d")){              //confirmacion de seguridad para validar que la fecha de inicio de la reserva es mayor a la fecha actual
+            if($startDate>=date("Y-m-d") && $startDate<=$endDate){              //confirmacion de seguridad para validar que la fecha de inicio de la reserva es mayor a la fecha actual
                 $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
 
                 $pet = $this->petController->petDAO->GetById($idPet);
@@ -163,7 +162,7 @@
 
         public function Remove($id) {
             require_once(VIEWS_PATH . "validate-session.php");
-
+            
             $this->reservationDAO->Remove(intval($id));
 
             $this->ShowRecordOwnerView();
@@ -171,11 +170,13 @@
 
         public function Confirm($state , $id) {         //modifica el estado de la reserva a confirmado y cancela las reservas para la misma fecha con otro tipo de animal
             $reservation = $this->reservationDAO->GetById($id);
-            $reservation->setState($state);
-
-            $this->reservationDAO->Modify($reservation);
             
+            $reservation->setState($state);
+            
+            $this->reservationDAO->Modify($reservation);
+
             $allPendingList=$this->getAllStateReservations($reservation->getKeeper()->getIdKeeper(),"PENDING");
+            
             foreach($allPendingList as $reservationPending){
                 $arrayValidate = $this->createArrayReservation($reservation->getStartDate(),$reservation->getEndDate());
                 $startDate=$reservationPending->getStartDate();

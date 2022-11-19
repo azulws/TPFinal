@@ -4,135 +4,195 @@
 
     use Models\Pet;
     use DAO\IPetDAO as IPetDAO;
+    use DAO\Conection as Conection;
 
     class PetDAO implements IPetDAO {
-        private $fileName = ROOT . "/Data/pets.json";
-        private $petList = array();
+        private $connection;
+        private $tableName = "pet";
 
-        public function Add(Pet $pet) {
-            $this->RetrieveData();
+        public function Add(Pet $pet)
+        {
+            try{
+                $query = "INSERT INTO ".$this->tableName." (id, name, idOwner, idPetType, description, petsize, image, vaccination, video) VALUES (:id, :name, :idOwner, :idPetType, :description,:petsize, :image, :vaccination, :video)";
 
-            $pet->setId($this->GetNextId());
-            $pet->setImage("");
-            $pet->setVaccination("");
-            $pet->setVideo("");
+                $pet->setImage("");
+                $pet->setVaccination("");
+                $pet->setVideo("");
+                $parameters["id"] =  $pet->getId();
+                $parameters["name"] = $pet->getName();
+                $parameters["idOwner"] = $pet->getOwner()->getIdOwner();
+                $parameters["idPetType"] = $pet->getPetType()->getId();
+                $parameters["description"] = $pet->getDescription();
+                $parameters["petsize"] = $pet->getSize();
+                $parameters["image"] = $pet->getImage();
+                $parameters["vaccination"] = $pet->getVaccination();
+                $parameters["video"] = $pet->getVideo();
 
+                $this->connection = Connection::GetInstance();
 
-            array_push($this->petList, $pet );
-            
-            $this->SaveData();
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
-        public function Modify(Pet $modpet) {
-            $this->RetrieveData();
+        public function Remove($id)
+        {            
+            try{
+                $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
 
-            $this->petList = array_filter($this->petList, function($pet) use($modpet) {
-                return $pet->getId() != $modpet->getId();
-            });
+                $parameters["id"] =  $id;
 
-            array_push($this->petList, $modpet);
+                $this->connection = Connection::GetInstance();
 
-            $this->SaveData();
-        }
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        }  
+                
+        public function GetAll()
+        {
+            try{
+                $petList = array();
 
-        public function Remove($id) {
-            $this->RetrieveData();
+                $query = "SELECT * FROM ".$this->tableName;
 
-            $this->petList = array_filter($this->petList, function($pet) use($id) {
-                return $pet->getId() != $id;
-            });
+                $this->connection = Connection::GetInstance();
 
-            $this->SaveData();
-        }
+                $result = $this->connection->Execute($query);
 
-        public function GetAll() {
-            $this->RetrieveData();
+                
 
-            return $this->petList;
+                foreach($result as $row)
+                {
+                    $pet = new Pet();
+                    $pet->setId($row["id"]);
+                    $pet->setName($row["name"]);
+
+                    $ownerDAO = new OwnerDAO();
+                    $owner = $ownerDAO->GetById($row["idOwner"]);
+                    $pet->setOwner($owner);
+
+                    $petTypeDAO = new PetTypeDAO();
+                    $petType = $petTypeDAO->GetById($row["idPetType"]);
+                    $pet->setPetType($petType);
+
+                    $pet->setDescription($row["description"]);
+                    $pet->setImage($row["image"]);
+                    $pet->setVaccination($row["vaccination"]);
+                    $pet->setVideo($row["video"]);
+                    $pet->setSize($row["petsize"]);
+
+                    array_push($petList, $pet);
+                }
+
+                return $petList;
+            }catch(Exception $ex){
+                throw $ex;
+            }
         }
 
         public function GetAllByOwner($idOwner)
         {
-            $this->RetrieveData();
-            $pets = array_filter($this->petList, function($pet) use($idOwner) {
-                return $pet->getOwner()->getIdOwner() == $idOwner;
-            });
+            try{
+                $petList = array();
 
-            $pets = array_values($pets);
+                $query = "SELECT * FROM ".$this->tableName." WHERE (idOwner = :idOwner)";
 
-            return $pets;
-        }
+                $parameters["idOwner"] = $idOwner;
 
-        public function GetById($id) {
-            $this->RetrieveData();
+                $this->connection = Connection::GetInstance();
 
-            $aux = array_filter($this->petList, function($pet) use($id) {
-                return $pet->getId() == $id;
-            });
+                $results = $this->connection->Execute($query, $parameters);
 
-            $aux = array_values($aux);
-
-            return (count($aux) > 0) ? $aux[0] : array();
-        }
-
-        private function SaveData() {
-            sort($this->petList);
-            $arrayEncode = array();
-
-            foreach($this->petList as $pet) {
-                $value["id"] = $pet->getId();
-                $value["name"] = $pet->getName();
-                $value["owner"] = $pet->getOwner()->getIdOwner();
-                $value["petType"] = $pet->getPetType()->getId();
-                $value["description"] = $pet->getDescription();
-                $value["image"] = $pet->getImage();
-                $value["vaccination"] = $pet->getVaccination();
-                $value["video"] = $pet->getVideo();
-                $value["size"] = $pet->getSize();
-
-                array_push($arrayEncode, $value);
-            }
-            $jsonContent = json_encode($arrayEncode, JSON_PRETTY_PRINT);
-            file_put_contents($this->fileName, $jsonContent);
-        }
-
-        private function RetrieveData() {
-            $this->petList = array();
-
-            if(file_exists($this->fileName)) {
-                $jsonContent = file_get_contents($this->fileName);
-                $arrayDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-                foreach($arrayDecode as $value) {
+                foreach($results as $row)
+                {
                     $pet = new Pet();
-                    $pet->setId($value["id"]);
-                    $pet->setName($value["name"]);
-                    $pet->setDescription($value["description"]);
-                    $pet->setImage($value["image"]);
-                    $pet->setVaccination($value["vaccination"]);
-                    $pet->setVideo($value["video"]);
-                    $pet->setSize($value["size"]);
+                    $pet->setId($row["id"]);
+                    $pet->setName($row["name"]);
 
-                    $ownerDAO = new ownerDAO();
-                    $owner = $ownerDAO->GetById($value["owner"]);
+                    $ownerDAO = new OwnerDAO();
+                    $owner = $ownerDAO->GetById($row["idOwner"]);
                     $pet->setOwner($owner);
-                    
+
                     $petTypeDAO = new PetTypeDAO();
-                    $petType = $petTypeDAO->Exist($value["petType"]);
+                    $petType = $petTypeDAO->Exist($row["idPetType"]);
                     $pet->setPetType($petType);
 
-                    array_push($this->petList, $pet);
+                    $pet->setDescription($row["description"]);
+                    $pet->setImage($row["image"]);
+                    $pet->setVaccination($row["vaccination"]);
+                    $pet->setVideo($row["video"]);
+                    $pet->setSize($row["petsize"]);
+
+                    array_push($petList, $pet);              
                 }
+
+                return $petList;
+            }catch(Exception $ex){
+                throw $ex;
+            }
+        } 
+        
+        public function GetById($id)
+        {
+            $query = "select * from ". $this->tableName . "            
+            WHERE id = '$id'";
+            
+            try{
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query); 
+                if(!empty($resultSet)){
+                    $pet = new Pet();
+                    $pet->setId($resultSet[0]["id"]);                   
+                    $pet->setName($resultSet[0]["name"]);
+
+                    $ownerDAO = new OwnerDAO();
+                    $owner = $ownerDAO->GetById($resultSet[0]["idOwner"]);
+                    $pet->setOwner($owner);
+
+                    $petTypeDAO = new PetTypeDAO();
+                    $petType = $petTypeDAO->Exist($resultSet[0]["idPetType"]);
+                    $pet->setPetType($petType);
+
+                    $pet->setDescription($resultSet[0]["description"]);
+                    $pet->setImage($resultSet[0]["image"]);
+                    $pet->setVaccination($resultSet[0]["vaccination"]);
+                    $pet->setVideo($resultSet[0]["video"]);
+                    $pet->setSize($resultSet[0]["petsize"]);
+                    return $pet;                       
+                
+            }
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }           
+            
+    
+    }
+
+        public function Modify(Pet $modpet) {
+            try{
+                $query = "UPDATE ".$this->tableName." SET  name = :name, description= :description, petsize= :petsize, image = :image,vaccination = :vaccination, video= :video where id = :id;" ;
+
+                $parameters["id"] =  $modpet->getId();
+                $parameters["name"] = $modpet->getName();
+                $parameters["description"] = $modpet->getDescription();
+                $parameters["petsize"] = $modpet->getSize();
+                $parameters["image"] = $modpet->getImage();
+                $parameters["vaccination"] = $modpet->getVaccination();
+                $parameters["video"] = $modpet->getVideo();
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(Exception $ex){
+                throw $ex;
             }
         }
 
-        private function GetNextId() {
-            $id = 0;
-            foreach($this->petList as $pet) {
-                $id = ($pet->getId() > $id) ? $pet->getId() : $id;
-            }
-            return $id + 1;
-        }
+
 
 
     }

@@ -1,109 +1,138 @@
 <?php
+namespace DAO;
 
-    namespace DAO;
+use Models\Owner as Owner;
+use DAO\IOwnerDAO as IOwnerDAO;
+use \Exception as Exception;
+use DAO\Connection as Connection;
 
-    use Models\Owner as Owner;
-    use DAO\IOwnerDAO as IOwnerDAO;
+class OwnerDAO implements IOwnerDAO
+{
+    private $connection;
+    private $tableName = "owner";
 
-    class OwnerDAO implements IOwnerDAO {
-        private $fileName = ROOT . "/Data/owners.json";
-        private $ownerList = array();
+    public function Add(Owner $owner)
+        {
+            try
+            {
+                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName, userPassword) VALUES (:firstName, :lastName, :userName, :userPassword);";
+                
+                $parameters["firstName"] = $owner->getFirstName();
+                $parameters["lastName"] = $owner->getLastName();
+                $parameters["userName"] = $owner->getUserName();
+                $parameters["userPassword"] = $owner->getPassword();
 
-        public function Add(Owner $owner) {
-            $this->RetrieveData();
+                $this->connection = Connection::GetInstance();
 
-            $owner->setIdOwner($this->GetNextId());
-
-            array_push($this->ownerList, $owner);
-            
-            $this->SaveData();
-        }
-
-        public function Remove($id) {
-            $this->RetrieveData();
-
-            $this->ownerList = array_filter($this->ownerList, function($owner) use($id) {
-                return $owner->getIdOwner() != $id;
-            });
-
-            $this->SaveData();
-        }
-
-        public function GetByUserName($userName) {
-            $owner = null;
-            $this->RetrieveData();
-
-            $owners = array_filter($this->ownerList, function($owner) use ($userName) {
-                return $owner->getUserName() == $userName;
-            });
-
-            $owners= array_values($owners);
-            return (count($owners) > 0) ? $owners[0] : null;
-        }
-
-        public function GetById($id) {
-            $this->RetrieveData();
-
-            $aux = array_filter($this->ownerList, function($owner) use($id) {
-                return $owner->getIdOwner() == $id;
-            });
-
-            $aux = array_values($aux);
-
-            return (count($aux) > 0) ? $aux[0] : array();
-        }
-        
-        public function GetAll() {
-            $this->RetrieveData();
-
-            return $this->ownerList;
-        }
-
-        private function SaveData() {
-            sort($this->ownerList);
-            $arrayEncode = array();
-
-            foreach($this->ownerList as $owner) {
-                $value["id"] = $owner->getIdOwner();
-                $value["firstName"] = $owner->getFirstName();
-                $value["lastName"] = $owner->getLastName();
-                $value["userName"] = $owner->getUserName();
-                $value["password"] = $owner->getPassword();
-
-                array_push($arrayEncode, $value);
+                $this->connection->ExecuteNonQuery($query, $parameters);
             }
-            $jsonContent = json_encode($arrayEncode, JSON_PRETTY_PRINT);
-            file_put_contents($this->fileName, $jsonContent);
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
-        private function RetrieveData() {
-            $this->ownerList = array();
+        public function GetAll()
+        {
+            try
+            {
+                $ownerList = array();
 
-            if(file_exists($this->fileName)) {
-                $jsonContent = file_get_contents($this->fileName);
-                $arrayDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
+                $query = "SELECT * FROM ".$this->tableName;
 
-                foreach($arrayDecode as $value) {
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
                     $owner = new Owner();
-                    $owner->setIdOwner($value["id"]);
-                    $owner->setFirstName($value["firstName"]);
-                    $owner->setLastName($value["lastName"]);
-                    $owner->setUserName($value["userName"]);
-                    $owner->setPassword($value["password"]);
+                    $owner->setIdOwner($row["idOwner"]);
+                    $owner->setFirstName($row["firstName"]);
+                    $owner->setLastName($row["lastName"]);
+                    $owner->setUserName($row["userName"]);
+                    $owner->setPassword($row["userPassword"]);
 
-                    array_push($this->ownerList, $owner);
+                    array_push($ownerList, $owner);
                 }
+
+                return $ownerList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
             }
         }
 
-        private function GetNextId() {
-            $id = 0;
-            foreach($this->ownerList as $owner) {
-                $id = ($owner->getIdOwner() > $id) ? $owner->getIdOwner() : $id;
+        public function Remove($id)
+        {
+            try
+            {
+                $query = "DELETE * FROM ".$this->tableName."WHERE id =". $id. ";";
+                
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->Execute($query);
             }
-            return $id + 1;
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
+
+        public function GetByUserName($userName)
+        {
+            $query = "select * from ". $this->tableName . "            
+            WHERE userName = '$userName'";
+            
+            try{
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query); 
+                if(!empty($resultSet)){
+                    $owner = new Owner();
+                    $owner->setIdOwner($resultSet[0]["idOwner"]);                   
+                    $owner->setFirstName($resultSet[0]["firstName"]);
+                    $owner->setLastName($resultSet[0]["lastName"]);
+                    $owner->setUserName($resultSet[0]["userName"]);
+                    $owner->setPassword($resultSet[0]["userPassword"]);
+                    return $owner;                       
+                
+            }
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }           
+            
+    
     }
+
+    public function GetById($id)
+        {
+            $query = "select * from ". $this->tableName . "            
+            WHERE idOwner = '$id'";
+            
+            try{
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query); 
+                if(!empty($resultSet)){
+                    $owner = new Owner();
+                    $owner->setIdOwner($resultSet[0]["idOwner"]);                   
+                    $owner->setFirstName($resultSet[0]["firstName"]);
+                    $owner->setLastName($resultSet[0]["lastName"]);
+                    $owner->setUserName($resultSet[0]["userName"]);
+                    $owner->setPassword($resultSet[0]["userPassword"]);
+                    return $owner;                       
+                
+            }
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }           
+            
+    
+    }
+
+}
 
     
 ?>
