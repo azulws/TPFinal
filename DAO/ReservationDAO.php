@@ -93,19 +93,16 @@
             
             try{
                 $parameters["id"] =  $modreservation->getId();
-                var_dump($modreservation);
-                var_dump($parameters["id"] );
+
                 $parameters["startDate"] = $modreservation->getStartDate();
                 $parameters["endDate"] = $modreservation->getEndDate();
-                var_dump($modreservation->getState());
                 if($modreservation->getState() == "PENDING"){
-                    $parameters["idState"]= 1;
+                    $parameters["idState"]=1;
                 }else if($modreservation->getState() == "CANCELED"){
-                    $parameters["idState"]= 2;
+                    $parameters["idState"]=2;
                 }else{
-                    $parameters["idState"]= 3;
+                    $parameters["idState"]=3;
                 }
-                var_dump($parameters["idState"]);
                 $parameters["price"] = $modreservation->getPrice();
                 
                 $this->connection = Connection::GetInstance();
@@ -198,7 +195,8 @@
         }
 
         public function GetById($id) {
-            $query = "select * from ". $this->tableName ." INNER JOIN state on reservation.idState=state.id WHERE reservation.id = '$id'";
+            $query = "select r.id,r.idKeeper,r.idPet,r.startDate,r.endDate,r.idState,r.price,s.state from ". $this->tableName ." r
+            INNER JOIN state s on r.idState=s.id WHERE r.id = '$id'";
             
             try{
                 $this->connection = Connection::GetInstance();
