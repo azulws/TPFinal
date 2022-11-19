@@ -1,8 +1,12 @@
 <main class="main">
     <div align="center">
-    <?php if ($message) {
-      echo $message;
-    } ?>
+    <div > 
+    <?php if ($message) { ?>
+      <span class="bar error" style="font-size: 30px"> <?php echo $message; ?> </span>
+      <?php
+    } 
+    ?>
+    </div>
         <br>
         <h1 align="center">WELCOME</h1>
     </div>
