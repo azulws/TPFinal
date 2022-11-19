@@ -5,7 +5,7 @@
   }
 ?>
 
-<?php include_once "header.php"; ?>
+<?php include_once "header-chat.php"; ?>
 <body>
   <div class="wrapper">
     <section class="form login">
