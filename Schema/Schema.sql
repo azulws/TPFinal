@@ -1,101 +1,34 @@
-create database PetHero;
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 19-11-2022 a las 00:04:50
+-- Versión del servidor: 5.7.36
+-- Versión de PHP: 7.4.26
 
-use PetHero;
-
-create table PetType(
-id int ,
-breed varchar(50),
-constraint pk_id primary key (id)
-);
-
-
-create table Owner(
-idOwner int auto_increment,
-firstName varchar(50),
-lastName varchar (50),
-userName varchar (50),
-userPassword varchar (50),
-constraint pk_idOwner primary key (idOwner)
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-create table Pet(
-id int auto_increment,
-name varchar(50),
-idOwner int,
-idPetType int,
-description varchar(200),
-petsize varchar (50),
-image varchar(50),
-vaccination varchar(50),
-video varchar (50),
-constraint pk_idPet primary key(id),
-constraint fk_idOwner foreign key (idOwner) references Owner (idOwner),
-constraint fk_idPetType foreign key (idPetType) references PetType (id)
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-);
-
-
-insert into PetType(id, breed)
-values(1, 'Dog'),
-(2, 'Cat');
-
-
-create table keeper(
-idKeeper int auto_increment,
-firstName varchar(50),
-lastName varchar (50),
-userName varchar (50),
-userPassword varchar (50),
-remuneration int (50) default 0,
-reputation int (50) default 0,
-constraint pk_idKeeper primary key (idKeeper)
-);
-
-create table availability(
-id int auto_increment,
-fecha date,
-idKeeper int,
-constraint pk_id primary key (id),
-constraint fk_idKeeper foreign key (idKeeper) references keeper (idKeeper)
-);
-
-create table petsize(
-id int auto_increment,
-petsize varchar(50),
-constraint pk_id primary key (id) 
-);
-
-create table Size_x_keeper(
-id int auto_increment,
-idPetSize int,
-idKeeper int,
-constraint pk_idSxK primary key (id),
-constraint  foreign key (idKeeper) references keeper (idKeeper),
-constraint  foreign key (idPetSize) references petsize (id),
-constraint uc_sizeXkeeper unique (idPetSize, idKeeper)
-);
-
-CREATE TABLE IF NOT EXISTS reservation
-(
-    id INT NOT NULL AUTO_INCREMENT,
-    idKeeper INT NOT NULL,
-    idPet INT NOT NULL,
-    startDate DATE NOT NULL,
-    endDate DATE NOT NULL,
-    state VARCHAR(100) NOT NULL DEFAULT "PENDING",
-    price INT NOT NULL,
-    CONSTRAINT PK_Reservations PRIMARY KEY (id),
-    CONSTRAINT FK_Keeper FOREIGN KEY (idKeeper) REFERENCES keepers(idKeeper),
-    CONSTRAINT FK_Pet FOREIGN KEY (idPet) REFERENCES pets(id)
-);
-
-DROP procedure IF EXISTS `reservation_Add`;
+--
+-- Base de datos: `pethero`
+--
+CREATE DATABASE IF NOT EXISTS `pethero` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `pethero`;
 
 DELIMITER $$
-
-CREATE PROCEDURE reservation_Add (IN idKeeper INT, IN idPet INT, IN startDate date, IN endDate date, IN price INT)
-BEGIN
+--
+-- Procedimientos
+--
+DROP PROCEDURE IF EXISTS `reservation_Add`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `reservation_Add` (IN `idKeeper` INT, IN `idPet` INT, IN `startDate` DATE, IN `endDate` DATE, IN `price` INT)  BEGIN
     INSERT INTO reservation
         (reservation.idKeeper, reservation.idPet, reservation.startDate, reservation.endDate, reservation.price)
     VALUES
@@ -103,4 +36,224 @@ BEGIN
 	select last_insert_id();
 END$$
 
-DELIMITER ;;
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `availability`
+--
+
+DROP TABLE IF EXISTS `availability`;
+CREATE TABLE IF NOT EXISTS `availability` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date DEFAULT NULL,
+  `idKeeper` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_idKeeper` (`idKeeper`)
+) ENGINE=MyISAM AUTO_INCREMENT=419 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `availability`
+--
+
+INSERT INTO `availability` (`id`, `fecha`, `idKeeper`) VALUES
+(418, '2022-11-30', 1),
+(417, '2022-11-26', 1),
+(416, '2022-11-25', 1),
+(415, '2022-11-22', 1),
+(414, '2022-11-20', 1),
+(413, '2022-11-19', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `keeper`
+--
+
+DROP TABLE IF EXISTS `keeper`;
+CREATE TABLE IF NOT EXISTS `keeper` (
+  `idKeeper` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(50) DEFAULT NULL,
+  `lastName` varchar(50) DEFAULT NULL,
+  `userName` varchar(50) DEFAULT NULL,
+  `userPassword` varchar(50) DEFAULT NULL,
+  `remuneration` int(50) DEFAULT '0',
+  `reputation` int(50) DEFAULT '0',
+  PRIMARY KEY (`idKeeper`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `keeper`
+--
+
+INSERT INTO `keeper` (`idKeeper`, `firstName`, `lastName`, `userName`, `userPassword`, `remuneration`, `reputation`) VALUES
+(1, 'nabo', 'db', 'nabodb', 'asd', 100, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `owner`
+--
+
+DROP TABLE IF EXISTS `owner`;
+CREATE TABLE IF NOT EXISTS `owner` (
+  `idOwner` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(50) DEFAULT NULL,
+  `lastName` varchar(50) DEFAULT NULL,
+  `userName` varchar(50) DEFAULT NULL,
+  `userPassword` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idOwner`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `owner`
+--
+
+INSERT INTO `owner` (`idOwner`, `firstName`, `lastName`, `userName`, `userPassword`) VALUES
+(1, 'azulws', 'db', 'azulwsdb', 'asd');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pet`
+--
+
+DROP TABLE IF EXISTS `pet`;
+CREATE TABLE IF NOT EXISTS `pet` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `idOwner` int(11) DEFAULT NULL,
+  `idPetType` int(11) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `petsize` varchar(50) DEFAULT NULL,
+  `image` varchar(50) DEFAULT NULL,
+  `vaccination` varchar(50) DEFAULT NULL,
+  `video` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_idOwner` (`idOwner`),
+  KEY `fk_idPetType` (`idPetType`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pet`
+--
+
+INSERT INTO `pet` (`id`, `name`, `idOwner`, `idPetType`, `description`, `petsize`, `image`, `vaccination`, `video`) VALUES
+(1, 'gatodb', 1, 2, 'gato', 'MEDIUM', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `petsize`
+--
+
+DROP TABLE IF EXISTS `petsize`;
+CREATE TABLE IF NOT EXISTS `petsize` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `petsize` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `petsize`
+--
+
+INSERT INTO `petsize` (`id`, `petsize`) VALUES
+(1, 'SMALL'),
+(2, 'MEDIUM'),
+(3, 'BIG');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pettype`
+--
+
+DROP TABLE IF EXISTS `pettype`;
+CREATE TABLE IF NOT EXISTS `pettype` (
+  `id` int(11) NOT NULL,
+  `breed` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pettype`
+--
+
+INSERT INTO `pettype` (`id`, `breed`) VALUES
+(1, 'Dog'),
+(2, 'Cat');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reservation`
+--
+
+DROP TABLE IF EXISTS `reservation`;
+CREATE TABLE IF NOT EXISTS `reservation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idKeeper` int(11) NOT NULL,
+  `idPet` int(11) NOT NULL,
+  `startDate` date NOT NULL,
+  `endDate` date NOT NULL,
+  `idState` int(11) DEFAULT '1',
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_Keeper` (`idKeeper`),
+  KEY `FK_Pet` (`idPet`),
+  KEY `FK_State` (`idState`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `size_x_keeper`
+--
+
+DROP TABLE IF EXISTS `size_x_keeper`;
+CREATE TABLE IF NOT EXISTS `size_x_keeper` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idPetSize` int(11) DEFAULT NULL,
+  `idKeeper` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_sizeXkeeper` (`idPetSize`,`idKeeper`),
+  KEY `idKeeper` (`idKeeper`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `size_x_keeper`
+--
+
+INSERT INTO `size_x_keeper` (`id`, `idPetSize`, `idKeeper`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `state`
+--
+
+DROP TABLE IF EXISTS `state`;
+CREATE TABLE IF NOT EXISTS `state` (
+  `id` int(11) NOT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `state`
+--
+
+INSERT INTO `state` (`id`, `state`) VALUES
+(1, 'PENDING'),
+(2, 'CANCELED'),
+(3, 'ACCEPTED');
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

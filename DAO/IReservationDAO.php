@@ -10,6 +10,6 @@ use Models\Reservation;
         function GetAll();
         function GetById($Id);
         function GetAllByKeeper($idKeeper);
-        //function GetAllByOwner($idOwner);
+        function GetAllByOwner($idOwner);
     }
 ?>

@@ -7,6 +7,7 @@
     use DAO\KeeperDAO as KeeperDAO;
     use DAO\PetDAO as PetDAO;
     use Models\eState;
+    use DAO\QueryType as QueryType;
 
     class ReservationDAO implements IReservationDAO {
         private $connection;
@@ -14,7 +15,6 @@
 
         public function Add(reservation $reservation) {
             try{
-                //$query = "INSERT INTO ".$this->tableName." (idKeeper, idPet, startDate, endDate, price) VALUES (:idKeeper, :idPet, :startDate, :endDate, :price)";
                 $query = "CALL reservation_Add(:idKeeper,:idPet,:startDate,:endDate,:price)";
 
                 $parameters["idKeeper"] = $reservation->getKeeper()->getIdKeeper();
@@ -22,15 +22,15 @@
                 $parameters["startDate"] = $reservation->getStartDate();
                 $parameters["endDate"] = $reservation->getEndDate();
                 $parameters["price"] = $reservation->getPrice();
-
+                
                 $this->connection = Connection::GetInstance();
 
-                $resultSet= $this->connection->ExecuteNonQuery($query, $parameters, QueryType::StoredProcedure);
-                return $resultSet;
-                /*if(!empty($resultSet)){
+                $resultSet= $this->connection->Execute($query, $parameters);
+
+                if(!empty($resultSet)){
                     $id=$resultSet[0]["last_insert_id()"];
                     return $id;
-                }*/
+                }
             }catch(Exception $ex){
                 throw $ex;
             }
@@ -54,7 +54,7 @@
             try{
                 $reservationList = array();
 
-                $query = "SELECT * FROM ".$this->tableName;
+                $query = "SELECT * FROM ".$this->tableName." INNER JOIN state on reservation.idState=state.id";
 
                 $this->connection = Connection::GetInstance();
 
@@ -90,12 +90,20 @@
         
         public function Modify(reservation $modreservation) {
             try{
-                $query = "UPDATE ".$this->tableName." SET  startDate = :startDate, endDate= :endDate, state= :state, price = :price where id = :id;" ;
+                $query = "UPDATE ".$this->tableName." SET  startDate = :startDate, endDate= :endDate, idState= :idState, price = :price where id = :id;" ;
 
                 $parameters["id"] =  $modreservation->getId();
                 $parameters["startDate"] = $modreservation->getStartDate();
                 $parameters["endDate"] = $modreservation->getEndDate();
-                $parameters["state"] = $modreservation->getState();
+
+                if($modreservation->getState() == "PENDING"){
+                    $parameters["idState"]= 1;
+                }else if($modreservation->getState() == "CANCELED"){
+                    $parameters["idState"]= 2;
+                }else{
+                    $parameters["idState"]= 3;
+                }
+
                 $parameters["price"] = $modreservation->getPrice();
 
                 $this->connection = Connection::GetInstance();
@@ -106,20 +114,13 @@
             }
         }
         
-        /*public function GetAllByOwner($idOwner)
+        public function GetAllByOwner($idOwner)
         {
-            $this->RetrieveData();
-            $reservations = array_filter($this->reservationList, function($reservation) use($idOwner) {
-                return $reservation->getPet()->GetOwner()->getIdOwner() == $idOwner;
-            });
-
-            $reservations = array_values($reservations);
-
-            return $reservations;
+            $query = "SELECT * FROM ".$this->tableName." JOIN pet on pet.id=reservation.idPet JOIN state on state.id=reservation.idState WHERE pet.idOwner = :idOwner";
             try{
-                $petList = array();
+                $reservationList = array();
 
-                $query = "SELECT * FROM ".$this->tableName." WHERE (idOwner = :idOwner)";
+                
 
                 $parameters["idOwner"] = $idOwner;
 
@@ -129,39 +130,37 @@
 
                 foreach($results as $row)
                 {
-                    $pet = new Pet();
-                    $pet->setId($row["id"]);
-                    $pet->setName($row["name"]);
+                    $reservation = new Reservation();
+                    $reservation->setId($row["id"]);
 
-                    $ownerDAO = new OwnerDAO();
-                    $owner = $ownerDAO->GetById($row["idOwner"]);
-                    $pet->setOwner($owner);
+                    $keeperDAO = new KeeperDAO();
+                    $keeper = $keeperDAO->GetById($row["idKeeper"]);
+                    $reservation->setKeeper($keeper);
 
-                    $petTypeDAO = new PetTypeDAO();
-                    $petType = $petTypeDAO->Exist($row["idPetType"]);
-                    $pet->setPetType($petType);
+                    $petDAO = new PetDAO();
+                    $pet = $petDAO->GetById($row["idPet"]);
+                    $reservation->setPet($pet);
 
-                    $pet->setDescription($row["description"]);
-                    $pet->setImage($row["image"]);
-                    $pet->setVaccination($row["vaccination"]);
-                    $pet->setVideo($row["video"]);
-                    $pet->setSize($row["petsize"]);
+                    $reservation->setStartDate($row["startDate"]);
+                    $reservation->setEndDate($row["endDate"]);
+                    $reservation->setState($row["state"]);
+                    $reservation->setPrice($row["price"]);
 
-                    array_push($petList, $pet);              
+                    array_push($reservationList, $reservation);              
                 }
 
-                return $petList;
+                return $reservationList;
             }catch(Exception $ex){
                 throw $ex;
             }
-        }  */
+        }
 
         public function GetAllByKeeper($idKeeper)
         {
             try{
                 $reservationList = array();
 
-                $query = "SELECT * FROM ".$this->tableName." WHERE (idKeeper = :idKeeper)";
+                $query = "SELECT * FROM ".$this->tableName." INNER JOIN state on reservation.idState=state.id WHERE (idKeeper = :idKeeper)";
 
                 $parameters["idKeeper"] = $idKeeper;
 
@@ -197,9 +196,7 @@
         }
 
         public function GetById($id) {
-            $query = "select * from ". $this->tableName . "            
-            WHERE id = '$id'";
-            
+            $query = "select * from ". $this->tableName ." INNER JOIN state on reservation.idState=state.id WHERE reservation.id = '$id'";
             try{
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($query); 

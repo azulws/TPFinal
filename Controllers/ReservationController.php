@@ -43,12 +43,9 @@
         public function ShowDetailView($id)
         {
             require_once(VIEWS_PATH . "validate-session.php");
-            var_dump($id);
             $reservation = $this->reservationDAO->GetById($id);
-            var_dump($reservation);
             $keeper = $reservation->getKeeper();
             $pet = $reservation->getPet();
-
             require_once(VIEWS_PATH . "reservation-detail.php");
         }
         
