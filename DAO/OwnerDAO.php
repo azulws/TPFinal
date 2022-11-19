@@ -93,6 +93,7 @@ class OwnerDAO implements IOwnerDAO
                     $owner->setIdOwner($resultSet[0]["idOwner"]);                   
                     $owner->setFirstName($resultSet[0]["firstName"]);
                     $owner->setLastName($resultSet[0]["lastName"]);
+                    $owner->setUserName($resultSet[0]["userName"]);
                     $owner->setPassword($resultSet[0]["userPassword"]);
                     return $owner;                       
                 
@@ -118,6 +119,7 @@ class OwnerDAO implements IOwnerDAO
                     $owner->setIdOwner($resultSet[0]["idOwner"]);                   
                     $owner->setFirstName($resultSet[0]["firstName"]);
                     $owner->setLastName($resultSet[0]["lastName"]);
+                    $owner->setUserName($resultSet[0]["userName"]);
                     $owner->setPassword($resultSet[0]["userPassword"]);
                     return $owner;                       
                 

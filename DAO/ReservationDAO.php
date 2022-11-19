@@ -160,7 +160,7 @@
         public function GetAllByKeeper($idKeeper)
         {
             $query = "SELECT r.id,r.idKeeper,r.idPet,r.startDate,r.endDate,r.idState,r.price,s.state FROM ".$this->tableName." r
-            JOIN state s on s.id=r.idState WHERE r.idKeeper = :idKeeper";
+            JOIN pet on pet.id=r.idPet JOIN owner on pet.idOwner=owner.idOwner JOIN state s on s.id=r.idState WHERE r.idKeeper = :idKeeper";
             try{
                 $reservationList = array();
     

@@ -27,6 +27,7 @@
                 ?>
                 <tr>
                     <td><?php echo $reservation->getPet()->getOwner()->getUserName() ?></td>
+                    
                     <td><?php echo $reservation->getPet()->getName()."--".$reservation->getPet()->getPetType()->getBreed()."--".$reservation->getPet()->getSize() ?></td>
                     <td><?php echo $reservation->getStartDate() ?></td>
                     <td><?php echo $reservation->getEndDate() ?></td>
