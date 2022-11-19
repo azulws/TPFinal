@@ -14,9 +14,9 @@
         private $tableName = "reservation";
 
         public function Add(reservation $reservation) {
-            try{
-                $query = "CALL reservation_Add(:idKeeper,:idPet,:startDate,:endDate,:price)";
-
+            $query = "CALL reservation_Add(:idKeeper,:idPet,:startDate,:endDate,:price)";
+            
+            try{    
                 $parameters["idKeeper"] = $reservation->getKeeper()->getIdKeeper();
                 $parameters["idPet"] = $reservation->getPet()->getId();
                 $parameters["startDate"] = $reservation->getStartDate();
@@ -37,11 +37,11 @@
         }
 
         public function Remove($id) {
+            $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
+
             try{
-                $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
-
                 $parameters["id"] =  $id;
-
+                
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -51,10 +51,10 @@
         }
 
         public function GetAll() {
+            $query = "SELECT * FROM ".$this->tableName." INNER JOIN state on reservation.idState=state.id";
+
             try{
                 $reservationList = array();
-
-                $query = "SELECT * FROM ".$this->tableName." INNER JOIN state on reservation.idState=state.id";
 
                 $this->connection = Connection::GetInstance();
 
@@ -89,13 +89,15 @@
 
         
         public function Modify(reservation $modreservation) {
+            $query = "UPDATE ".$this->tableName." SET  startDate = :startDate, endDate= :endDate, idState= :idState, price = :price where id = :id;" ;
+            
             try{
-                $query = "UPDATE ".$this->tableName." SET  startDate = :startDate, endDate= :endDate, idState= :idState, price = :price where id = :id;" ;
-
                 $parameters["id"] =  $modreservation->getId();
+                var_dump($modreservation);
+                var_dump($parameters["id"] );
                 $parameters["startDate"] = $modreservation->getStartDate();
                 $parameters["endDate"] = $modreservation->getEndDate();
-
+                var_dump($modreservation->getState());
                 if($modreservation->getState() == "PENDING"){
                     $parameters["idState"]= 1;
                 }else if($modreservation->getState() == "CANCELED"){
@@ -103,9 +105,9 @@
                 }else{
                     $parameters["idState"]= 3;
                 }
-
+                var_dump($parameters["idState"]);
                 $parameters["price"] = $modreservation->getPrice();
-
+                
                 $this->connection = Connection::GetInstance();
 
                 $this->connection->ExecuteNonQuery($query, $parameters);
@@ -116,11 +118,11 @@
         
         public function GetAllByOwner($idOwner)
         {
-            $query = "SELECT * FROM ".$this->tableName." JOIN pet on pet.id=reservation.idPet JOIN state on state.id=reservation.idState WHERE pet.idOwner = :idOwner";
+            $query = "SELECT r.id,r.idKeeper,r.idPet,r.startDate,r.endDate,r.idState,r.price,s.state FROM ".$this->tableName." r
+            JOIN pet on pet.id=r.idPet JOIN state s on s.id=r.idState WHERE pet.idOwner = :idOwner";
+            
             try{
                 $reservationList = array();
-
-                
 
                 $parameters["idOwner"] = $idOwner;
 
@@ -157,11 +159,11 @@
 
         public function GetAllByKeeper($idKeeper)
         {
+            $query = "SELECT r.id,r.idKeeper,r.idPet,r.startDate,r.endDate,r.idState,r.price,s.state FROM ".$this->tableName." r
+            JOIN state s on s.id=r.idState WHERE r.idKeeper = :idKeeper";
             try{
                 $reservationList = array();
-
-                $query = "SELECT * FROM ".$this->tableName." INNER JOIN state on reservation.idState=state.id WHERE (idKeeper = :idKeeper)";
-
+    
                 $parameters["idKeeper"] = $idKeeper;
 
                 $this->connection = Connection::GetInstance();
@@ -185,7 +187,7 @@
                     $reservation->setEndDate($row["endDate"]);
                     $reservation->setState($row["state"]);
                     $reservation->setPrice($row["price"]);
-
+                    
                     array_push($reservationList, $reservation);           
                 }
 
@@ -197,6 +199,7 @@
 
         public function GetById($id) {
             $query = "select * from ". $this->tableName ." INNER JOIN state on reservation.idState=state.id WHERE reservation.id = '$id'";
+            
             try{
                 $this->connection = Connection::GetInstance();
                 $resultSet = $this->connection->Execute($query); 
