@@ -89,7 +89,7 @@
 
             $this->keeperDAO->Modify($keeper);
 
-            $this->ShowListView();
+            require_once(VIEWS_PATH."home-keeper.php");
         }
 
         public function EditSize($size)
