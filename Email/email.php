@@ -20,7 +20,7 @@ try {
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                     //aca va el host, averiguar en google cual es dependiendo del @ del email
     $mail->SMTPAuth   = true;                                   //no toquen nada aca
-    $mail->Username   = 'brunopruzsi@gmail.com';                     // aca ponemos nuestro mail para enviar mails
+    $mail->Username   = '@gmail.com';                     // aca ponemos nuestro mail para enviar mails
     $mail->Password   = 'qplzwwhaujptmsrn';                               //si usamos gmail, habilitar autenticacion en dos pasos y crear una clave para la app, todo en seguridad y privacidad de gmail esta
     $mail->SMTPSecure = 'ssl';            //si la pagina tiene un candadito, ssl, si no lo tiene, tsl
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
