@@ -177,8 +177,7 @@
             $reservation->setState($state);
             
             if($state == "ACCEPTED"){
-                //var_dump("mail enviado: ".$reservation->getPet()->getOwner()->getEmail());
-                //$this->SendMail($reservation);
+                $this->SendMail($reservation);
             }
 
             $this->reservationDAO->Modify($reservation);
@@ -220,7 +219,7 @@
                 
                     //Recipients
                     $mail->setFrom('CaninosYa@outlook.com', 'Caninos Ya');
-                    $email= $reservation->getOwner()->getEmail();
+                    $email= $reservation->getPet()->getOwner()->getEmail();
                     $mail->addAddress($email,$reservation->getPet()->getOwner()->getUserName());     // aca pondriamos el owner $email y el owner $name, o $username
                             //Name is optional
                             //$reservation->getPet()->getOwner()->getMail()

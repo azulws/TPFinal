@@ -64,12 +64,13 @@
             require_once(VIEWS_PATH."edit-sizes.php");
         }
 
-        public function Add($firstName,$lastName,$userName,$password)
+        public function Add($firstName,$lastName,$userName,$email,$password)
         {
             $keeper = new Keeper();
             $keeper->setFirstName($firstName);
             $keeper->setLastName($lastName);
             $keeper->setUserName($userName);
+            $keeper->setEmail($email);
             $keeper->setPassword($password);
             
             if($this->keeperDAO->GetByUserName($keeper->getUserName())){

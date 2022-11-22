@@ -15,11 +15,12 @@ class KeeperDAO implements IKeeper
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName, userPassword) VALUES (:firstName, :lastName, :userName, :userPassword);";
+                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName,email, userPassword) VALUES (:firstName, :lastName, :userName,:email, :userPassword);";
         
                 $parameters["firstName"] = $keeper->getFirstName();
                 $parameters["lastName"] = $keeper->getLastName();
                 $parameters["userName"] = $keeper->getUserName();
+                $parameters["email"] = $keeper->getEmail();
                 $parameters["userPassword"] = $keeper->getPassword();
             
 
@@ -52,6 +53,7 @@ class KeeperDAO implements IKeeper
                     $keeper->setFirstName($row["firstName"]);
                     $keeper->setLastName($row["lastName"]);
                     $keeper->setUserName($row["userName"]);
+                    $keeper->setEmail($row["email"]);
                     $keeper->setPassword($row["userPassword"]);
                     $keeper->setRemuneration($resultSet[0]["remuneration"]);
                     $keeper->setReputation($resultSet[0]["reputation"]);
@@ -243,6 +245,7 @@ class KeeperDAO implements IKeeper
                     $keeper->setIdKeeper($resultSet[0]["idKeeper"]);                   
                     $keeper->setFirstName($resultSet[0]["firstName"]);
                     $keeper->setLastName($resultSet[0]["lastName"]);
+                    $keeper->setEmail($resultSet[0]["email"]);
                     $keeper->setPassword($resultSet[0]["userPassword"]);
                     $keeper->setRemuneration($resultSet[0]["remuneration"]);
                     $keeper->setReputation($resultSet[0]["reputation"]);
@@ -273,6 +276,7 @@ class KeeperDAO implements IKeeper
                     $keeper->setFirstName($resultSet[0]["firstName"]);
                     $keeper->setLastName($resultSet[0]["lastName"]);
                     $keeper->setUserName($resultSet[0]["userName"]);
+                    $keeper->setEmail($resultSet[0]["email"]);
                     $keeper->setPassword($resultSet[0]["userPassword"]);
                     $keeper->setRemuneration($resultSet[0]["remuneration"]);
                     $keeper->setReputation($resultSet[0]["reputation"]);
@@ -291,12 +295,13 @@ class KeeperDAO implements IKeeper
 
     public function Modify(Keeper $keeper) {
         try{
-            $query = "UPDATE ".$this->tableName." SET  firstName = :firstName, lastName = :lastName, userName = :userName, userPassword = :userPassword ,remuneration = :remuneration, reputation= :reputation where idKeeper = :idKeeper;" ;
+            $query = "UPDATE ".$this->tableName." SET  firstName = :firstName, lastName = :lastName, userName = :userName, email= :email, userPassword = :userPassword ,remuneration = :remuneration, reputation= :reputation where idKeeper = :idKeeper;" ;
 
             $parameters["idKeeper"] =  $keeper->getIdKeeper();
             $parameters["firstName"] = $keeper->getFirstName();
             $parameters["lastName"] = $keeper->getLastName();
             $parameters["userName"] = $keeper->getUserName();
+            $parameters["email"] = $keeper->getEmail();
             $parameters["userPassword"] = $keeper->getPassword();
             $parameters["remuneration"] = $keeper->getRemuneration();
             $parameters["reputation"] = $keeper->getReputation();
