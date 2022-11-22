@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-11-2022 a las 00:04:50
+-- Tiempo de generación: 22-11-2022 a las 19:59:55
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `pethero`
 --
-CREATE DATABASE IF NOT EXISTS `pethero` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `pethero`;
 
 DELIMITER $$
 --
@@ -51,19 +49,18 @@ CREATE TABLE IF NOT EXISTS `availability` (
   `idKeeper` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_idKeeper` (`idKeeper`)
-) ENGINE=MyISAM AUTO_INCREMENT=419 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=811 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `availability`
 --
 
 INSERT INTO `availability` (`id`, `fecha`, `idKeeper`) VALUES
-(418, '2022-11-30', 1),
-(417, '2022-11-26', 1),
-(416, '2022-11-25', 1),
-(415, '2022-11-22', 1),
-(414, '2022-11-20', 1),
-(413, '2022-11-19', 1);
+(810, '2022-12-04', 1),
+(809, '2022-11-30', 1),
+(808, '2022-11-26', 1),
+(807, '2022-11-25', 1),
+(806, '2022-11-22', 1);
 
 -- --------------------------------------------------------
 
@@ -80,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `keeper` (
   `userPassword` varchar(50) DEFAULT NULL,
   `remuneration` int(50) DEFAULT '0',
   `reputation` int(50) DEFAULT '0',
+  `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idKeeper`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -87,8 +85,8 @@ CREATE TABLE IF NOT EXISTS `keeper` (
 -- Volcado de datos para la tabla `keeper`
 --
 
-INSERT INTO `keeper` (`idKeeper`, `firstName`, `lastName`, `userName`, `userPassword`, `remuneration`, `reputation`) VALUES
-(1, 'nabo', 'db', 'nabodb', 'asd', 100, 0);
+INSERT INTO `keeper` (`idKeeper`, `firstName`, `lastName`, `userName`, `userPassword`, `remuneration`, `reputation`, `email`) VALUES
+(1, 'nabo', 'db', 'nabodb', 'asd', 50, 0, 'asd@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -103,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `owner` (
   `lastName` varchar(50) DEFAULT NULL,
   `userName` varchar(50) DEFAULT NULL,
   `userPassword` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idOwner`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
@@ -110,8 +109,8 @@ CREATE TABLE IF NOT EXISTS `owner` (
 -- Volcado de datos para la tabla `owner`
 --
 
-INSERT INTO `owner` (`idOwner`, `firstName`, `lastName`, `userName`, `userPassword`) VALUES
-(1, 'azulws', 'db', 'azulwsdb', 'asd');
+INSERT INTO `owner` (`idOwner`, `firstName`, `lastName`, `userName`, `userPassword`, `email`) VALUES
+(1, 'azulws', 'db', 'azulwsdb', 'asd', 'azul1155cs@hotmail.com');
 
 -- --------------------------------------------------------
 
@@ -133,14 +132,17 @@ CREATE TABLE IF NOT EXISTS `pet` (
   PRIMARY KEY (`id`),
   KEY `fk_idOwner` (`idOwner`),
   KEY `fk_idPetType` (`idPetType`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pet`
 --
 
 INSERT INTO `pet` (`id`, `name`, `idOwner`, `idPetType`, `description`, `petsize`, `image`, `vaccination`, `video`) VALUES
-(1, 'gatodb', 1, 2, 'gato', 'MEDIUM', '', '', '');
+(1, 'gatodb', 1, 2, 'gato', 'MEDIUM', '', '', ''),
+(2, 'asd', 1, 1, 'asd', 'MEDIUM', '', '', ''),
+(3, 'emi', 1, 2, 'perra', 'SMALL', '', '', ''),
+(4, 'emi2', 1, 1, 'asd', 'SMALL', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -204,7 +206,19 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   KEY `FK_Keeper` (`idKeeper`),
   KEY `FK_Pet` (`idPet`),
   KEY `FK_State` (`idState`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `reservation`
+--
+
+INSERT INTO `reservation` (`id`, `idKeeper`, `idPet`, `startDate`, `endDate`, `idState`, `price`) VALUES
+(10, 1, 3, '2022-11-20', '2022-11-20', 3, 100),
+(11, 1, 2, '2022-11-25', '2022-11-25', 2, 100),
+(12, 1, 3, '2022-11-25', '2022-11-25', 2, 100),
+(13, 1, 1, '2022-11-25', '2022-11-25', 3, 50),
+(14, 1, 1, '2022-11-26', '2022-11-26', 3, 50),
+(15, 1, 3, '2022-11-26', '2022-11-26', 3, 50);
 
 -- --------------------------------------------------------
 

@@ -177,12 +177,18 @@
             $reservation->setState($state);
             
             if($state == "ACCEPTED"){
-                var_dump("mail enviado: ".$reservation->getPet()->getOwner()->getEmail());
+                //var_dump("mail enviado: ".$reservation->getPet()->getOwner()->getEmail());
                 //$this->SendMail($reservation);
             }
 
             $this->reservationDAO->Modify($reservation);
 
+            $this->cancelOtherTypeSameDate($reservation);
+
+            $this->ShowRecordKeeperView();
+        }
+
+        public function cancelOtherTypeSameDate($reservation){
             $allPendingList=$this->getAllStateReservations($reservation->getKeeper()->getIdKeeper(),"PENDING");
             
             foreach($allPendingList as $reservationPending){
@@ -196,8 +202,6 @@
                     }
                 }
             }
-
-            $this->ShowRecordKeeperView();
         }
 
         public function SendMail($reservation){ 
