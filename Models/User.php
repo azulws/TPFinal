@@ -6,6 +6,7 @@
         private $lastName;
         private $userName;
         private $password;
+        private $email;
 
         function __construct(){
         }
