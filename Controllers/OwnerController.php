@@ -26,12 +26,13 @@
             require_once(VIEWS_PATH . "home-owner.php");
         }
 
-        public function Add($firstName,$lastName,$userName,$password)
+        public function Add($firstName,$lastName,$userName,$email,$password)
         {
             $owner = new Owner();
             $owner->setFirstName($firstName);
             $owner->setLastName($lastName);
             $owner->setUserName($userName);
+            $owner->setEmail($email);
             $owner->setPassword($password);
             
             if($this->OwnerDAO->GetByUserName($owner->getUserName())){
@@ -45,23 +46,7 @@
 
         }
 
-        /*public function Add($firstName,$lastName,$userName,$password)  
-        {
-            if($this->OwnerDAO->GetByUserName($userName)==NULL){
-                $owner = new Owner();
-                $owner->setFirstName($firstName);
-                $owner->setLastName($lastName);
-                $owner->setUserName($userName);
-                $owner->setPassword($password);
-
-                $this->OwnerDAO->Add($owner);
-            }
-
-            $this->ShowAddView(); 
-                
-        }
-*/
-        public function Remove($id)
+  public function Remove($id)
         {
             $this->keeperDAO->Remove($id);
 

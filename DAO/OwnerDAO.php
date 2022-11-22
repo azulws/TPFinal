@@ -20,6 +20,8 @@ class OwnerDAO implements IOwnerDAO
                 $parameters["firstName"] = $owner->getFirstName();
                 $parameters["lastName"] = $owner->getLastName();
                 $parameters["userName"] = $owner->getUserName();
+                $parameters["email"] = $owner->getEmail();
+
                 $parameters["userPassword"] = $owner->getPassword();
 
                 $this->connection = Connection::GetInstance();
@@ -51,6 +53,7 @@ class OwnerDAO implements IOwnerDAO
                     $owner->setFirstName($row["firstName"]);
                     $owner->setLastName($row["lastName"]);
                     $owner->setUserName($row["userName"]);
+                    $owner->setEmail($row["email"]);
                     $owner->setPassword($row["userPassword"]);
 
                     array_push($ownerList, $owner);
@@ -94,6 +97,8 @@ class OwnerDAO implements IOwnerDAO
                     $owner->setFirstName($resultSet[0]["firstName"]);
                     $owner->setLastName($resultSet[0]["lastName"]);
                     $owner->setUserName($resultSet[0]["userName"]);
+                    $owner->setEmail($resultSet[0]["email"]);
+
                     $owner->setPassword($resultSet[0]["userPassword"]);
                     return $owner;                       
                 
@@ -120,6 +125,7 @@ class OwnerDAO implements IOwnerDAO
                     $owner->setFirstName($resultSet[0]["firstName"]);
                     $owner->setLastName($resultSet[0]["lastName"]);
                     $owner->setUserName($resultSet[0]["userName"]);
+                    $owner->setEmail($resultSet[0]["email"]);
                     $owner->setPassword($resultSet[0]["userPassword"]);
                     return $owner;                       
                 
