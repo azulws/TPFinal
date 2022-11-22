@@ -15,7 +15,7 @@ class OwnerDAO implements IOwnerDAO
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName, userPassword) VALUES (:firstName, :lastName, :userName, :userPassword);";
+                $query = "INSERT INTO ".$this->tableName." (firstName, lastName, userName,email, userPassword) VALUES (:firstName, :lastName, :userName, :email, :userPassword);";
                 
                 $parameters["firstName"] = $owner->getFirstName();
                 $parameters["lastName"] = $owner->getLastName();
