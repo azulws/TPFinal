@@ -16,7 +16,11 @@
                 <div class="form__group">
                   <input class="form__input" type="text" name="userName" min="0" placeholder="User name" required>
                   <label for="userName" class="form__label">User name</label>
-                </div>                
+                </div>
+                <div class="form__group">
+                  <input class="form__input" type="email" name="email" min="0" placeholder="Email" required>
+                  <label for="email" class="form__label">Email</label>
+                </div>                   
                 <div class="form__group">
                   <input class="form__input" type="password" name="password" min="0" placeholder="Password" required>
                   <label for="password" class="form__label">Password</label>
