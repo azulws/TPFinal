@@ -5,18 +5,18 @@
             {
             ?>
                 <tr>
-                    <td><?php echo $chat->getIdKeeper()->getUserName().":"?></td>
-                    <td><?php echo $chat->getMsg() ?></td>
+                    <td><?php echo $chat->getKeeper()->getUserName().":"?></td>
+                    <td><?php echo $chat->getMsg();?></td>
                     <br>
                 </tr>
+                
             <?php
             }
         ?>                          
 </tbody>
-    
         <input type="text" name="msg">
-        <input type="hidden" name="idK" value="<?php echo $chat->getIdKeeper() ?>">
-        <input type="hidden" name="idO" value="<?php echo $chat->getIdOwner() ?>">
+        <input type="hidden" name="keeper" value="<?php echo $chat->getKeeper()->getIdKeeper() ?>">
+        <input type="hidden" name="owner" value="<?php echo $chat->getOwner()->getIdOwner() ?>">
         <button type="submit" name="" class="btn" value=""> Send </button>
     </form>
     

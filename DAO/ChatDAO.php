@@ -3,6 +3,8 @@
     namespace DAO;
 
     use Models\Chat as Chat;
+    use Models\Keeper as Keeper;
+    use Models\Owner as Owner;
     use DAO\IChatDAO as IChatDAO;
     use \Exception as Exception;
     use DAO\Connection as Connection;
@@ -18,8 +20,8 @@
             {
                 $query = "INSERT INTO ".$this->tableName." (idKeeper,idOwner,msg) VALUES (:idKeeper, :idOwner, :msg);";
                 
-                $parameters["idKeeper"] = $chat->getIdKeeper();
-                $parameters["idOwner"] = $chat->getIdOwner();
+                $parameters["idKeeper"] = $chat->getKeeper()->getIdKeeper();
+                $parameters["idOwner"] = $chat->getOwner()->getIdOwner();
                 $parameters["msg"] = $chat->getMsg();
 
                 $this->connection = Connection::GetInstance();
@@ -50,11 +52,11 @@
 
                     $keeperDAO= new KeeperDAO();
                     $keeper= $keeperDAO->GetById($row["idKeeper"]);
-                    $chat->setIdKeeper($row["idKeeper"]);
+                    $chat->setKeeper($keeper);
 
                     $ownerDAO= new OwnerDAO();
                     $owner= $ownerDAO->GetById($row["idOwner"]);
-                    $chat->setIdOwner($row["idOwner"]);
+                    $chat->setOwner($owner);
 
                     $chat->setMsg($row["msg"]);
 

@@ -2,6 +2,8 @@
     namespace controllers;
     use Models\Chat as Chat;
     use DAO\ChatDAO as ChatDAO;
+    use DAO\KeeperDAO as KeeperDAO;
+    use DAO\OwnerDAO as OwnerDAO;
 
     class ChatController{
         private $chatDAO;
@@ -16,21 +18,19 @@
             require_once(VIEWS_PATH."chat.php");
         }
 
-        public function Add($msg,$idK,$idO){
+        public function Add($msg,$idKeeper,$idOwner){
             $chat = new Chat();
             $chat->setMsg($msg);
-            $chat->setIdKeeper($idK);
-            $chat->setIdOwner($idO);
+
+            $keeperDAO= new KeeperDAO();
+            $keeper=$keeperDAO->GetById($idKeeper);
+            $chat->setKeeper($keeper);
+            $ownerDAO= new OwnerDAO();
+            $owner=$ownerDAO->GetById($idOwner);
+            $chat->setOwner($owner);
 
             $this->chatDAO->Add($chat);
-            $this->ShowChatView($idK);
+            $this->ShowChatView($keeper->getIdKeeper());
         }
-
-        /*public function GetChat($idKeeper){
-            $chatList=$this->chatDAO->GetChat($idKeeper,$_SESSION["loggedUser"]->getIdOwner());
-
-            require_once(VIEWS_PATH."chat.php");
-            //$this->ShowChatView();
-        }*/
     }
 ?>

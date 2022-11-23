@@ -1,58 +1,60 @@
 <?php
-    namespace Models;
+        namespace Models;
+        use Models\Keeper as Keeper;
+        use Models\Owner as Owner;
 
-    class Chat{
-        private $id;
-        private Keeper $idKeeper;
-        private Owner $idOwner;
-        private $msg;
+        class Chat{
+                private $id;
+                private Keeper $Keeper;
+                private Owner $Owner;
+                private $msg;
 
-        public function getId()
-        {
-                return $this->id;
+                public function getId()
+                {
+                        return $this->id;
+                }
+
+                public function setId($id)
+                {
+                        $this->id = $id;
+
+                        return $this;
+                }
+
+                public function getKeeper()
+                {
+                        return $this->Keeper;
+                }
+
+                public function setKeeper(Keeper $Keeper)
+                {
+                        $this->Keeper = $Keeper;
+
+                        return $this;
+                }
+
+                public function getOwner()
+                {
+                        return $this->Owner;
+                }
+
+                public function setOwner(Owner $Owner)
+                {
+                        $this->Owner = $Owner;
+
+                        return $this;
+                }
+
+                public function getMsg()
+                {
+                        return $this->msg;
+                }
+
+                public function setMsg($msg)
+                {
+                        $this->msg = $msg;
+
+                        return $this;
+                }
         }
-
-        public function setId($id)
-        {
-                $this->id = $id;
-
-                return $this;
-        }
-
-        public function getIdKeeper()
-        {
-                return $this->idKeeper;
-        }
-
-        public function setIdKeeper(Keeper $idKeeper)
-        {
-                $this->idKeeper = $idKeeper;
-
-                return $this;
-        }
-
-        public function getIdOwner()
-        {
-                return $this->idOwner;
-        }
-
-        public function setIdOwner(Owner $idOwner)
-        {
-                $this->idOwner = $idOwner;
-
-                return $this;
-        }
-
-        public function getMsg()
-        {
-                return $this->msg;
-        }
-
-        public function setMsg($msg)
-        {
-                $this->msg = $msg;
-
-                return $this;
-        }
-    }
 ?>
