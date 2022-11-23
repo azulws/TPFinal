@@ -21,8 +21,17 @@
             require_once(VIEWS_PATH."chat.php");
         }
 
+        public function ShowChatKeeperView($isKeeper,$keeper,$owner){
+            $idKeeper=$keeper;
+            $idOwner=$owner;
+            $iskeeper=$isKeeper;
+
+            $chatList=$this->chatDAO->GetChat($keeper,$owner);
+            require_once(VIEWS_PATH."chat.php");
+        }
+
         public function ShowChatList(){
-            $ownerList=$this->chatDAO->GetChatsByKeeper($_SESSION["loggedUser"]->getIdKeeper());
+            $chatList=$this->chatDAO->GetChatsByKeeper($_SESSION["loggedUser"]->getIdKeeper());
             require_once(VIEWS_PATH."my-chats.php");
         }
 

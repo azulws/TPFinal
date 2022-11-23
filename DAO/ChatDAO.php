@@ -80,11 +80,12 @@
             {
                 $chatList = array();
 
-                $query = "SELECT * FROM ".$this->tableName.""; //where $idKeeper=:$idKeeper group by idOwner
+                $query = "SELECT * FROM ".$this->tableName." c where (c.idKeeper=:idKeeper) group by c.idOwner";
+                $parameters["idKeeper"] =  $idKeeper;
 
                 $this->connection = Connection::GetInstance();
 
-                $resultSet = $this->connection->Execute($query);
+                $resultSet = $this->connection->Execute($query,$parameters);
                 
                 foreach ($resultSet as $row)
                 {                

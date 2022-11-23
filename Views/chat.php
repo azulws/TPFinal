@@ -3,8 +3,7 @@
         <?php
         if(isset($chatList)){
             foreach($chatList as $chat)
-            { var_dump($idKeeper);
-                var_dump($idOwner);
+            {
             ?>
                 <tr>
                     <?php
