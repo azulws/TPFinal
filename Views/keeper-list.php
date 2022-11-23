@@ -25,6 +25,7 @@
                     <td><?php echo $keeper->getUserName() ?> </td>
                     <td><?php echo $keeper->getRemuneration() ?></td>
                     <td>
+                      <input type="hidden" name="isKeeper" value=True>  
                       <input type="hidden" name="owner" value="<?php echo $_SESSION["loggedUser"]->getIdOwner() ?>">  
                       <button type="submit" name="keeper" class="btn" value="<?php echo $keeper->getIdKeeper() ?>"> Chat </button>
                     </td>

@@ -12,9 +12,11 @@
             $this->chatDAO= new ChatDAO();
         }
 
-        public function ShowChatView($owner,$keeper){
+        public function ShowChatView($isKeeper,$owner,$keeper){
             $idKeeper=$keeper;
             $idOwner=$owner;
+            $iskeeper=$isKeeper;
+
             $chatList=$this->chatDAO->GetChat($keeper,$owner);
             require_once(VIEWS_PATH."chat.php");
         }
@@ -24,7 +26,7 @@
             require_once(VIEWS_PATH."my-chats.php");
         }
 
-        public function Add($msg,$idKeeper,$idOwner){
+        public function Add($msg,$idKeeper,$idOwner,$isKeeper){
             $chat = new Chat();
             $chat->setMsg($msg);
 
@@ -36,8 +38,10 @@
             $owner=$ownerDAO->GetById($idOwner);
             $chat->setOwner($owner);
 
+            $chat->setIsKeeper($isKeeper);
+            
             $this->chatDAO->Add($chat);
-            $this->ShowChatView($owner->getIdOwner(),$keeper->getIdKeeper());
+            $this->ShowChatView($isKeeper,$owner->getIdOwner(),$keeper->getIdKeeper());
         }
     }
 ?>

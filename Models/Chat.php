@@ -8,6 +8,7 @@
                 private Keeper $Keeper;
                 private Owner $Owner;
                 private $msg;
+                private $isKeeper;
 
                 public function getId()
                 {
@@ -53,6 +54,18 @@
                 public function setMsg($msg)
                 {
                         $this->msg = $msg;
+
+                        return $this;
+                }
+
+                public function getIsKeeper()
+                {
+                        return $this->isKeeper;
+                }
+
+                public function setIsKeeper($isKeeper)
+                {
+                        $this->isKeeper = $isKeeper;
 
                         return $this;
                 }

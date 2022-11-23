@@ -18,11 +18,12 @@
         public function Add(Chat $chat){
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (idKeeper,idOwner,msg) VALUES (:idKeeper, :idOwner, :msg);";
+                $query = "INSERT INTO ".$this->tableName." (idKeeper,idOwner,msg,isKeeper) VALUES (:idKeeper, :idOwner, :msg, :isKeeper);";
                 
                 $parameters["idKeeper"] = $chat->getKeeper()->getIdKeeper();
                 $parameters["idOwner"] = $chat->getOwner()->getIdOwner();
                 $parameters["msg"] = $chat->getMsg();
+                $parameters["isKeeper"] = $chat->getIsKeeper();
 
                 $this->connection = Connection::GetInstance();
 
@@ -37,8 +38,6 @@
         public function GetChat($idKeeper,$idOwner){
             try
             {
-                var_dump($idKeeper);
-                var_dump($idOwner);
                 $chatList = array();
 
                 $query = "SELECT * FROM ".$this->tableName." where (idKeeper=:idKeeper) and (idOwner=:idOwner)";
@@ -63,6 +62,7 @@
                     $chat->setOwner($owner);
 
                     $chat->setMsg($row["msg"]);
+                    $chat->setIsKeeper($row["isKeeper"]);
 
                     array_push($chatList, $chat);
                 }
@@ -100,6 +100,7 @@
                     $chat->setOwner($owner);
 
                     $chat->setMsg($row["msg"]);
+                    $chat->setIsKeeper($row["isKeeper"]);
 
                     array_push($chatList, $chat);
                 }
