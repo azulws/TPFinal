@@ -37,9 +37,50 @@
         public function GetChat($idKeeper,$idOwner){
             try
             {
+                var_dump($idKeeper);
+                var_dump($idOwner);
                 $chatList = array();
 
-                $query = "SELECT * FROM ".$this->tableName."";
+                $query = "SELECT * FROM ".$this->tableName." where (idKeeper=:idKeeper) and (idOwner=:idOwner)";
+                $parameters["idKeeper"] =  $idKeeper;
+                $parameters["idOwner"] =  $idOwner;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query,$parameters);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $chat = new Chat();
+                    $chat->setId($row["idMsg"]);
+
+                    $keeperDAO= new KeeperDAO();
+                    $keeper= $keeperDAO->GetById($row["idKeeper"]);
+                    $chat->setKeeper($keeper);
+
+                    $ownerDAO= new OwnerDAO();
+                    $owner= $ownerDAO->GetById($row["idOwner"]);
+                    $chat->setOwner($owner);
+
+                    $chat->setMsg($row["msg"]);
+
+                    array_push($chatList, $chat);
+                }
+
+                return $chatList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }    
+        
+        public function GetChatsByKeeper($idKeeper){
+            try
+            {
+                $chatList = array();
+
+                $query = "SELECT * FROM ".$this->tableName.""; //where $idKeeper=:$idKeeper group by idOwner
 
                 $this->connection = Connection::GetInstance();
 
@@ -69,6 +110,6 @@
             {
                 throw $ex;
             }
-        }         
+        }
     }
 ?>

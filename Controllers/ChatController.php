@@ -12,10 +12,16 @@
             $this->chatDAO= new ChatDAO();
         }
 
-        public function ShowChatView($idKeeper){
-            $chatList=$this->chatDAO->GetChat($idKeeper,$_SESSION["loggedUser"]->getIdOwner());
-
+        public function ShowChatView($owner,$keeper){
+            $idKeeper=$keeper;
+            $idOwner=$owner;
+            $chatList=$this->chatDAO->GetChat($keeper,$owner);
             require_once(VIEWS_PATH."chat.php");
+        }
+
+        public function ShowChatList(){
+            $ownerList=$this->chatDAO->GetChatsByKeeper($_SESSION["loggedUser"]->getIdKeeper());
+            require_once(VIEWS_PATH."my-chats.php");
         }
 
         public function Add($msg,$idKeeper,$idOwner){
@@ -25,12 +31,13 @@
             $keeperDAO= new KeeperDAO();
             $keeper=$keeperDAO->GetById($idKeeper);
             $chat->setKeeper($keeper);
+            
             $ownerDAO= new OwnerDAO();
             $owner=$ownerDAO->GetById($idOwner);
             $chat->setOwner($owner);
 
             $this->chatDAO->Add($chat);
-            $this->ShowChatView($keeper->getIdKeeper());
+            $this->ShowChatView($owner->getIdOwner(),$keeper->getIdKeeper());
         }
     }
 ?>

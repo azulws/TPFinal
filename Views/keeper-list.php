@@ -23,9 +23,10 @@
                     <td><?php echo $keeper->getFirstName() ?> </td>
                     <td><?php echo $keeper->getLastName() ?> </td>
                     <td><?php echo $keeper->getUserName() ?> </td>
-                    <td><?php echo $keeper->getRemuneration() ?> </td>
+                    <td><?php echo $keeper->getRemuneration() ?></td>
                     <td>
-                      <button type="submit" name="idKeeper" class="btn" value="<?php echo $keeper->getIdKeeper() ?>"> Chat </button>
+                      <input type="hidden" name="owner" value="<?php echo $_SESSION["loggedUser"]->getIdOwner() ?>">  
+                      <button type="submit" name="keeper" class="btn" value="<?php echo $keeper->getIdKeeper() ?>"> Chat </button>
                     </td>
                   </tr>
                 <?php
