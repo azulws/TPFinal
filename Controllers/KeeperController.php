@@ -74,10 +74,10 @@
 
             $ownerController = new OwnerController();
             
-            if($this->keeperDAO->GetByUserName($keeper->getUserName()) || $ownerController->ownerDAO->getByUserName($keeper->getUserName())){
+            if($this->keeperDAO->GetByUserName($keeper->getUserName()) || $ownerController->OwnerDAO->GetByUserName($keeper->getUserName())){
                 $this->ShowAddView("Ya existe un usuario con ese Username",null);
             }
-            else if($this->keeperDAO->GetByEmail($keeper->getEmail()) || $ownerController->ownerDAO->getByEmail($keeper->getEmail())){
+            else if($this->keeperDAO->GetByEmail($keeper->getEmail()) || $ownerController->OwnerDAO->GetByEmail($keeper->getEmail())){
                 $this->ShowAddView("Ya existe un usuario con ese Email",null);
             }else{
                 $this->keeperDAO->Add($keeper);

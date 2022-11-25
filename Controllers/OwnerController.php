@@ -7,7 +7,7 @@
 
     class OwnerController
     {
-        private $OwnerDAO;
+        public $OwnerDAO;
 
         public function __construct()
         {
