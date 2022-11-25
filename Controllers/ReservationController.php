@@ -2,9 +2,6 @@
 
     namespace Controllers;
 
-    use DAO\PetDAO;
-    use DAO\KeeperDAO;
-    use DAO\OwnerDAO;
     use Models\Pet;
     use Models\Keeper;
     use DAO\ReservationDAO;
@@ -55,15 +52,15 @@
 
         public function CalculatePrice($startDate, $endDate, $idKeeper)
         {
-            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+            $keeper = $this->keeperController->GetById($idKeeper);
             $dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
             return count($dates) * $keeper->getRemuneration();
         }   
 
         public function RaceValidation($idKeeper , $idPet, $startDate, $endDate)
         {
-            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
-            $pet = $this->petController->petDAO->GetById($idPet);
+            $keeper = $this->keeperController->GetById($idKeeper);
+            $pet = $this->petController->GetById($idPet);
 
             $allConfirmList=$this->getAllStateReservations($keeper->getIdKeeper(),"ACCEPTED");
 
@@ -104,9 +101,9 @@
 
         public function Add($idPet, $startDate, $endDate ,$idKeeper) {
             if($startDate>=date("Y-m-d") && $startDate<=$endDate){              //confirmacion de seguridad para validar que la fecha de inicio de la reserva es mayor a la fecha actual
-                $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+                $keeper = $this->keeperController->GetById($idKeeper);
 
-                $pet = $this->petController->petDAO->GetById($idPet);
+                $pet = $this->petController->GetById($idPet);
 
                 if($this->validateRepeatedDates($keeper,$pet,$startDate,$endDate)){                     //confirmo si ya tiene reservas con ese rango de fechas
                     if($this->RaceValidation($idKeeper , $idPet, $startDate, $endDate)){        //confirmo si es el mismo tipo de animal
