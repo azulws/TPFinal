@@ -51,7 +51,8 @@
         }
 
         public function GetAll() {
-            $query = "SELECT * FROM ".$this->tableName." INNER JOIN state on reservation.idState=state.id";
+            $query = "SELECT r.id,r.idKeeper,r.idPet,r.startDate,r.endDate,r.idState,r.price,s.state FROM ".$this->tableName." r 
+            INNER JOIN state s on r.idState=s.id";
 
             try{
                 $reservationList = array();
@@ -93,7 +94,6 @@
             
             try{
                 $parameters["id"] =  $modreservation->getId();
-
                 $parameters["startDate"] = $modreservation->getStartDate();
                 $parameters["endDate"] = $modreservation->getEndDate();
                 if($modreservation->getState() == "PENDING"){
@@ -225,7 +225,6 @@
                 throw $ex;
             }           
         }
-
 
     }
     

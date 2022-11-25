@@ -28,12 +28,14 @@
 
         public function ShowRecordKeeperView() {
             require_once(VIEWS_PATH . "validate-session.php");
+            $this->cancelOldReservation();
             $reservationList = $this->reservationDAO->GetAllByKeeper($_SESSION["loggedUser"]->getIdKeeper());
             require_once(VIEWS_PATH . "keeper-reservations.php");
         }
 
         public function ShowRecordOwnerView() {
             require_once(VIEWS_PATH . "validate-session.php");
+            $this->cancelOldReservation();
             $reservationList = $this->reservationDAO->GetAllByOwner($_SESSION["loggedUser"]->getIdOwner());
             require_once(VIEWS_PATH . "owner-reservations.php");
         }
@@ -239,6 +241,16 @@
                    <br><?php 
                 } catch (Exception $e) {
                     echo "error al enviar. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }
+
+            public function cancelOldReservation(){             //elimina las fechas antiguas del arreglo del keeper
+                $reservationList= $this->reservationDAO->GetAll();
+                foreach($reservationList as $reservation){
+                    if($reservation->getStartDate()<date("Y-m-d") && $reservation->getState()=="PENDING"){
+                        $reservation->setState("CANCELED");
+                        $this->reservationDAO->Modify($reservation);
+                    }
                 }
             }
     }
