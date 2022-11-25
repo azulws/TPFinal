@@ -18,7 +18,7 @@
             require_once(VIEWS_PATH."add-view.php");
         }
         
-        public function Login($userName, $password,$userType) {       //busqueda en el dao correspondiente del usuario logueando
+        public function Login($userName, $password, $userType) {       //busqueda en el dao correspondiente del usuario logueando
             if($userType=="owner"){
                 $ownerController = new OwnerController();
                 $user = $ownerController->GetByUserName($userName);
