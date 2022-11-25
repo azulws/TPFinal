@@ -21,12 +21,12 @@
             require_once(VIEWS_PATH."chat.php");
         }
 
-        public function ShowChatKeeperView($isKeeper,$keeper,$owner){
-            $idKeeper=$keeper;
-            $idOwner=$owner;
+        public function ShowChatKeeperView($isKeeper,$idKeeper,$idOwner){
+            $idKeeper=$idKeeper;
+            $idOwner=$idOwner;
             $iskeeper=$isKeeper;
 
-            $chatList=$this->chatDAO->GetChat($keeper,$owner);
+            $chatList=$this->chatDAO->GetChat($idKeeper,$idOwner);
             require_once(VIEWS_PATH."chat.php");
         }
 
