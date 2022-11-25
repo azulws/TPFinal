@@ -137,13 +137,7 @@ footer {
   left: 65%;
   bottom: 27%;
 }
-.sendBtn:hover {
-	background-color:#0688fa;
-}
-.sendBtn:active {
-	position:relative;
-	top:1px;
-}
+
 /* barra mensaje info*/
 /* (A) base */
 .bar {
