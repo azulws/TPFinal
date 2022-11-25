@@ -14,9 +14,8 @@
             $this->keeperDAO = new keeperDAO();
         }
 
-        public function ShowAddView()
+        public function ShowAddView($message = "")
         {
-            require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."add-view.php");
         }
 
@@ -72,14 +71,18 @@
             $keeper->setUserName($userName);
             $keeper->setEmail($email);
             $keeper->setPassword($password);
+
+            $ownerController = new OwnerController();
             
-            if($this->keeperDAO->GetByUserName($keeper->getUserName())){
+            if($this->keeperDAO->GetByUserName($keeper->getUserName()) || $ownerController->ownerDAO->getByUserName($keeper->getUserName())){
                 $this->ShowAddView("Ya existe un usuario con ese Username",null);
             }
-            else{
+            else if($this->keeperDAO->GetByEmail($keeper->getEmail()) || $ownerController->ownerDAO->getByEmail($keeper->getEmail())){
+                $this->ShowAddView("Ya existe un usuario con ese Email",null);
+            }else{
                 $this->keeperDAO->Add($keeper);
                 /*$_SESSION["loggedUser"]=$keeper;*/
-                $this->ShowAddView();
+                header("location:../index.php");
             }
 
         }

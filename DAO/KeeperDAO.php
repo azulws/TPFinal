@@ -262,6 +262,36 @@ class KeeperDAO implements IKeeper
     
     }
 
+    public function GetByEmail($email)
+        {
+            $query = "select * from ". $this->tableName . "            
+            WHERE email = '$email'";
+            
+            try{
+                $this->connection = Connection::GetInstance();
+                $resultSet = $this->connection->Execute($query); 
+                if(!empty($resultSet)){
+                    $keeper = new Keeper();
+                    $keeper->setIdKeeper($resultSet[0]["idKeeper"]);                   
+                    $keeper->setFirstName($resultSet[0]["firstName"]);
+                    $keeper->setLastName($resultSet[0]["lastName"]);
+                    $keeper->setEmail($resultSet[0]["email"]);
+                    $keeper->setPassword($resultSet[0]["userPassword"]);
+                    $keeper->setRemuneration($resultSet[0]["remuneration"]);
+                    $keeper->setReputation($resultSet[0]["reputation"]);
+                    $keeper->setAvailability($this->GetAvailabilityById($resultSet[0]["idKeeper"]));
+                    $keeper->setSizes($this->GetSizesById($resultSet[0]["idKeeper"]));
+                    return $keeper;                       
+                
+            }
+            }
+            catch(Exception $ex){
+                throw $ex;
+            }           
+            
+    
+    }
+
     public function GetById($id)
         {
             $query = "select * from ". $this->tableName . "            
