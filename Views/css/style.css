@@ -1,3 +1,11 @@
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  height: 40px;
+  bottom:20px;
+}
+
 .burbuja{
   position: relative;
   background-color: lightblue;
