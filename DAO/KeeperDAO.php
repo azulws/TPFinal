@@ -55,8 +55,8 @@ class KeeperDAO implements IKeeper
                     $keeper->setUserName($row["userName"]);
                     $keeper->setEmail($row["email"]);
                     $keeper->setPassword($row["userPassword"]);
-                    $keeper->setRemuneration($resultSet[0]["remuneration"]);
-                    $keeper->setReputation($resultSet[0]["reputation"]);
+                    $keeper->setRemuneration($row["remuneration"]);
+                    $keeper->setReputation($row["reputation"]);
                     $keeper->setAvailability($this->GetAvailabilityById($row["idKeeper"]));
                     $keeper->setSizes($this->GetSizesById($row["idKeeper"]));
 
