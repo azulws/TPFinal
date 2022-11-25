@@ -2,8 +2,7 @@
     namespace controllers;
     use Models\Chat as Chat;
     use DAO\ChatDAO as ChatDAO;
-    use DAO\KeeperDAO as KeeperDAO;
-    use DAO\OwnerDAO as OwnerDAO;
+
 
     class ChatController{
         private $chatDAO;
@@ -39,12 +38,12 @@
             $chat = new Chat();
             $chat->setMsg($msg);
 
-            $keeperDAO= new KeeperDAO();
-            $keeper=$keeperDAO->GetById($idKeeper);
+            $keeperController= new KeeperController();
+            $keeper=$keeperController->GetById($idKeeper);
             $chat->setKeeper($keeper);
             
-            $ownerDAO= new OwnerDAO();
-            $owner=$ownerDAO->GetById($idOwner);
+            $ownerController= new OwnerController();
+            $owner=$ownerController->GetById($idOwner);
             $chat->setOwner($owner);
 
             $chat->setIsKeeper($isKeeper);

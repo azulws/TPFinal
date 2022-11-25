@@ -7,7 +7,7 @@
 
     class KeeperController
     {
-        public $keeperDAO;
+        private $keeperDAO;
 
         public function __construct()
         {
@@ -74,10 +74,10 @@
 
             $ownerController = new OwnerController();
             
-            if($this->keeperDAO->GetByUserName($keeper->getUserName()) || $ownerController->OwnerDAO->GetByUserName($keeper->getUserName())){
+            if($this->keeperDAO->GetByUserName($keeper->getUserName()) || $ownerController->GetByUserName($keeper->getUserName())){
                 $this->ShowAddView("Ya existe un usuario con ese Username",null);
             }
-            else if($this->keeperDAO->GetByEmail($keeper->getEmail()) || $ownerController->OwnerDAO->GetByEmail($keeper->getEmail())){
+            else if($this->keeperDAO->GetByEmail($keeper->getEmail()) || $ownerController->GetByEmail($keeper->getEmail())){
                 $this->ShowAddView("Ya existe un usuario con ese Email",null);
             }else{
                 $this->keeperDAO->Add($keeper);
@@ -203,6 +203,18 @@
             $this->keeperDAO->Remove($id);
 
             $this->ShowListView();
+        }
+
+        public function GetById($id){
+            return $this->keeperDAO->GetById($id);
+        }
+
+        public function GetByUserName($userName){
+            return $this->keeperDAO->GetByUserName($userName);
+        }
+
+        public function GetByEmail($email){
+            return $this->keeperDAO->GetByEmail($email);
         }
     }
 ?>

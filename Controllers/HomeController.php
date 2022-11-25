@@ -1,8 +1,6 @@
 <?php
     namespace Controllers;
 
-    use DAO\OwnerDAO as OwnerDAO;
-    use DAO\KeeperDAO as KeeperDAO;
     use Models\Keeper as Keeper;
     use Models\Owner as Owner;
     
@@ -22,11 +20,11 @@
         
         public function Login($userName, $password,$userType) {       //busqueda en el dao correspondiente del usuario logueando
             if($userType=="owner"){
-                $ownerList = new OwnerDAO();
-                $user = $ownerList->GetByUserName($userName);
+                $ownerController = new OwnerController();
+                $user = $ownerController->GetByUserName($userName);
             }else if($userType=="keeper"){                              
-                $keeperList= new KeeperDAO();                    
-                $user = $keeperList->GetByUserName($userName);
+                $keeperController= new KeeperController();                    
+                $user = $keeperController->GetByUserName($userName);
             }
             if(($user != NULL) && ($user->getPassword() == $password)) {
                 $_SESSION["loggedUser"] = $user;
