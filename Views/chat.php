@@ -11,7 +11,12 @@
                     <?php
                         if($chat->getIsKeeper()=="True"){
                     ?>
+                    <br>
+                    <br>
+                    <br>
+                   
                         <td><?php echo $chat->getOwner()->getUserName().":"?></td>
+                      
                     <?php 
                         }else{
                     ?>
@@ -19,7 +24,9 @@
                         <?php 
                         }
                     ?>
-                    <td><?php echo $chat->getMsg();?></td>
+                    
+                    <td><a class="burbuja"><?php echo $chat->getMsg();?></a></td>
+                    <br>
                     <br>
                 </tr>
                 

@@ -1,9 +1,26 @@
-.go-chat{
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
+.burbuja{
+  position: relative;
+  background-color: lightblue;
+  padding: 8px;
+  color: #222;
+  border-radius: 3px;
+  margin-left: 20px;
+}
+
+.burbuja:after{
+  content: "";
+  display: block;
+  position: absolute;
+
+  top: 15px;
+  margin-left: -35px;
+
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+
+  border-right: 15px solid #fff;
 }
 /* Chat Area CSS Start */
 /*test chat*/
@@ -25,20 +42,15 @@
   border-radius: 32px;
   }
 .chat-box h2{
-  position: static;
-  width: 336px;
-  height: 58px;
-  left: 0px;
-  top: 0px;
+  
 
   font-family: Inter;
   font-style: normal;
   font-weight: bold;
   font-size: 27px;
-  line-height: 120%;
+  line-height: 20%;
   /* or 29px */
 
-  text-align: center;
 
   /* Gray/gray-500 */
 
@@ -48,11 +60,6 @@
 
 /* Inside Auto Layout */
 
-flex: none;
-order: 0;
-align-self: stretch;
-flex-grow: 0;
-margin: 16px 0px;
 }
 
 .chat-box h3{
