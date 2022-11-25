@@ -22,9 +22,7 @@
 <body styles="font-family: 'Montserrat', sans-serif;">
 <header>
    <!--Logo-->
-    <a class="logo" style="background-color: #004882;" href="<?php echo FRONT_ROOT."Home/Logout"?>">
-     <img src="Views/img/logo.png" class="logo-img" style="background-color: #004882;"> 
-    </a >
+ 
   
   
    <h1 class="texto-nav"><a class="texto-nav" href="<?php echo FRONT_ROOT ?>">Caninos Ya!</a></h1>
