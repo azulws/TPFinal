@@ -15,21 +15,7 @@ footer {
   margin-left: 20px;
 }
 
-.burbuja:after{
-  content: "";
-  display: block;
-  position: absolute;
 
-  top: 15px;
-  margin-left: -35px;
-
-  width: 0;
-  height: 0;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-
-  border-right: 15px solid #fff;
-}
 /* Chat Area CSS Start */
 /*test chat*/
 .chat-box{
