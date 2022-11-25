@@ -22,7 +22,7 @@
 <body styles="font-family: 'Montserrat', sans-serif;">
 <header>
    <!--Logo-->
-    <a class="logo" style="background-color: #004882;" href="<?php echo FRONT_ROOT ?>">
+    <a class="logo" style="background-color: #004882;" href="<?php echo FRONT_ROOT."Home/Logout"?>">
      <img src="Views/img/logo.png" class="logo-img" style="background-color: #004882;"> 
     </a >
   

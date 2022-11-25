@@ -11,7 +11,10 @@
     use Models\Reservation as Reservation;
     use Models\eState;
 
-    
+    //email
+    use Email\PHPMailer\PHPMailer as PHPMailer;
+    use Email\PHPMailer\SMTP;
+    use Email\PHPMailer\Exception;  
 
     class ReservationController {
         private $reservationDAO;
@@ -173,8 +176,18 @@
             
             $reservation->setState($state);
             
+            if($state == "ACCEPTED"){
+                $this->SendMail($reservation);
+            }
+
             $this->reservationDAO->Modify($reservation);
 
+            $this->cancelOtherTypeSameDate($reservation);
+
+            $this->ShowRecordKeeperView();
+        }
+
+        public function cancelOtherTypeSameDate($reservation){
             $allPendingList=$this->getAllStateReservations($reservation->getKeeper()->getIdKeeper(),"PENDING");
             
             foreach($allPendingList as $reservationPending){
@@ -188,10 +201,48 @@
                     }
                 }
             }
-
-            $this->ShowRecordKeeperView();
         }
 
+        public function SendMail($reservation){ 
+            $mail = new PHPMailer(true); //mail
+            try {
+                    //Server settings
+                    $mail->SMTPDebug = 0;                      //poner 2 aca es como poner un var dump, sino pongan 0 y no muestra nada
+                    
+                    $mail->isSMTP();                                            //Send using SMTP
+                    $mail->Host       = 'smtp-mail.outlook.com';                     //aca va el host, averiguar en google cual es dependiendo del @ del email
+                    $mail->SMTPAuth   = true;                                   //no toquen nada aca
+                    $mail->Username   = 'CaninosYa@outlook.com';                     // aca ponemos nuestro mail para enviar mails
+                    $mail->Password   = 'YaCaninos123';                               //si usamos gmail, habilitar autenticacion en dos pasos y crear una clave para la app, todo en seguridad y privacidad de gmail esta
+                    $mail->SMTPSecure = 'TLS';            //si la pagina tiene un candadito, ssl, si no lo tiene, tsl
+                    $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                
+                    //Recipients
+                    $mail->setFrom('CaninosYa@outlook.com', 'Caninos Ya');
+                    $email= $reservation->getPet()->getOwner()->getEmail();
+                    $mail->addAddress($email,$reservation->getPet()->getOwner()->getUserName());     // aca pondriamos el owner $email y el owner $name, o $username
+                            //Name is optional
+                            //$reservation->getPet()->getOwner()->getMail()
+                
+                
+                    //Content
+                    $mail->isHTML(true);    //Set email format to HTML
+                    $namePet=$reservation->getPet()->getName();
+                    $startDate=$reservation->getStartDate();
+                    $price= $this->CalculatePrice($reservation->getStartDate(), $reservation->getEndDate(), $reservation->getKeeper()->getIdKeeper());
+                    $mail->Subject = 'reserva '.$namePet.' at '.$startDate;
+                    $mail->Body    = 'pet: '.$namePet.
+                    ' startDate: '.$startDate.
+                    ' endDate: '.$reservation->getEndDate().
+                    ' keeper: '.$reservation->getKeeper()->getUserName().
+                    ' price: '.$price; //esto es html asi que podemos agregar imagenes y pavaditas si llegamos con el tiempo
+
+                    $mail->send();
+                    echo 'mensaje enviado!';  
+                } catch (Exception $e) {
+                    echo "error al enviar. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }
     }
 
 ?>

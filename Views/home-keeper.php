@@ -22,6 +22,8 @@
     <br>
     <a class="btn-desencriptar" href="<?php echo FRONT_ROOT . "Keeper/ShowEditSizesView"?>">  EDIT SIZES</a>
     <br>
+    <a class="btn-desencriptar" href="<?php echo FRONT_ROOT . "Chat/ShowChatList"?>">  MY CHATS</a>
+    <br>
 </div>
 
 

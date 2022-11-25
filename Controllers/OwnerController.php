@@ -14,9 +14,8 @@
             $this->OwnerDAO = new OwnerDAO();
         }
 
-        public function ShowAddView()
+        public function ShowAddView($message = "")
         {
-            require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."add-view.php"); 
         }
 
@@ -26,42 +25,31 @@
             require_once(VIEWS_PATH . "home-owner.php");
         }
 
-        public function Add($firstName,$lastName,$userName,$password)
+        public function Add($firstName,$lastName,$userName,$email,$password)
         {
             $owner = new Owner();
             $owner->setFirstName($firstName);
             $owner->setLastName($lastName);
             $owner->setUserName($userName);
+            $owner->setEmail($email);
             $owner->setPassword($password);
+
+            $keeperController = new KeeperController();
             
-            if($this->OwnerDAO->GetByUserName($owner->getUserName())){
+            if($this->OwnerDAO->GetByUserName($owner->getUserName()) || $keeperController->keeperDAO->GetByUserName($userName)){
                 $this->ShowAddView("Ya existe un usuario con ese Username",null);
+            }else if($this->OwnerDAO->GetByEmail($owner->getEmail()) || $keeperController->keeperDAO->GetByEmail($email)){
+                $this->ShowAddView("Ya existe un usuario con ese Email",null);
             }
             else{
                 $this->OwnerDAO->Add($owner);
                 /*$_SESSION["loggedUser"]=$owner;*/
-                $this->ShowAddView();
+                header("location:../index.php");
             }
 
         }
 
-        /*public function Add($firstName,$lastName,$userName,$password)  
-        {
-            if($this->OwnerDAO->GetByUserName($userName)==NULL){
-                $owner = new Owner();
-                $owner->setFirstName($firstName);
-                $owner->setLastName($lastName);
-                $owner->setUserName($userName);
-                $owner->setPassword($password);
-
-                $this->OwnerDAO->Add($owner);
-            }
-
-            $this->ShowAddView(); 
-                
-        }
-*/
-        public function Remove($id)
+  public function Remove($id)
         {
             $this->keeperDAO->Remove($id);
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 19-11-2022 a las 00:04:50
+-- Tiempo de generación: 23-11-2022 a las 18:54:19
 -- Versión del servidor: 5.7.36
 -- Versión de PHP: 7.4.26
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `pethero`
 --
-CREATE DATABASE IF NOT EXISTS `pethero` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `pethero`;
 
 DELIMITER $$
 --
@@ -51,19 +49,17 @@ CREATE TABLE IF NOT EXISTS `availability` (
   `idKeeper` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_idKeeper` (`idKeeper`)
-) ENGINE=MyISAM AUTO_INCREMENT=419 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1479 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `availability`
 --
 
 INSERT INTO `availability` (`id`, `fecha`, `idKeeper`) VALUES
-(418, '2022-11-30', 1),
-(417, '2022-11-26', 1),
-(416, '2022-11-25', 1),
-(415, '2022-11-22', 1),
-(414, '2022-11-20', 1),
-(413, '2022-11-19', 1);
+(1478, '2022-12-04', 1),
+(1477, '2022-11-30', 1),
+(1476, '2022-11-26', 1),
+(1475, '2022-11-25', 1);
 
 -- --------------------------------------------------------
 
@@ -80,15 +76,61 @@ CREATE TABLE IF NOT EXISTS `keeper` (
   `userPassword` varchar(50) DEFAULT NULL,
   `remuneration` int(50) DEFAULT '0',
   `reputation` int(50) DEFAULT '0',
+  `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idKeeper`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `keeper`
 --
 
-INSERT INTO `keeper` (`idKeeper`, `firstName`, `lastName`, `userName`, `userPassword`, `remuneration`, `reputation`) VALUES
-(1, 'nabo', 'db', 'nabodb', 'asd', 100, 0);
+INSERT INTO `keeper` (`idKeeper`, `firstName`, `lastName`, `userName`, `userPassword`, `remuneration`, `reputation`, `email`) VALUES
+(1, 'nabo', 'db', 'nabodb', 'asd', 50, 0, 'asd@hotmail.com'),
+(3, 'test', 'test', 'testM', 'asd', 0, 0, 'testMail@hotmail.com'),
+(4, 'n', 'u', 'nuevo', 'asd', 0, 0, 'nuevo@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `messages`
+--
+
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
+  `idMsg` int(11) NOT NULL AUTO_INCREMENT,
+  `idKeeper` int(11) NOT NULL,
+  `idOwner` int(11) NOT NULL,
+  `msg` varchar(1000) NOT NULL,
+  `isKeeper` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`idMsg`),
+  KEY `fk_idKeeper` (`idKeeper`),
+  KEY `fk_idOwner` (`idOwner`)
+) ENGINE=MyISAM AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `messages`
+--
+
+INSERT INTO `messages` (`idMsg`, `idKeeper`, `idOwner`, `msg`, `isKeeper`) VALUES
+(62, 1, 1, 'asd', 'True'),
+(63, 1, 1, 'as', 'True'),
+(64, 1, 1, 's', 'True'),
+(65, 1, 1, 'a', 'True'),
+(66, 1, 1, 'a', 'True'),
+(67, 3, 1, 'a', 'True'),
+(68, 3, 1, 'v', 'True'),
+(69, 1, 3, 'asd', 'True'),
+(70, 1, 3, 'ds', 'True'),
+(71, 1, 3, 'fddfd', 'True'),
+(72, 1, 4, 'asd', 'True'),
+(73, 1, 4, 'asd', 'True'),
+(74, 1, 4, 'asd', 'True'),
+(75, 1, 4, 'a', 'False'),
+(76, 1, 4, 'je', 'False'),
+(77, 1, 4, 'asd', 'True'),
+(78, 1, 4, 'fd', 'True'),
+(79, 1, 1, 'soy re pete', 'False'),
+(80, 1, 1, ':(', 'False');
 
 -- --------------------------------------------------------
 
@@ -103,15 +145,18 @@ CREATE TABLE IF NOT EXISTS `owner` (
   `lastName` varchar(50) DEFAULT NULL,
   `userName` varchar(50) DEFAULT NULL,
   `userPassword` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idOwner`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `owner`
 --
 
-INSERT INTO `owner` (`idOwner`, `firstName`, `lastName`, `userName`, `userPassword`) VALUES
-(1, 'azulws', 'db', 'azulwsdb', 'asd');
+INSERT INTO `owner` (`idOwner`, `firstName`, `lastName`, `userName`, `userPassword`, `email`) VALUES
+(1, 'azulws', 'db', 'azulwsdb', 'asd', 'azul1155cs@hotmail.com'),
+(3, 'owner', 'owner', 'owner', 'asd', 'owner@gmail.com'),
+(4, 'owner2', 'owner2', 'owner2', 'asd', 'owner2@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -133,14 +178,17 @@ CREATE TABLE IF NOT EXISTS `pet` (
   PRIMARY KEY (`id`),
   KEY `fk_idOwner` (`idOwner`),
   KEY `fk_idPetType` (`idPetType`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pet`
 --
 
 INSERT INTO `pet` (`id`, `name`, `idOwner`, `idPetType`, `description`, `petsize`, `image`, `vaccination`, `video`) VALUES
-(1, 'gatodb', 1, 2, 'gato', 'MEDIUM', '', '', '');
+(1, 'gatodb', 1, 2, 'gato', 'MEDIUM', '', '', ''),
+(2, 'asd', 1, 1, 'asd', 'MEDIUM', '', '', ''),
+(3, 'emi', 1, 2, 'perra', 'SMALL', '', '', ''),
+(4, 'emi2', 1, 1, 'asd', 'SMALL', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -204,7 +252,19 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   KEY `FK_Keeper` (`idKeeper`),
   KEY `FK_Pet` (`idPet`),
   KEY `FK_State` (`idState`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `reservation`
+--
+
+INSERT INTO `reservation` (`id`, `idKeeper`, `idPet`, `startDate`, `endDate`, `idState`, `price`) VALUES
+(10, 1, 3, '2022-11-20', '2022-11-20', 1, 100),
+(11, 1, 2, '2022-11-25', '2022-11-25', 3, 100),
+(12, 1, 3, '2022-11-25', '2022-11-25', 2, 100),
+(13, 1, 1, '2022-11-25', '2022-11-25', 2, 50),
+(14, 1, 1, '2022-11-26', '2022-11-26', 1, 50),
+(15, 1, 3, '2022-11-26', '2022-11-26', 3, 50);
 
 -- --------------------------------------------------------
 
