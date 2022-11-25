@@ -30,6 +30,7 @@
           <div align="center">
             <input type="submit" class="btn-encriptar" value="Owner" />
           </div>
+          <br>
           <div align="center">
             <input type="submit" class="btn-desencriptar" value="Keeper"  formaction="<?php echo FRONT_ROOT."Keeper/Add" ?>">
           </div>

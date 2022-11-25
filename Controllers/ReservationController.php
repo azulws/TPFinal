@@ -235,7 +235,8 @@
                     ' price: '.$price; //esto es html asi que podemos agregar imagenes y pavaditas si llegamos con el tiempo
 
                     $mail->send();
-                    echo 'mensaje enviado!';  
+                   ?><span class="bar success" style="font-size: 30px"><?php echo 'mensaje enviado!'; ?></span>
+                   <br><?php 
                 } catch (Exception $e) {
                     echo "error al enviar. Mailer Error: {$mail->ErrorInfo}";
                 }
