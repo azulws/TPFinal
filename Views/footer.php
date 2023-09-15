@@ -1,9 +1,9 @@
 <html>
 <footer> 
-    <nav>
+    <nav align="center">
       <ul >
         <li><a href="<?php echo FRONT_ROOT."Home/ShowHomeView" ?>">Home</a></li>         
-        <li><a  href="<?php echo FRONT_ROOT."Home/Logout"?>">Logout</a></li>
+        <li><a style="color:black" href="<?php echo FRONT_ROOT."Home/Logout"?>">Logout</a></li>
 
       </ul>
     </nav>

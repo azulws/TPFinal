@@ -3,7 +3,7 @@ footer {
   bottom: 0;
   width: 100%;
   height: 60px;
-  background-color: #94c8f0;
+  background-color: #d2ebff;
 }
 
 .burbuja{
@@ -251,7 +251,7 @@ table.customTable td, table.customTable th {
 }
 
 table.customTable thead {
-  background-color: #7EA8F8;
+  background: #E9ECF8;
 }
 
 /* confirm btn en availability*/
@@ -402,7 +402,7 @@ body {
   min-height: 80%;
   margin: 0;
   padding: 0;
-  background-color: #004882;
+  background: #E9ECF8;
   height:100%;
 }
 
@@ -510,7 +510,6 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
-    background: #E9ECF8;
   }
   
   .main {
