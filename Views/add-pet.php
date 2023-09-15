@@ -1,14 +1,9 @@
-
-<div> 
-    <h1>Add Pet</h1>
-</div>
-
-
 <main class="main"> 
     <!-- main body -->
      
     <div >
-        <h2 align="center">Ingresar Datos</h2>
+        <br>
+        <h1 align="center">NEW PET</h1>
         <br>
         <form align="center" action="<?php echo FRONT_ROOT."Pet/Add" ?>" method="post" enctype="multipart/form-data">
         
@@ -42,10 +37,9 @@
 
                 </div>
             <br>
-            
         
         <div align="center">
-            <input type="submit" class="btn-encriptar" value="Agregar" />
+            <input type="submit" class="btn-encriptar" value="ADD PET" />
         </div>
         
         </form>

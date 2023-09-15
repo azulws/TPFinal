@@ -15,9 +15,9 @@
               <tr>
                 <th>Race</th>
                 <th>Name</th>
-                <th>Tamaño</th>
+                <th>Size</th>
                 <th>Description</th>       
-                <th>Imagen</th>
+                <th>Image</th>
                 <th>Vaccination</th>
                 <th>Video</th>
               </tr>

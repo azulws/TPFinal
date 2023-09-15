@@ -41,11 +41,10 @@
             </div>
             <br>
             <div>
-                <a class="btn-desencriptar" href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Registrarse</a>
+                <a class="btn-desencriptar" href="<?php echo FRONT_ROOT."Home/ShowAddView" ?>">Register</a>
             </div>
         </form>
     </div>
-
     <section class="message-box">
       <div class="cat">
          <img class= "monigote" src="Views/img/keeper.jpg">

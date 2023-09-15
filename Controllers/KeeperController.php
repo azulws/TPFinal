@@ -56,10 +56,11 @@
             require_once(VIEWS_PATH."keeper-available.php");
         }
 
-        public function ShowEditSizesView()
+        public function ShowEditSizesAndRemunerationView()
         {
             require_once(VIEWS_PATH."validate-session.php");
             $sizesList = $_SESSION["loggedUser"]->getSizes();
+            $keeper = $this->keeperDAO->getById($_SESSION["loggedUser"]->getIdKeeper());
             require_once(VIEWS_PATH."edit-sizes.php");
         }
 
@@ -93,7 +94,7 @@
 
             $this->keeperDAO->Modify($keeper);
 
-            require_once(VIEWS_PATH."home-keeper.php");
+            $this->ShowEditSizesAndRemunerationView();
         }
 
         public function EditSize($size)
@@ -101,7 +102,7 @@
             $_SESSION["loggedUser"]->setSizes($size);
             $this->keeperDAO->SetSizes($_SESSION["loggedUser"]);
 
-            $this->ShowEditSizesView();
+            $this->ShowEditSizesAndRemunerationView();
 
         
         }
