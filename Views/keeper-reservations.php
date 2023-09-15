@@ -53,7 +53,7 @@
         <br>
         <br>
         <br>
-        <div>
+        <div style="padding-bottom:60px">
         <h2>RECORD RESERVATIONS</h2>   
         <table  class="customTable">
         <thead>
