@@ -1,7 +1,7 @@
 <main class="main">
     <div align="center">
     <div > 
-    <?php if ($message) { ?>
+    <?php if ($message and $message !="logOut") { ?>
       <span class="bar error" style="font-size: 30px"> <?php echo $message; ?> </span>
       <?php
     } 
@@ -47,7 +47,17 @@
     </div>
     <section class="message-box">
       <div class="cat">
-         <img class= "monigote" src="Views/img/keeper.jpg">
+        <?php 
+          if($message!="logOut"){
+        ?>
+        <img class= "monigote" src="<?php echo IMG_PATH."keeper.jpg"?>">
+        <?php 
+          }else{ 
+        ?>
+        <img class= "monigote" src="<?php echo "../Views/img/keeper.jpg"?>">
+        <?php 
+          } 
+        ?>
       </div>
         <h2>Los mejores cuidando mascotas!</h2>
         <h3>Por favor especifique que tipo de usuario es a la hora de entrar.</h3>

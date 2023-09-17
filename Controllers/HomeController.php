@@ -46,7 +46,7 @@
         public function Logout() {
             session_destroy();
 
-            $this->Index();
+            $this->Index("logOut");
             
 
         }      
