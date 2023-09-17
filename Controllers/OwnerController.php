@@ -36,9 +36,9 @@
 
             $keeperController = new KeeperController();
             
-            if($this->OwnerDAO->GetByUserName($owner->getUserName()) || $keeperController->keeperDAO->GetByUserName($userName)){
+            if($this->OwnerDAO->GetByUserName($owner->getUserName()) || $keeperController->GetByUserName($userName)){
                 $this->ShowAddView("Ya existe un usuario con ese Username",null);
-            }else if($this->OwnerDAO->GetByEmail($owner->getEmail()) || $keeperController->keeperDAO->GetByEmail($email)){
+            }else if($this->OwnerDAO->GetByEmail($owner->getEmail()) || $keeperController->GetByEmail($email)){
                 $this->ShowAddView("Ya existe un usuario con ese Email",null);
             }
             else{
@@ -49,11 +49,23 @@
 
         }
 
-  public function Remove($id)
+        public function Remove($id)
         {
             $this->keeperDAO->Remove($id);
 
             $this->ShowListView();
+        }
+
+        public function GetByUserName($userName){
+            return $this->OwnerDAO->GetByUserName($userName);
+        }
+
+        public function GetByEmail($email){
+            return $this->OwnerDAO->GetByEmail($email);
+        }
+
+        public function GetById($id){
+            return $this->OwnerDAO->GetById($id);
         }
     }
 ?>

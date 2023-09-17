@@ -7,7 +7,7 @@
     use Models\PetType;
 
     class PetController {
-        public $petDAO;
+        private $petDAO;
         private $petTypeController;
         private $keeperControler;
 
@@ -19,7 +19,7 @@
 
         public function ShowAddView($message = "") {
             require_once(VIEWS_PATH . "validate-session.php");
-            $petTypeList = $this->petTypeController->petTypeDAO->getAll();
+            $petTypeList = $this->petTypeController->GetAll();
             require_once(VIEWS_PATH . "add-pet.php");
         }
 
@@ -34,7 +34,7 @@
         {
             require_once(VIEWS_PATH . "validate-session.php");
             $pet = $this->petDAO->GetById($id);
-            $petTypeList = $this->petTypeController->petTypeDAO->getAll();
+            $petTypeList = $this->petTypeController->GetAll();
             require_once(VIEWS_PATH . "modify-pet.php");
         }
 
@@ -52,7 +52,7 @@
             require_once(VIEWS_PATH . "validate-session.php");
 
             
-            $type = $this->petTypeController->petTypeDAO->Exist(intval($petType));
+            $type = $this->petTypeController->Exist(intval($petType));
 
             if($type) {
                 $pet = new pet();
@@ -166,7 +166,11 @@
             
             $this->petDAO->Modify($pet);
             $this->ShowListView();       
-        }   
+        }
+        
+        public function GetById($id){
+            return $this->petDAO->GetById($id);
+        }
 
 
 }

@@ -2,9 +2,6 @@
 
     namespace Controllers;
 
-    use DAO\PetDAO;
-    use DAO\KeeperDAO;
-    use DAO\OwnerDAO;
     use Models\Pet;
     use Models\Keeper;
     use DAO\ReservationDAO;
@@ -31,12 +28,14 @@
 
         public function ShowRecordKeeperView() {
             require_once(VIEWS_PATH . "validate-session.php");
+            $this->cancelOldReservation();
             $reservationList = $this->reservationDAO->GetAllByKeeper($_SESSION["loggedUser"]->getIdKeeper());
             require_once(VIEWS_PATH . "keeper-reservations.php");
         }
 
         public function ShowRecordOwnerView() {
             require_once(VIEWS_PATH . "validate-session.php");
+            $this->cancelOldReservation();
             $reservationList = $this->reservationDAO->GetAllByOwner($_SESSION["loggedUser"]->getIdOwner());
             require_once(VIEWS_PATH . "owner-reservations.php");
         }
@@ -55,15 +54,15 @@
 
         public function CalculatePrice($startDate, $endDate, $idKeeper)
         {
-            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+            $keeper = $this->keeperController->GetById($idKeeper);
             $dates = $this->keeperController->checkAllDates($keeper->getAvailability(),$startDate , $endDate);
             return count($dates) * $keeper->getRemuneration();
         }   
 
         public function RaceValidation($idKeeper , $idPet, $startDate, $endDate)
         {
-            $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
-            $pet = $this->petController->petDAO->GetById($idPet);
+            $keeper = $this->keeperController->GetById($idKeeper);
+            $pet = $this->petController->GetById($idPet);
 
             $allConfirmList=$this->getAllStateReservations($keeper->getIdKeeper(),"ACCEPTED");
 
@@ -104,9 +103,9 @@
 
         public function Add($idPet, $startDate, $endDate ,$idKeeper) {
             if($startDate>=date("Y-m-d") && $startDate<=$endDate){              //confirmacion de seguridad para validar que la fecha de inicio de la reserva es mayor a la fecha actual
-                $keeper = $this->keeperController->keeperDAO->GetById($idKeeper);
+                $keeper = $this->keeperController->GetById($idKeeper);
 
-                $pet = $this->petController->petDAO->GetById($idPet);
+                $pet = $this->petController->GetById($idPet);
 
                 if($this->validateRepeatedDates($keeper,$pet,$startDate,$endDate)){                     //confirmo si ya tiene reservas con ese rango de fechas
                     if($this->RaceValidation($idKeeper , $idPet, $startDate, $endDate)){        //confirmo si es el mismo tipo de animal
@@ -238,9 +237,20 @@
                     ' price: '.$price; //esto es html asi que podemos agregar imagenes y pavaditas si llegamos con el tiempo
 
                     $mail->send();
-                    echo 'mensaje enviado!';  
+                   ?><span class="bar success" style="font-size: 30px"><?php echo 'mensaje enviado!'; ?></span>
+                   <br><?php 
                 } catch (Exception $e) {
                     echo "error al enviar. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }
+
+            public function cancelOldReservation(){             //elimina las fechas antiguas del arreglo del keeper
+                $reservationList= $this->reservationDAO->GetAll();
+                foreach($reservationList as $reservation){
+                    if($reservation->getStartDate()<date("Y-m-d") && $reservation->getState()=="PENDING"){
+                        $reservation->setState("CANCELED");
+                        $this->reservationDAO->Modify($reservation);
+                    }
                 }
             }
     }

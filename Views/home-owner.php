@@ -1,7 +1,7 @@
 <main class="main">
   <div align = "center">
     <br>
-    <h1>MENU OWNER</h1>
+    <h1>OWNER'S MENU</h1>
   </div>
   <br>
   <div align ="center">

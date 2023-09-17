@@ -3,6 +3,9 @@
     <!-- main body -->
     <div > 
     <div >
+    <?php if($reservationList==null){
+        ?> <h2 align=center>you don't have any reservation </h2><?php
+        }else{ ?>
     <form action="<?php echo FRONT_ROOT . "Reservation/Remove" ?>" method="post" enctype="multipart/form-data">
         <table  class="customTable">
         <thead>
@@ -44,6 +47,7 @@
                 </tr>
                 <?php
             }
+        }
             ?>                          
         </tbody>
         </table>

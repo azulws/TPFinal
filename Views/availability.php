@@ -1,5 +1,5 @@
 
-<div>
+
   <main> 
     <!-- main body -->
     <div> 
@@ -29,7 +29,7 @@
             <div>
             </form>
         </div>
-        <div >
+        <div style="padding-bottom:60px">
         <h2 align="center">Availability List: <?php echo $_SESSION["loggedUser"]->getUserName()?></h2>
         <br>
           <form action="<?php echo FRONT_ROOT."Keeper/RemoveAvailability"?>" method="post">
@@ -61,7 +61,6 @@
     <!-- / main body -->
     <div class="clear"></div>
   </main>
-</div>
 
 <?php 
     include_once('footer.php');

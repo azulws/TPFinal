@@ -6,7 +6,7 @@
     use Models\PetType;
 
     class PetTypeController {
-        public $petTypeDAO;
+        private $petTypeDAO;
 
         public function __construct() {
             $this->petTypeDAO = new PetTypeDAO();
@@ -40,6 +40,14 @@
             $this->petTypeDAO->Remove(intval($id));
 
             $this->ShowListView();
+        }
+
+        public function GetAll(){
+            return $this->petTypeDAO->GetAll();
+        }
+
+        public function Exist($id){
+            return $this->petTypeDAO->Exist(intval($id));
         }
 
     }

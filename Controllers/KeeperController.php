@@ -7,7 +7,7 @@
 
     class KeeperController
     {
-        public $keeperDAO;
+        private $keeperDAO;
 
         public function __construct()
         {
@@ -56,10 +56,11 @@
             require_once(VIEWS_PATH."keeper-available.php");
         }
 
-        public function ShowEditSizesView()
+        public function ShowEditSizesAndRemunerationView()
         {
             require_once(VIEWS_PATH."validate-session.php");
             $sizesList = $_SESSION["loggedUser"]->getSizes();
+            $keeper = $this->keeperDAO->getById($_SESSION["loggedUser"]->getIdKeeper());
             require_once(VIEWS_PATH."edit-sizes.php");
         }
 
@@ -74,10 +75,10 @@
 
             $ownerController = new OwnerController();
             
-            if($this->keeperDAO->GetByUserName($keeper->getUserName()) || $ownerController->ownerDAO->getByUserName($keeper->getUserName())){
+            if($this->keeperDAO->GetByUserName($keeper->getUserName()) || $ownerController->GetByUserName($keeper->getUserName())){
                 $this->ShowAddView("Ya existe un usuario con ese Username",null);
             }
-            else if($this->keeperDAO->GetByEmail($keeper->getEmail()) || $ownerController->ownerDAO->getByEmail($keeper->getEmail())){
+            else if($this->keeperDAO->GetByEmail($keeper->getEmail()) || $ownerController->GetByEmail($keeper->getEmail())){
                 $this->ShowAddView("Ya existe un usuario con ese Email",null);
             }else{
                 $this->keeperDAO->Add($keeper);
@@ -93,7 +94,7 @@
 
             $this->keeperDAO->Modify($keeper);
 
-            require_once(VIEWS_PATH."home-keeper.php");
+            $this->ShowEditSizesAndRemunerationView();
         }
 
         public function EditSize($size)
@@ -101,7 +102,7 @@
             $_SESSION["loggedUser"]->setSizes($size);
             $this->keeperDAO->SetSizes($_SESSION["loggedUser"]);
 
-            $this->ShowEditSizesView();
+            $this->ShowEditSizesAndRemunerationView();
 
         
         }
@@ -203,6 +204,18 @@
             $this->keeperDAO->Remove($id);
 
             $this->ShowListView();
+        }
+
+        public function GetById($id){
+            return $this->keeperDAO->GetById($id);
+        }
+
+        public function GetByUserName($userName){
+            return $this->keeperDAO->GetByUserName($userName);
+        }
+
+        public function GetByEmail($email){
+            return $this->keeperDAO->GetByEmail($email);
         }
     }
 ?>
