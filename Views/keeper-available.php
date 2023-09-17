@@ -3,6 +3,7 @@
     <!-- main body -->
     <div > 
       <div >
+      <?php if($keeperListCheck!=null){ ?>
       <form action="<?php echo FRONT_ROOT . "Reservation/Add" ?>" method="post" enctype="multipart/form-data">
         <table style="text-align:center;">
           <thead>
@@ -48,6 +49,9 @@
             ?>                          
           </tbody>
         </table>
+        <?php }else{ ?>
+        <h2 align="center">no keeper was found for those dates</h2>
+        <?php } ?>
       </div>
     </div>
     <!-- / main body -->
